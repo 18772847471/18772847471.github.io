@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>安全框架</title>
+      <link href="/2020/03/25/%E6%9D%83%E9%99%90%E6%A1%86%E6%9E%B6/"/>
+      <url>/2020/03/25/%E6%9D%83%E9%99%90%E6%A1%86%E6%9E%B6/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><a id="more"></a><p>  安全框架。</p><h3 id="认证和授权"><a href="#认证和授权" class="headerlink" title="认证和授权"></a>认证和授权</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> spring security  shiro </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Nespring security  shirotty </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Netty</title>
+      <link href="/2020/03/20/Netty/"/>
+      <url>/2020/03/20/Netty/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><a id="more"></a><p>   Netty是当前非常流行的网络通讯框架，当程序对网络数据处理时，需要保证高并发和高可靠，底层就可以用Netty支撑。</p><h3 id="Netty三大核心部分"><a href="#Netty三大核心部分" class="headerlink" title="Netty三大核心部分"></a>Netty三大核心部分</h3><p>   Channel（通道） Buffer(缓冲区) Selector(选择器)</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Netty </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Netty </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>分库分表</title>
+      <link href="/2020/03/15/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/"/>
+      <url>/2020/03/15/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><a id="more"></a><p>分库分表</p><h3 id="1、分库分表的方式"><a href="#1、分库分表的方式" class="headerlink" title="1、分库分表的方式"></a>1、分库分表的方式</h3><pre><code>分库分表包括分库和分表两个部分，在生产中通常包括：垂直分库、水平分库、垂直分表、水平分表四种方式。 </code></pre><h3 id="2、Sharding-JDBC"><a href="#2、Sharding-JDBC" class="headerlink" title="2、Sharding-JDBC"></a>2、Sharding-JDBC</h3><pre><code>Sharding-JDBC的核心功能为数据分片和读写分离，通过Sharding-JDBC，应用可以透明的使用jdbc访问已经分库 分表、读写分离的多个数据源，而不用关心数据源的数量以及数据如何分布。 Sharding-JDBC执行流程： SQL解析 =&gt; 查询优化 =&gt; SQL路由 =&gt; SQL改写 =&gt; SQL执行 =&gt; 结果归并引入 sharding-jdbc和SpringBoot整合的Jar包：   &lt;dependency&gt;        &lt;groupId&gt;org.apache.shardingsphere&lt;/groupId&gt;        &lt;artifactId&gt;sharding‐jdbc‐spring‐boot‐starter&lt;/artifactId&gt;        &lt;version&gt;4.0.0‐RC1&lt;/version&gt;     &lt;/dependency&gt;</code></pre><h3 id="3、分片规则配置"><a href="#3、分片规则配置" class="headerlink" title="3、分片规则配置"></a>3、分片规则配置</h3><pre><code>分片规则配置是sharding-jdbc进行对分库分表操作的重要依据，配置内容包括：数据源、主键生成策略、分片策 略等。</code></pre><h3 id="4、配置"><a href="#4、配置" class="headerlink" title="4、配置"></a>4、配置</h3><pre><code>   # 真实数据源定义 m为主库 s为从库    spring.shardingsphere.datasource.names = m0,m1,m2,s0,s1,s2     spring.shardingsphere.datasource.m0.type = com.alibaba.druid.pool.DruidDataSource     spring.shardingsphere.datasource.m0.driver‐class‐name = com.mysql.jdbc.Driver     spring.shardingsphere.datasource.m0.url = jdbc:mysql://localhost:3306/store_db?useUnicode=true     spring.shardingsphere.datasource.m0.username = root spring.shardingsphere.datasource.m0.password = root     spring.shardingsphere.datasource.m1.type = com.alibaba.druid.pool.DruidDataSource     spring.shardingsphere.datasource.m1.driver‐class‐name = com.mysql.jdbc.Driver     spring.shardingsphere.datasource.m1.url = jdbc:mysql://localhost:3306/product_db_1? useUnicode=true     spring.shardingsphere.datasource.m1.username = root spring.shardingsphere.datasource.m1.password = root     spring.shardingsphere.datasource.m2.type = com.alibaba.druid.pool.DruidDataSource     spring.shardingsphere.datasource.m2.driver‐class‐name = com.mysql.jdbc.Driver     spring.shardingsphere.datasource.m2.url = jdbc:mysql://localhost:3306/product_db_2? useUnicode=true     spring.shardingsphere.datasource.m2.username = root     spring.shardingsphere.datasource.m2.password = root     spring.shardingsphere.datasource.s0.type = com.alibaba.druid.pool.DruidDataSource     spring.shardingsphere.datasource.s0.driver‐class‐name = com.mysql.jdbc.Driver     spring.shardingsphere.datasource.s0.url = jdbc:mysql://localhost:3307/store_db?useUnicode=true     spring.shardingsphere.datasource.s0.username = root     spring.shardingsphere.datasource.s0.password = root     spring.shardingsphere.datasource.s1.type = com.alibaba.druid.pool.DruidDataSource     spring.shardingsphere.datasource.s1.driver‐class‐name = com.mysql.jdbc.Driver     spring.shardingsphere.datasource.s1.url = jdbc:mysql://localhost:3307/product_db_1? useUnicode=true     spring.shardingsphere.datasource.s1.username = root     spring.shardingsphere.datasource.s1.password = root     spring.shardingsphere.datasource.s2.type = com.alibaba.druid.pool.DruidDataSource     spring.shardingsphere.datasource.s2.driver‐class‐name = com.mysql.jdbc.Driver     spring.shardingsphere.datasource.s2.url = jdbc:mysql://localhost:3307/product_db_2? useUnicode=true     spring.shardingsphere.datasource.s2.username = root spring.shardingsphere.datasource.s2.password = root     # 主库从库逻辑数据源定义 ds0为store_db ds1为product_db_1 ds2为product_db_2     spring.shardingsphere.sharding.master‐slave‐rules.ds0.master‐data‐source‐name=m0     spring.shardingsphere.sharding.master‐slave‐rules.ds0.slave‐data‐source‐names=s0    spring.shardingsphere.sharding.master‐slave‐rules.ds1.master‐data‐source‐name=m1     spring.shardingsphere.sharding.master‐slave‐rules.ds1.slave‐data‐source‐names=s1     spring.shardingsphere.sharding.master‐slave‐rules.ds2.master‐data‐source‐name=m2     spring.shardingsphere.sharding.master‐slave‐rules.ds2.slave‐data‐source‐names=s2     # 默认分库策略，以store_info_id为分片键，分片策略为store_info_id % 2 + 1，也就是store_info_id为双数的 数据进入ds1，为单数的进入ds2     spring.shardingsphere.sharding.default‐database‐strategy.inline.sharding‐column = store_info_id     spring.shardingsphere.sharding.default‐database‐strategy.inline.algorithm‐expression = ds$‐&gt; {store_info_id % 2 + 1}     # store_info分表策略，固定分配至ds0的store_info真实表，     spring.shardingsphere.sharding.tables.store_info.actual‐data‐nodes = ds$‐&gt;{0}.store_info     spring.shardingsphere.sharding.tables.store_info.table‐strategy.inline.sharding‐column = id     spring.shardingsphere.sharding.tables.store_info.table‐strategy.inline.algorithm‐expression = store_info     # product_info分表策略，分布在ds1,ds2的product_info_1 product_info_2表 ，分片策略为product_info_id % 2 + 1，product_info_id生成为雪花算法，为双数的数据进入product_info_1表，为单数的进入product_info_2 表    spring.shardingsphere.sharding.tables.product_info.actual‐data‐nodes = ds$‐&gt; {1..2}.product_info_$‐&gt;{1..2}     spring.shardingsphere.sharding.tables.product_info.table‐strategy.inline.sharding‐column = product_info_id     spring.shardingsphere.sharding.tables.product_info.table‐strategy.inline.algorithm‐expression = product_info_$‐&gt;{product_info_id % 2 + 1}     spring.shardingsphere.sharding.tables.product_info.key‐generator.column=product_info_id     spring.shardingsphere.sharding.tables.product_info.key‐generator.type=SNOWFLAKE     # product_descript分表策略，分布在ds1,ds2的product_descript_1 product_descript_2表 ，分片策略为 product_info_id % 2 + 1，id生成为雪花算法，product_info_id为双数的数据进入product_descript_1表，为单 数的进入product_descript_2表     spring.shardingsphere.sharding.tables.product_descript.actual‐data‐nodes = ds$‐&gt; {1..2}.product_descript_$‐&gt;{1..2}     spring.shardingsphere.sharding.tables.product_descript.table‐strategy.inline.sharding‐column = product_info_id     spring.shardingsphere.sharding.tables.product_descript.table‐strategy.inline.algorithm‐ expression = product_descript_$‐&gt;{product_info_id %2+1}     spring.shardingsphere.sharding.tables.product_descript.key‐generator.column=id    spring.shardingsphere.sharding.tables.product_descript.key‐generator.type=SNOWFLAKE     # 设置product_info,product_descript为绑定表     spring.shardingsphere.sharding.binding‐tables[0] = product_info,product_descript     # 设置region为广播表(公共表)，每次更新操作会发送至所有数据源     spring.shardingsphere.sharding.broadcast‐tables=region     # 打开sql输出日志     spring.shardingsphere.props.sql.show = true</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 分库分表 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 分库分表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>mysql数据库</title>
+      <link href="/2019/12/28/mysql%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <url>/2019/12/28/mysql%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="1-树"><a href="#1-树" class="headerlink" title="1.树"></a>1.树</h3><pre><code>二叉树：二叉树是指每个结点最多有两个子树的树结构。平衡二叉搜索树：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。</code></pre><h3 id="2-索引的本质"><a href="#2-索引的本质" class="headerlink" title="2.索引的本质"></a>2.索引的本质</h3><pre><code> 索引是帮助mysql数据库快速获取数据排好顺序的而数据结构。</code></pre><h3 id="3-mysql数据库中锁"><a href="#3-mysql数据库中锁" class="headerlink" title="3.mysql数据库中锁"></a>3.mysql数据库中锁</h3><pre><code>  悲观锁，假设丢失更新一定存在；sql后面加上for update；这是数据库的一种机制。  乐观锁，假设丢失更新不一定发生。update时候存在版本，更新时候按版本号进行更新。   表级锁：开销小，加锁块；不会出现死锁，锁定粒度大，发生锁冲突的概率最高，并发度最低。</code></pre><p>　　　　行级锁：开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发性也最高。</p><p>　　　　页面锁：开销和加锁界于表锁和行锁之间，会出现死锁；锁定粒度界与表锁和行锁之间，并发一般。</p><pre><code>   共享锁：就是允许多个线程同时获取一个锁，一个锁可以同时被多个线程拥有。   排它锁：也称作独占锁，一个锁在某一时刻只能被一个线程占有，其它线程必须等待锁被释放之后才可能获取到锁。</code></pre><h3 id="4-事务的四大特性（ACID）"><a href="#4-事务的四大特性（ACID）" class="headerlink" title="4.事务的四大特性（ACID）"></a>4.事务的四大特性（ACID）</h3><pre><code> 原子性（Atomicity）： 事务开始后所有操作，要么全部成功，要么全部失败，不可能停滞在中间环节。事务执行过程中出错，会回滚到事务开始前的状态，所有的操作就像 没  有发生一样。也就是说事务是一个不可分割的整体，就像化学中学过的原子，是物质构成的基本单位。 一致性（Consistency）：一致性是指事务必须使数据库从一个一致性状态变换到另一个一致性状态，也就是说一个事务执行之前和执行之后都必须处于一致性状态。拿转账来说，假设用户A和用户B两者的钱加起来一共是5000，那么不管A和B之间如何转账，转几次账，事务结束后两个用户的钱相加起来应该还得是5000，这就是事务的一致性。 隔离性（Isolation）:隔离性是当多个用户并发访问数据库时，比如操作同一张表时，数据库为每一个用户开启的事务，不能被其他事务的操作所干扰，多个并发事务之间要相互隔离。  持久性（Durability）:持久性是指一个事务一旦被提交了，那么对数据库中的数据的改变就是永久性的，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作。</code></pre><h3 id="5-事务的并发问题"><a href="#5-事务的并发问题" class="headerlink" title="5.事务的并发问题"></a>5.事务的并发问题</h3><pre><code>  脏读： 在一个事务处理过程里读取了另一个未提交的事务中的数据。  不可重复读: 是指在一个事务内，多次读同一数据。在这个事务还没有结束时，另外一个事务也访问该同一数据。那么，在第一个事务中的两次读数据之间，由于第二个事务的修改，那么第一个事务两次读到的的数据可能是不一样的。这样就发生了在一个事务内两次读到的数据是不一样的，因此称为是不可重复读。  幻读: 第一个事务对一个表中的数据进行了修改，这种修改涉及到表中的全部数据行。同时，第二个事务也修改这个表中的数据，这种修改是向表中插入或删除一行新数据。那么，以后就会发生操作第一个事务的用户发现表中还有没有修改的数据行，就好象发生了幻觉一样。</code></pre><h3 id="6-隔离级别及并发"><a href="#6-隔离级别及并发" class="headerlink" title="6.隔离级别及并发"></a>6.隔离级别及并发</h3><pre><code>         事务隔离级别           脏读       不可重复读    幻读   读未提交（read-uncommitted）    是           是             是   读已提交 （read-committed）    否        是            是   可重复读（repeatable-read）    否        否            是   串行化（serializable）          否        否            否   MySQL默认的是 可重复读（repeatable-read），而其它的数据库默认的是 读已提交 （read-committed）</code></pre><h3 id="7-事务的七大传播机制"><a href="#7-事务的七大传播机制" class="headerlink" title="7.事务的七大传播机制"></a>7.事务的七大传播机制</h3><pre><code>               类型                          说明    PROPAGATION_REQUIRED            如果当前没有事务，就新建一个事务，如果已经存在一个事务中，加入到这个事务中。这是最常见的选择。    PROPAGATION_SUPPORTS            支持当前事务，如果当前没有事务，就以非事务方式执行。    PROPAGATION_MANDATORY            使用当前的事务，如果当前没有事务，就抛出异常。    PROPAGATION_REQUIRES_NEW        新建事务，如果当前存在事务，把当前事务挂起。    PROPAGATION_NOT_SUPPORTED        以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。    PROPAGATION_NEVER                以非事务方式执行，如果当前存在事务，则抛出异常。    PROPAGATION_NESTED                如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与PROPAGATION_REQUIRED类似的操作。    注意：MySQL默认的是 PROPAGATION_REQUIRED</code></pre><h3 id="8-导致索引失效"><a href="#8-导致索引失效" class="headerlink" title="8.导致索引失效"></a>8.导致索引失效</h3><pre><code>    1.如果条件中有or，即使其中有条件带索引也不会使用(这也是为什么尽量少用or的原因)    2.对于多列索引，不是使用的第一部分，则不会使用索引    3.like查询是以%开头    4.如果列类型是字符串，那一定要在条件中将数据使用引号引用起来,否则不使用索引    5.如果mysql估计使用全表扫描要比使用索引快,则不使用索引</code></pre><h3 id="9-jdbc执行过程"><a href="#9-jdbc执行过程" class="headerlink" title="9.jdbc执行过程"></a>9.jdbc执行过程</h3><pre><code>    获得连接-》预编译sql-》设置参数-》执行</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> mysql </category>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+            <tag> 数据库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>rabbitMq</title>
+      <link href="/2019/12/21/rabbitMq/"/>
+      <url>/2019/12/21/rabbitMq/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><a id="more"></a><p>消息中间件</p><h3 id="1、六种工作模式"><a href="#1、六种工作模式" class="headerlink" title="1、六种工作模式"></a>1、六种工作模式</h3><pre><code> 简单模式：一个生产者，一个消费者        1.消息产生着§将消息放入队列      2.消息的消费者(consumer) 监听(while) 消息队列,如果队列中有消息,就消费掉,消息被拿走后,自动从队列中删除(隐患 消息可能没有被消费者正确处理,已经从队列中消失了,造成消息的丢失)应用场景:聊天(中间有一个过度的服务器;p端,c端) work模式：一个生产者，多个消费者，每个消费者获取到的消息唯一。     1.消息产生者将消息放入队列消费者可以有多个,消费者1,消费者2,同时监听同一个队列,消息被消费?C1 C2共同争抢当前的消息队列内容,谁先拿到谁负责消费消息(隐患,高并发情况下,默认会产生某2.一个消息被多个消费者共同使用,可以设置一个开关(syncronize,与同步锁的性能不一样) 保证一条消息只能被一个消费者使用)     应用场景:红包;大项目中的资源调度(任务分配系统不需知道哪一个任务执行系统在空闲,直接将任务扔到消息队列中,空闲的系统自动争抢) 订阅模式：一个生产者发送的消息会被多个消费者获取。     1.X代表交换机rabbitMQ内部组件,erlang 消息产生者是代码完成,代码的执行效率不高,消息产生者将消息放入交换机,交换机发布订阅把消息发送到所有消息队列中,对应消息队列的消费者拿到消息进行消费    2.相关场景:邮件群发,群聊天,广播(广告) 路由模式：发送消息到交换机并且要指定路由key ，消费者将队列绑定到交换机时需要指定路由key    1.消息生产者将消息发送给交换机按照路由判断,路由是字符串(info) 当前产生的消息携带路由字符(对象的方法),交换机根据路由的key,只能匹配上路由key对应的消息队列,对应的消费者才能消费消息;    2.根据业务功能定义路由字符串    3.从系统的代码逻辑中获取对应的功能字符串,将消息任务扔到对应的队列中业务场景:error 通知;EXCEPTION;错误通知的功能;传统意义的错误通知;客户通知;利用key路由,可以将程序中的错误封装成消息传入到消息队列中,开发者可以自定义消费者,实时接收错误; topic模式：将路由键和某模式进行匹配，此时队列需要绑定在一个模式上，“#”匹配一个词或多个词，“*”只匹配一个词。    1.星号井号代表通配符    2.星号代表多个单词,井号代表一个单词    3.路由功能添加模糊匹配    4.消息产生者产生消息,把消息交给交换机    5.交换机根据key的规则模糊匹配到对应的队列,由队列的监听消费者接收消息消费</code></pre><h3 id="2、六种工作模式消息基于什么传输"><a href="#2、六种工作模式消息基于什么传输" class="headerlink" title="2、六种工作模式消息基于什么传输"></a>2、六种工作模式消息基于什么传输</h3><pre><code>  RabbitMQ使用信道的方式来传输数据。信道是建立在真实的TCP连接内的虚拟连接，且每条TCP连接上的信道数量没有限制。  channel 频道，exchange 交换机和 queue队列</code></pre><h3 id="3、消息怎么路由"><a href="#3、消息怎么路由" class="headerlink" title="3、消息怎么路由"></a>3、消息怎么路由</h3><pre><code> 消息路由必须有三部分：交换器、路由、绑定。生产者把消息发布到交换器上；绑定决定了消息如何从路由器路由到特定的队列；消息最终到达队列，并被消费者接收。 常用的交换器主要分为一下三种：    direct：如果路由键完全匹配，消息就被投递到相应的队列    fanout：如果交换器收到消息，将会广播到所有绑定的队列上    topic：可以使来自不同源头的消息能够到达同一个队列。 使用topic交换器时，可以使用通配符，比如：“*” 匹配特定位置的任意文本， “.” 把路由键分为了几部分，“#” 匹配所有规则等。特别注意：发往topic交换器的消息不能随意的设置选择键（routing_key），必须是由&quot;.&quot;隔开的一系列的标识符组成。</code></pre><h3 id="4、如何确保消息正确地发送至RabbitMQ"><a href="#4、如何确保消息正确地发送至RabbitMQ" class="headerlink" title="4、如何确保消息正确地发送至RabbitMQ"></a>4、如何确保消息正确地发送至RabbitMQ</h3><pre><code> RabbitMQ使用发送方确认模式，确保消息正确地发送到RabbitMQ。发送方确认模式：将信道设置成confirm模式（发送方确认模式），则所有在信道上发布的消息都会被指派一个唯一的ID。一旦消息被投递到目的队列后，或者消息被写入磁盘后（可持久化的消息），信道会发送一个确认给生产者（包含消息唯一ID）。如果RabbitMQ发生内部错误从而导致消息丢失，会发送一条nack（not acknowledged，未确认）消息。发送方确认模式是异步的，生产者应用程序在等待确认的同时，可以继续发送消息。当确认消息到达生产者应用程序，生产者应用程序的回调方法就会被触发来处理确认消息。</code></pre><h3 id="5、如何解决丢数据的问题"><a href="#5、如何解决丢数据的问题" class="headerlink" title="5、如何解决丢数据的问题"></a>5、如何解决丢数据的问题</h3><pre><code> 从生产者弄丢数据这个角度来看，RabbitMQ提供transaction和confirm模式来确保生产者不丢消息。 transaction机制就是说，发送消息前，开启事物(channel.txSelect())，然后发送消息，如果发送过程中出现什么异常，事物就会回滚(channel.txRollback())，如果发送成功则提交事物(channel.txCommit())。 生产上用confirm模式的居多。一旦channel进入confirm模式，所有在该信道上面发布的消息都将会被指派一个唯一的ID(从1开始)，一旦消息被投递到所有匹配的队列之后，rabbitMQ就会发送一个Ack给生产者(包含消息的唯一ID)，这就使得生产者知道消息已经正确到达目的队列了.如果rabiitMQ没能处理该消息，则会发送一个Nack消息给你，你可以进行重试操作。</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> rabbitMq </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> rabbitMq </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Activiti</title>
+      <link href="/2019/06/21/Activiti%E5%B7%A5%E4%BD%9C%E6%B5%81/"/>
+      <url>/2019/06/21/Activiti%E5%B7%A5%E4%BD%9C%E6%B5%81/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><a id="more"></a><p>Activiti工作流</p><h3 id="1、Activiti工作流表"><a href="#1、Activiti工作流表" class="headerlink" title="1、Activiti工作流表"></a>1、Activiti工作流表</h3><pre><code>      ACT_RE_*: &#39;RE&#39;表示repository。 这个前缀的表包含了流程定义和流程静态资源 （图片，规则，等等）。      ACT_RU_*: &#39;RU&#39;表示runtime。 这些运行时的表，包含流程实例，任务，变量，异步任务，等运行中的数据。 Activiti只在流程实例执行过程中保存这些数据， 在流程结束时就会删除这些记录。 这 样运行时表可以一直很小速度很快。      ACT_ID_*: &#39;ID&#39;表示identity。 这些表包含身份信息，比如用户，组等等。      ACT_HI_*: &#39;HI&#39;表示history。 这些表包含历史数据，比如历史流程实例， 变量，任务等等。      ACT_GE_*: 通用数据， 用于不同场景下，如存放资源文件。</code></pre><h3 id="2、Activiti核心"><a href="#2、Activiti核心" class="headerlink" title="2、Activiti核心"></a>2、Activiti核心</h3><pre><code>     ProcessEngine对象，这是Activiti工作的核心。负责生成流程运行时的各种实例及数据、监控和管理流程的运行。     repositoryService：管理流程定义     runtimeService： 执行管理，包括启动、推进、删除流程实例等操作     taskService：    任务管理     HistoryService： 历史管理(执行完的数据的管理)     identityService：单位岗位管理</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Activiti </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 工作流 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JVM</title>
+      <link href="/2019/06/15/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+      <url>/2019/06/15/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>  JVM虚拟机.</p><a id="more"></a><h3 id="一：JVM图例"><a href="#一：JVM图例" class="headerlink" title="一：JVM图例"></a>一：JVM图例</h3><p><img src="/image/JVM1.png" alt="效果图预览"></p><pre><code>  1.程序计数器:    内存空间小，线程私有。字节码解释器工作是就是通过改变这个计数器的值来选取下一条需要执行指令的字节码指令，分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖计数器完成。  2.Java 虚拟机栈     线程私有，生命周期和线程一致。描述的是 Java 方法执行的内存模型：每个方法在执行时都会床创建一个栈帧(Stack Frame)用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每一个方法从调用直至执行结束，就对应着一个栈帧从虚拟机栈中入栈到出栈的过程     局部变量表：存放了编译期可知的各种基本类型(boolean、byte、char、short、int、float、long、double)、对象引用(reference 类型)和 returnAddress 类型(指向了一条字节码指令的地址)     StackOverflowError：线程请求的栈深度大于虚拟机所允许的深度。     OutOfMemoryError：如果虚拟机栈可以动态扩展，而扩展时无法申请到足够的内存。  3.本地方法栈     区别于 Java 虚拟机栈的是，Java 虚拟机栈为虚拟机执行 Java 方法(也就是字节码)服务，而本地方法栈则为虚拟机使用到的 Native 方法服务。也会有 StackOverflowError 和 OutOfMemoryError 异常。  4.Java 堆     对于绝大多数应用来说，这块区域是 JVM 所管理的内存中最大的一块。线程共享，主要是存放对象实例和数组。内部会划分出多个线程私有的分配缓冲区。可以位于物理上不连续的空间，但是逻辑上要连续。如果堆中没有内存完成实例分配，并且堆也无法再扩展时，抛出该异常  5.方法区     属于共享内存区域，存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。  6.运行时常量池    属于方法区一部分，用于存放编译期生成的各种字面量和符号引用。编译器和运行期(String 的 intern() )都可以将常量放入池中。内存有限，无法申请时抛出 OutOfMemoryError。  7.直接内存    非虚拟机运行时数据区的部分</code></pre><p><img src="/image/JVM2.png" alt="效果图预览"></p><h3 id="二：-多线程并发编程如何正确的执行程序"><a href="#二：-多线程并发编程如何正确的执行程序" class="headerlink" title="二： 多线程并发编程如何正确的执行程序"></a>二： 多线程并发编程如何正确的执行程序</h3><pre><code>  原子性：执行过程要么成功要么失败，比如经典的银行转账问题。  可见性：多线程并发时，一个线程修改了工作内存中的值（主存中的值），会立刻改变主存相应地址的值，其它线程工作内存的值无效，重新获取主存的值。  有序性：程序执行的顺序，单个线程中没有依赖的代码，cpu会进行指令重排，使代码执行顺序调换，但是不影响最终执行的结果（单线程没有任何问题，多线程就会出现问题）</code></pre><h3 id="三：volatile关键字"><a href="#三：volatile关键字" class="headerlink" title="三：volatile关键字"></a>三：volatile关键字</h3><pre><code>  volatile能保证可见性，volatile能禁止指令重排序（所以volatile能在一定程度上保证有序性），但是这里只能保证volatile所修饰的变量之前的程序不会在该变量之后执行，该变量之后的代码不会在变量之前执行。</code></pre><h3 id="四：引用"><a href="#四：引用" class="headerlink" title="四：引用"></a>四：引用</h3><pre><code>  强引用StrongReference）：强引用是使用最普遍的引用。如果一个对象具有强引用，那垃圾回收器绝不会回收它。如下：     Object o=new Object();   //  强引用     当内存空间不足，Java虚拟机宁愿抛出OutOfMemoryError错误，使程序异常终止，也不会靠随意回收具有强引用的对象来解决内存不足的问题。  弱引用（WeakReference）：弱引用与软引用的区别在于：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。不过，由于垃圾回收器是一个优先级很低的线程，因此不一定会很快发现那些只具有弱引用的对象。     String str=new String(&quot;abc&quot;);     WeakReference&lt;String&gt; abcWeakRef = new WeakReference&lt;String&gt;(str);  软引用（SoftReference）：如果一个对象只具有软引用，则内存空间足够，垃圾回收器就不会回收它；如果内存空间不足了，就会回收这些对象的内存。只要垃圾回收器没有回收它，该对象就可以被程序使用。软引用可用来实现内存敏感的高速缓存。     String str=new String(&quot;abc&quot;); // 强引用     SoftReference&lt;String&gt; softRef=new SoftReference&lt;String&gt;(str);       虚引用（PhantomReference）：虚引用主要用来跟踪对象被垃圾回收器回收的活动。虚引用与软引用和弱引用的一个区别在于：虚引用必须和引用队列 （ReferenceQueue）联合使用。当垃圾回收器准备回收一个对象时，如果发现它还有虚引用，就会在回收对象的内存之前，把这个虚引用加入到与之 关联的引用队列中。  java4种引用的级别由高到低依次为：   强引用 &gt; 软引用 &gt; 弱引用 &gt; 虚引用  引用类型    被垃圾回收时间     用途                 生存时间   强引用    从来不会         对象的一般状态    JVM停止运行时终止   软引用    在内存不足时    对象缓存          内存不足时终止   弱引用    在垃圾回收时    对象缓存          gc运行后终止   虚引用    Unknown         Unknown        Unknown</code></pre><h3 id="五：JVM垃圾收集算法之标记算法"><a href="#五：JVM垃圾收集算法之标记算法" class="headerlink" title="五：JVM垃圾收集算法之标记算法"></a>五：JVM垃圾收集算法之标记算法</h3><pre><code>   引用计数法非常容易理解，jvm为每一个对象设立一个引用计数器，当该对象被引用时，计数器就加一，引用取消时则减一。   当jvm开始gc时，jvm判断该对象的引用计数器是否为0，若为0则标记为可清除对象。   引用计数器有个致命的缺点是无法解决循环依赖问题，这也导致这个算法被弃用。   根搜索算法       根搜索算法是目前大部分JVM所使用的标记算法。       根搜索算法会以根对象集合中的根对象出发，进行自上往下的搜索，与根对象直接连接或间接连接的对象都可以被搜索。       当JVM无法到达某个对象时，它会被标记为可清除对象。  根对象集合指的是：     JAVA栈中的对象引用     本地方法栈的对象引用     运行时常量池中的对象引用     方法区中的类静态属性的对象引用     类对应的唯一数据类型的Class对象（这句话有点抽象，实际上每个类都有一个Class对象用于表示这个类在运行时被JVM加载的相关信息，如类名、方法、属性等）                 可以使用ClassName.class、实例化对象.class、Class.forName()，获取该类的Class对象  STW，是在执行垃圾收集算法时，Java应用程序的其他所有线程都被挂起（除了垃圾收集帮助器之外）。Java中一种全局暂停现象，全局停顿，所有Java代码停止，native代码可以执行，但不能与JVM交互；这些现象多半是由于gc引起。</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> JVM </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JVM </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>spring</title>
+      <link href="/2019/03/16/spring/"/>
+      <url>/2019/03/16/spring/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>  <a href="https://spring.io/" target="_blank" rel="noopener">https://spring.io/</a></p><a id="more"></a><h3 id="一：Spring-包括哪些东西"><a href="#一：Spring-包括哪些东西" class="headerlink" title="一：Spring 包括哪些东西"></a>一：Spring 包括哪些东西</h3><pre><code>核心技术 IoC 和 AOP数据访问 （持久层解决方案）Web层解决方案 SpringMVC集成 （整合其他开源框架）</code></pre><h3 id="二：IoC控制反转和DI依赖注入"><a href="#二：IoC控制反转和DI依赖注入" class="headerlink" title="二：IoC控制反转和DI依赖注入"></a>二：IoC控制反转和DI依赖注入</h3><pre><code> IoC： IoC Inverse of Control 反转控制的概念，就是将原本在程序中手动创建对象的控制权，交由Spring框架管理，简单说，就是创建对象控制权被反转到了Spring框架。 DI：Dependency Injection 依赖注入，在Spring框架负责创建Bean对象时，动态的将依赖对象注入到Bean组件</code></pre><h3 id="三：-IoC-和-DI的区别"><a href="#三：-IoC-和-DI的区别" class="headerlink" title="三： IoC 和 DI的区别"></a>三： IoC 和 DI的区别</h3><pre><code>IoC 控制反转，指将对象的创建权，反转到Spring容器 。DI 依赖注入，指Spring创建对象的过程中，将对象依赖属性通过配置进行注入</code></pre><h3 id="四：-Spring读取配置文件中的bean"><a href="#四：-Spring读取配置文件中的bean" class="headerlink" title="四： Spring读取配置文件中的bean"></a>四： Spring读取配置文件中的bean</h3><pre><code> 加载classpath （src）：        new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;); 加载磁盘路径：        new FileSystemXmlApplicationContext(&quot;applicationContext.xml&quot;); 创建Spring 核心工厂对象        通过工厂的getBean 获得配置实例对象 (IService) applicationContext.getBean(&quot;service&quot;);</code></pre><h3 id="五：Spring-工厂接口"><a href="#五：Spring-工厂接口" class="headerlink" title="五：Spring 工厂接口"></a>五：Spring 工厂接口</h3><pre><code>  ApplicationContext 接口是继承 BeanFactory 接口 ，Spring 核心工厂是BeanFactory ,BeanFactory 采取延迟加载，第一次getBean时才会初始化Bean ,   ApplicationContext 是会在加载配置文件时 初始化Bean，ApplicationContext是对BeanFactory扩展。  Spring 工厂接口（开发中基本都在使用ApplicationContext, web项目使用WebApplicationContext ，很少用到BeanFactory）      BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource(&quot;applicationContext.xml&quot;));      IService service = (IService) beanFactory.getBean(&quot;service&quot;);      service.sayHello();</code></pre><h3 id="六：-IoC容器装配Bean"><a href="#六：-IoC容器装配Bean" class="headerlink" title="六： IoC容器装配Bean"></a>六： IoC容器装配Bean</h3><pre><code>   6.1xml配置方式           使用类构造器实例化(默认无参数)              &lt;bean id=&quot;bean1&quot; class=&quot;cn.hb.spring.b_instance.Bean1&quot;&gt;&lt;/bean&gt;           使用静态工厂方法实例化(简单工厂模式)              &lt;bean id=&quot;bean2&quot; class=&quot;cn.hb.spring.b_instance.Bean2Factory&quot; factorymethod=&quot;getBean2&quot;&gt;&lt;/bean&gt;           使用实例工厂方法实例化(工厂方法模式)              &lt;bean id=&quot;bean3Factory&quot; class=&quot;cn.hb.spring.b_instance.Bean3Factory&quot;&gt;&lt;/bean&gt;                          &lt;bean id=&quot;bean3&quot; factory-bean=&quot;bean3Factory&quot; factory-method=&quot;getBean3&quot;&gt;&lt;/bean&gt;          &lt;bean&gt;元素scope属性              scope=&quot;singleton&quot; 单例 ，在Spring IoC容器中仅存在一个Bean实例 （默认的scope）。              scope=&quot;prototype&quot; 多例 ，每次从容器中调用Bean时，都返回一个新的实例，即每次调用getBean()时 ，相当于执行new XxxBean()。              scope=&quot;request&quot; 用于web开发，将Bean放入request范围 ，request.setAttribute(&quot;xxx&quot;) ， 在同一个request 获得同一个Bean。              scope=&quot;session&quot; 用于web开发，将Bean 放入Session范围，在同一个Session 获得同一个Bean。              scope=&quot;globalSession&quot; 一般用于Porlet应用环境 , 分布式系统存在全局session概念 ，如果不是porlet环境，globalSession 等同于Session。  6.2注解方式           编写Class，在声明上 添加 @Component              @Component(&quot;helloService&quot;)                public class HelloService {                }           编写applicationContext.xml               需要引入 context 名称空间               &lt;context:component-scan base-package=&quot;cn.hb.spring.a_beandefinition&quot;&gt;&lt;/context:componentscan&gt;           spring2.5 引入@Component 等效三个衍生注解               @Repository 用于对DAO实现类进行标注（持久层）               @Service 用于对Service实现类进行标注（业务层）               @Controller 用于对Controller实现类进行标注(表现层) 6.3Bean的生命周期          在配置 &lt;bean&gt; 元素，通过 init-method 指定Bean的初始化方法，通过 destroy-method 指定Bean销毁方法。          destroy-method 只对 scope=&quot;singleton&quot; 有效          销毁方法，必须关闭ApplicationContext对象，才会被调用               ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);               applicationContext.close();                销毁方法destroy-method，必须关闭ApplicationContext对象，才会被调用。          Bean的完整生命周期              1、instantiate bean对象实例化              2、populate properties 封装属性              3、如果Bean实现BeanNameAware 执行 setBeanName              4、如果Bean实现BeanFactoryAware 或者 ApplicationContextAware 设置工厂 setBeanFactory 或者上下文对象 setApplicationContext              5、如果存在类实现 BeanPostProcessor（后处理Bean） ，执行postProcessBeforeInitialization              6、如果Bean实现InitializingBean 执行 afterPropertiesSet              7、调用&lt;bean init-method=&quot;init&quot;&gt; 指定初始化方法 init              8、如果存在类实现 BeanPostProcessor（处理Bean） ，执行postProcessAfterInitialization              9、执行业务处理              10、如果Bean实现 DisposableBean 执行 destroy              11、调用&lt;bean destroy-method=&quot;&quot;&gt; 指定销毁方法 customerDestroy</code></pre><h3 id="七：AOP-面向切面编程"><a href="#七：AOP-面向切面编程" class="headerlink" title="七：AOP 面向切面编程"></a>七：AOP 面向切面编程</h3><pre><code>  Joinpoint(连接点):所谓连接点是指那些被拦截到的点。在spring中,这些点指的是方法,因为spring只支持方法类型的连接点.  Pointcut(切入点):所谓切入点是指我们要对哪些Joinpoint进行拦截的定义.  Advice(通知/增强):所谓通知是指拦截到Joinpoint之后所要做的事情就是通知.通知分为前置通知,后置通知,异常通知,最终通知,环绕通知(切面要完成的功能)。  Introduction(引介):引介是一种特殊的通知在不修改类代码的前提下, Introduction可以在运行期为类动态地添加一些方法或Field.  Target(目标对象):代理的目标对象。  Weaving(织入):是指把增强应用到目标对象来创建新的代理对象的过程.     spring采用动态代理织入，而AspectJ采用编译期织入和类装在期织入.  Proxy（代理）:一个类被AOP织入增强后，就产生一个结果代理类.  Aspect(切面): 是切入点和通知（引介）的结合.   AOP 的底层实现:        JDK动态代理 和 CGlib的动态代理.   JDK动态代理:         针对内存中Class对象，使用类加载器 动态为目标对象实现接口的创建代理类.         代理类 是动态创建的， 代理类 和 被代理对象 实现相同接口.         被代理对象 必须要实现 接口 （JDK代理 只能针对接口 进行代理 ）.</code></pre><h3 id="八：spring中循环依赖问题"><a href="#八：spring中循环依赖问题" class="headerlink" title="八：spring中循环依赖问题"></a>八：spring中循环依赖问题</h3><pre><code>  private final Map&lt;String, Object&gt; singletonObjects = new ConcurrentHashMap(256);  private final Map&lt;String, ObjectFactory&lt;?&gt;&gt; singletonFactories = new HashMap(16);  private final Map&lt;String, Object&gt; earlySingletonObjects = new HashMap(16);  private final Set&lt;String&gt; singletonsCurrentlyInCreation = Collections.newSetFromMap(new ConcurrentHashMap(16));  singletonsCurrentlyInCreation：保存对象的BeanName，在创建对象之前就会把对象的beanName保存起来。  singletonFactories：保存对象的BeanName和创建bean的工厂AbstractAutowireCapableBeanFactory(ObjectFactory)，（对象的构造函数是在这一步完成的）  earlySingletonObjects：保存对象BeanName和对象的早期实例（ObjectFactory#getObject得到的对象）（此时对象还没注入属性），此时可以作为对象填充依赖。  singletonObjects：保存BeanName和bean的实例（此时对象已经完成了属性注入）</code></pre><h3 id="九：spring对事物支持"><a href="#九：spring对事物支持" class="headerlink" title="九：spring对事物支持"></a>九：spring对事物支持</h3><pre><code>  TransactionDefinition：事务的定义信息：包含事务操作的 隔离级别，传播行为，是否超时 ，是否是只读的等信息。  PlatformTransactionManager 平台事务管理器：真正用来管理事务的接口，包含 事务的提交，回滚等信息  TransactionStatus 事务的具体运行状态：该接口提供的方法可以获取或者判断事务的相关状态。事务是否有保存点，事务是否已经完成，事务是不是一个新的事务等等。  回滚RuntimeException 和 Error类型异常  不回滚 checked exceptions  编程式事务使用TransactionTemplate或者直接使用底层的PlatformTransactionManager。</code></pre><h3 id="十：controller的三种实现方式"><a href="#十：controller的三种实现方式" class="headerlink" title="十：controller的三种实现方式"></a>十：controller的三种实现方式</h3><pre><code>    第一种：实现Controller接口        public class Contrller implements Controller{        @Override        //重写handleRequest方法        public ModelAndVIew handleRequest(HttpServletRequest request,HttpServletResponse response){        }        &lt;bean id=&quot;/hello&quot; class=&quot;Hello.java&quot;&gt;&lt;/bean&gt;        &lt;!--配置controllerbean让spring管理--&gt;    第二种：实现HttpRequestHandler接口        public class Contrller implements HttpRequestHandler{            @Override            //重写handleRequest方法            public void handleRequest(HttpServletRequest request,HttpServletResponse response){                //没有modelAndView,所以需要request转发或重定向到页面 request转发 req.getrequestDispatcher(&quot;需要跳转的页面路径&quot;).forward(req,resp)            //重定向sendRedirect            }        }        &lt;!--配置controllerbean让spring管理--&gt;    第三种：实现HttpRequestHandler接口        @Controller        //注解需要扫描需要配置spring-context context-component-scan base-package=&quot;扫描包路径&quot;        public class Contrller{        @RequestMapping(&quot;路径&quot;)            public void hello(){            }        }</code></pre><h3 id="十：事物失效"><a href="#十：事物失效" class="headerlink" title="十：事物失效"></a>十：事物失效</h3><pre><code> 1.作用于接口：不推荐这种使用方法，因为一旦标注在Interface上并且配置了Spring AOP 使用CGLib动态代理。 2.@Transactional 应用在非 public 修饰的方法上 3.同一个类中方法调用，导致@Transactional失效 4.异常被你的 catch“吃了”导致@Transactional失效 5.数据库引擎不支持事务 6.事务属性配置错误</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> spring </category>
+          
+          <category> 框架 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> spring </tag>
+            
+            <tag> 框架 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Redis</title>
+      <link href="/2019/03/15/Redis/"/>
+      <url>/2019/03/15/Redis/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>  Redis.</p><a id="more"></a><h3 id="第一步：Redis支持的数据类型"><a href="#第一步：Redis支持的数据类型" class="headerlink" title="第一步：Redis支持的数据类型"></a>第一步：Redis支持的数据类型</h3><pre><code>  String字符串：  格式: set key value  string类型是二进制安全的。意思是redis的string可以包含任何数据。比如jpg图片或者序列化的对象 。  string类型是Redis最基本的数据类型，一个键最大能存储512MB。  Hash（哈希）：  格式: hmset name  key1 value1 key2 value2  Redis hash 是一个键值(key=&gt;value)对集合。  Redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。  List（列表）：  Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）  格式: lpush  name  value  在 key 对应 list 的头部添加字符串元素  格式: rpush  name  value  在 key 对应 list 的尾部添加字符串元素  格式: lrem name  index  key 对应 list 中删除 count 个和 value 相同的元素  格式: llen name    返回 key 对应 list 的长度  Set（集合）：  格式: sadd  name  value  Redis的Set是string类型的无序集合。  集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。  zset(sorted set：有序集合)：  格式: zadd  name score value  Redis zset 和 set 一样也是string类型元素的集合,且不允许重复的成员。  不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。  zset的成员是唯一的,但分数(score)却可以重复。</code></pre><h3 id="二：Redis分布式锁基础指令"><a href="#二：Redis分布式锁基础指令" class="headerlink" title="二：Redis分布式锁基础指令"></a>二：Redis分布式锁基础指令</h3><pre><code> SETNX key value    将key设置值为value，如果key不存在，这种情况下等同SET命令。 当key存在时，什么也不做。SETNX是”SET if Not eXists”的简写。 返回值：    1 如果key被设置了    0 如果key没有被设置 用途：可以用来枷锁。比如给商品id加锁。 GETSET  key value    自动将key对应到value并且返回原来key对应的value。如果key存在但是对应的value不是字符串，就返回错误。</code></pre><h3 id="三-redis持久化方式和原理"><a href="#三-redis持久化方式和原理" class="headerlink" title="三.redis持久化方式和原理"></a>三.redis持久化方式和原理</h3><pre><code>RDB方式原理：当redis需要做持久化时（执行SAVA或者BGSAVA命令，或者是达到配置条件时执行），redis会fork一个子进程，子进程将数据写到磁盘上一个临时RDB文件中，当子进程完成写临时文件后，将原来的RDB替换掉（默认文件名为dump.rdb）AOF方式原理：AOF就可以做到全程持久化，Redis每执行一个修改数据的命令，都会把这个命令添加到AOF文件中，当Redis重启时，将会读取AOF文件进行“重放”以恢复到 Redis关闭前的最后时刻。由于os会在内核中缓存 write做的修改，所以可能不是立即写到磁盘上。这样aof方式的持久化也还是有可能会丢失部分修改。不过我们可以通过配置文件告诉redis我们想要 通过fsync函数强制os写入到磁盘的时机。有三种方式如下（默认是：每秒fsync一次）  Redis内建支持两种持久化方案，snapshot快照和AOF 增量Log方式。快照顾名思义就是隔一段时间将完整的数据Dump下来存储在文件中。AOF增量Log则是记录对数据的修改操作（实际上记录的就是每个对数据产生修改的命令本身），两种方案可以并存，也各有优缺点，具体参见</code></pre><h3 id="四-过期数据删除策略"><a href="#四-过期数据删除策略" class="headerlink" title="四.过期数据删除策略"></a>四.过期数据删除策略</h3><pre><code>惰性删除发生在redis处理读写请求的过程，如get/set等命令。定期删除发生在redis内部定时任务执行过程中，限制占用cpu的时间。</code></pre><p>   redis的定期删除是通过定时任务实现的，也就是定时任务会循环调用serverCron方法。然后定时检查过期数据的方法是databasesCron。<br> 定期删除的一大特点就是考虑了定时删除过期数据会占用cpu时间，所以每次执行databasesCron的时候会限制cpu的占用不超过25%。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Redis </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Redis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>注解</title>
+      <link href="/2018/03/17/java%E4%B8%AD%E6%B3%A8%E8%A7%A3/"/>
+      <url>/2018/03/17/java%E4%B8%AD%E6%B3%A8%E8%A7%A3/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>  注解.</p><a id="more"></a><h3 id="一Java定义的元注解："><a href="#一Java定义的元注解：" class="headerlink" title="一Java定义的元注解："></a>一Java定义的元注解：</h3><pre><code>  @Target, @Retention, @Documented, @Inherited    这些类型和它们所支持的类在java.lang.annotation包中可以找到。  @Target：        @Target说明了Annotation所修饰的对象范围：Annotation可被用于 packages、types（类、接口、枚举、Annotation类型）、类型成员（方法、构造方法、成员变量、枚举值）、方法参数和本地变量（如循环变量、catch参数）。在Annotation类型的声明中使用了target可更加明晰其修饰的目标。     作用：用于描述注解的使用范围（即：被描述的注解可以用在什么地方）           取值(ElementType)有：     　　　　1.CONSTRUCTOR:用于描述构造器     　　　　2.FIELD:用于描述域     　　　　3.LOCAL_VARIABLE:用于描述局部变量     　　　　4.METHOD:用于描述方法     　　　　5.PACKAGE:用于描述包     　　　　6.PARAMETER:用于描述参数     　　　　7.TYPE:用于描述类、接口(包括注解类型) 或enum声明  @Retention：        @Retention定义了该Annotation被保留的时间长短：某些Annotation仅出现在源代码中，而被编译器丢弃；而另一些却被编译在class文件中；编译在class文件中的Annotation可能会被虚拟机忽略，而另一些在class被装载时将被读取（请注意并不影响class的执行，因为Annotation与class在使用上是被分离的）。使用这个meta-Annotation可以对 Annotation的“生命周期”限制。          取值（RetentionPoicy）有：     　　　　1.SOURCE:在源文件中有效（即源文件保留）     　　　　2.CLASS:在class文件中有效（即class保留）     　　　　3.RUNTIME:在运行时有效（即运行时保留）  @Documented:        @Documented用于描述其它类型的annotation应该被作为被标注的程序成员的公共API，因此可以被例如javadoc此类的工具文档化。Documented是一个标记注解，没有成员。  @Inherited：        @Inherited 元注解是一个标记注解，@Inherited阐述了某个被标注的类型是被继承的。如果一个使用了@Inherited修饰的annotation类型被用于一个class，则这个annotation将被用于该class的子类。        注意：@Inherited annotation类型是被标注过的class的子类所继承。类并不从它所实现的接口继承annotation，方法并不从它所重载的方法继承annotation。</code></pre><p>　　         </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> java </category>
+          
+          <category> 注解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> 注解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>docker基础</title>
+      <link href="/2018/03/15/docker%E5%9F%BA%E7%A1%80/"/>
+      <url>/2018/03/15/docker%E5%9F%BA%E7%A1%80/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>  记录学习docker过程.</p><a id="more"></a><h3 id="第一步：安装docker"><a href="#第一步：安装docker" class="headerlink" title="第一步：安装docker"></a>第一步：安装docker</h3><pre><code>1. yum包更新到最新sudo yum update2. 安装需要的软件包sudo yum install -y yum-utils device-mapper-persistent-data lvm23. 设置yum源为阿里云sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo4.安装docker-cesudo yum install docker-ce5.查看当前docker版本docker -v</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Centos7上搭建ftp</title>
+      <link href="/2017/09/25/Centos7%E4%B8%8A%E6%90%AD%E5%BB%BAftp/"/>
+      <url>/2017/09/25/Centos7%E4%B8%8A%E6%90%AD%E5%BB%BAftp/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>  记录一次在centos服务器上搭建ftp过程。</p><a id="more"></a><h3 id="第一步：使用xshell连上远程服务器，安装vsftp"><a href="#第一步：使用xshell连上远程服务器，安装vsftp" class="headerlink" title="第一步：使用xshell连上远程服务器，安装vsftp"></a>第一步：使用xshell连上远程服务器，安装vsftp</h3><pre><code> yum install -y vsftpd</code></pre><h3 id="第二步：设置开机启动"><a href="#第二步：设置开机启动" class="headerlink" title="第二步：设置开机启动"></a>第二步：设置开机启动</h3><pre><code> systemctl enable vsftpd</code></pre><h3 id="第三步：启动ftp服务"><a href="#第三步：启动ftp服务" class="headerlink" title="第三步：启动ftp服务"></a>第三步：启动ftp服务</h3><pre><code>   systemctl start vsftpd.service</code></pre><h3 id="第四步：打开防火墙"><a href="#第四步：打开防火墙" class="headerlink" title="第四步：打开防火墙"></a>第四步：打开防火墙</h3><pre><code> firewall-cmd --zone=public --add-port=21/tcp --permanent firewall-cmd --permanent --zone=public --add-service=ftp firewall-cmd --reload</code></pre><h3 id="第五步：添加用户"><a href="#第五步：添加用户" class="headerlink" title="第五步：添加用户"></a>第五步：添加用户</h3><pre><code> useradd -g root -d /home/data -s /sbin/nologin test 新建test用户 添加到root组 但是不允许用户登录，仅仅可以ftp登录 ftp登录后的默认目录是/home/data</code></pre><h3 id="第六步：设置用户密码"><a href="#第六步：设置用户密码" class="headerlink" title="第六步：设置用户密码"></a>第六步：设置用户密码</h3><pre><code>passwd test</code></pre><h3 id="第七步：设置权限"><a href="#第七步：设置权限" class="headerlink" title="第七步：设置权限"></a>第七步：设置权限</h3><pre><code> chown -R test:root /home/data setsebool -P ftpd_full_access on</code></pre><h3 id="第八步：修改vsftp配置文件，禁止匿名登录"><a href="#第八步：修改vsftp配置文件，禁止匿名登录" class="headerlink" title="第八步：修改vsftp配置文件，禁止匿名登录"></a>第八步：修改vsftp配置文件，禁止匿名登录</h3><pre><code> vi /etc/vsftpd/vsftpd.conf 把：anonymous_enable=YES 改为： anonymous_enable=NO 输入---&gt; :wq! 保存退出</code></pre><h3 id="第九步：在本地电脑上按下win-R键，输入cmd，进入命令行"><a href="#第九步：在本地电脑上按下win-R键，输入cmd，进入命令行" class="headerlink" title="第九步：在本地电脑上按下win+R键，输入cmd，进入命令行"></a>第九步：在本地电脑上按下win+R键，输入cmd，进入命令行</h3><p><img src="/image/ftp.jpg" alt="效果图预览"></p><pre><code>  输入ftp、输入open命令 ，输入ftp服务器地址，输入登录名，密码。回车。 出现 230 Login successful.表示ftp服务器搭建成功。</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> ftp </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ftp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>log4j日志管理</title>
+      <link href="/2017/09/21/log4j%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/"/>
+      <url>/2017/09/21/log4j%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><a id="more"></a><p>log4j是java主流的日志框架，在线上生产环境下，有很多问题都是通过查看日志发觉的，日志的重要性不言而喻。</p><h3 id="1、log4j说明"><a href="#1、log4j说明" class="headerlink" title="1、log4j说明"></a>1、log4j说明</h3><p> log4j提供各种类型，各种存储，各种格式，多样化的日志服务。Log4j根据日志信息的重要程度，分OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL这7类。一般只使用其中的4个级别，优先级从高到低分别是 ERROR、WARN、INFO、DEBUG。日志配置的级别较高，就不会把低级别的日志打印出来。比如配置的日志级别是ERROR，就不会将WARN、INFO、DEBUG级别的日志打印出来。</p><h3 id="2、引入依赖"><a href="#2、引入依赖" class="headerlink" title="2、引入依赖"></a>2、引入依赖</h3><p> 在pom.xml文件中引入依赖<br><dependency><br>    <groupId>log4j</groupId><br>    <artifactId>log4j</artifactId><br>    <version>1.2.17</version><br></dependency></p><h3 id="2、新建文件log4j-properties"><a href="#2、新建文件log4j-properties" class="headerlink" title="2、新建文件log4j.properties"></a>2、新建文件log4j.properties</h3><p>在项目resources目录下新建一个文件log4j.properties。将配置放入文件中</p><p>log4j.rootLogger=DEBUG, Console ,FIEL ,DailyRollingFile ,RollingFile #Console log4j.appender.Console=org.apache.log4j.ConsoleAppender log4j.appender.Console.layout=org.apache.log4j.TTCCLayout #FIEL log4j.appender.FIEL = org.apache.log4j.FileAppender log4j.appender.FIEL.File = D://WorkProject//SpringBoot//logs//log.log log4j.appender.FIEL.layout = org.apache.log4j.PatternLayout log4j.appender.FIEL.layout.ConversionPattern =%d [%t] %-5p [%c] - %m%n #DailyRollingFile log4j.appender.DailyRollingFile = org.apache.log4j.DailyRollingFileAppender log4j.appender.DailyRollingFile.File = D://WorkProject//SpringBoot//logs//springbootcrud-log.log log4j.appender.DailyRollingFile.layout = org.apache.log4j.PatternLayout log4j.appender.DailyRollingFile.layout.ConversionPattern =%d [%t] %-5p [%c] - %m%n #RollingFile log4j.appender.RollingFile = org.apache.log4j.RollingFileAppender log4j.appender.RollingFile.File = D://WorkProject//SpringBoot//logs//springbootcrud-date.log log4j.appender.RollingFile.MaxFileSize=100KB log4j.appender.RollingFile.MaxBackupIndex=10 log4j.appender.RollingFile.layout = org.apache.log4j.PatternLayout log4j.appender.RollingFile.layout.ConversionPattern =%d [%t] %-5p [%c] - %m%n</p><p>说明：<br>   log4j.rootLogger中DEBUG代表配置的日志级别是DEBUG。<br>   log4j.appender.FIEL.File 中的配置代表日志输出到那个文件下<br>   log4j.appender.DailyRollingFile.File中的配置代表每天的日志输出到那个文件下（主要是为了防止文件日志太大）<br>   log4j.appender.RollingFile.File中的配置代表如果日志文件超过了设定的值，日志输出到那个文件下。</p><h3 id="3、代码中使用log4j"><a href="#3、代码中使用log4j" class="headerlink" title="3、代码中使用log4j"></a>3、代码中使用log4j</h3><p>在代码中使用日志，在要使用日志的类中定义日志变量。<br>private static Logger logger=Logger.getLogger(PersonController.class);</p><p>说明：<br>    PersonController是类名。</p><p>在要打印日志的地方调用日志类的方法输出日志<br>    logger.info(“普通Info信息”); logger.debug(“调试debug信息”); logger.error(“报错error信息”); logger.warn(“警告warn信息”); logger.fatal(“严重错误fatal信息”);</p><h3 id="4、效果图"><a href="#4、效果图" class="headerlink" title="4、效果图"></a>4、效果图</h3><p><img src="/image/log4j.png" alt="效果图预览"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> java </category>
+          
+          <category> 插件 </category>
+          
+          <category> log4j </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> 插件 </tag>
+            
+            <tag> log4j </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>分页插件pagehelper的使用</title>
+      <link href="/2017/09/15/%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6pagehelper%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+      <url>/2017/09/15/%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6pagehelper%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><a id="more"></a><p>在java开发的过程中，我们经常会查询列表数据。但是不可能将所有的数据都查询出来，都查询出来，对服务器的内存是很大的浪费，其次，页面上也不需要一次性展示这么多数据。通常我们会在查询语句里边拼接分页sql,这样做虽然能解决分页问题，但是拼接sql，sql语句显得极其凌乱。更重要的是，如果因为参数问题，拼接的sql极有可能不是我们想要的sql,执行时会报错。分页插件pagehelper很好的解决了这一问题，并且使用起来也很简单。</p><h3 id="1、引入依赖"><a href="#1、引入依赖" class="headerlink" title="1、引入依赖"></a>1、引入依赖</h3><p> 在pom.xml文件中引入依赖<br><dependency><br>   <groupId>com.github.pagehelper</groupId><br>   <artifactId>pagehelper</artifactId><br>   <version>5.1.2</version><br></dependency></p><h3 id="2、使用PageHelper"><a href="#2、使用PageHelper" class="headerlink" title="2、使用PageHelper"></a>2、使用PageHelper</h3><p>在service类中执行查询语句时将PageHelper插件引入。<br>    public PageInfo selectPersonAll(Integer pageNum, Integer pageSize) {<br>        PageHelper.startPage(pageNum,pageSize);<br>        List<Person> list =personDao.selectPersonAll();<br>        PageInfo pageInfo = new PageInfo(list);<br>        return pageInfo;<br>    }</p><p>在执行查询语句时，先执行一句PageHelper.startPage(pageNum,pageSize);<br>pageNum为当前页，pageSize为每页要显示的数据量，执行了该语句后会默认对下一句查询语句分页。</p><p>List<Person> list =personDao.selectPersonAll();//调用dao层执行查询语句。<br>PageInfo pageInfo = new PageInfo(list);//将查询的语句放入PageInfo中，PageInfo会将分页参数那些全部计算好返回，无需自己在计算。PageInfo 是PageHelper中自带的类。</p><p>dao层代码：<br>    public interface PersonDao {<br>    List<Person> selectPersonAll();<br>    }</p><p>mapper文件中sql:<br>    <select id="selectPersonAll" resultType="com.example.business.person.entity.Person"><br>        select * from T_PERSON<br>    </select></p><h3 id="3、PageHelper中PageInfo类说明"><a href="#3、PageHelper中PageInfo类说明" class="headerlink" title="3、PageHelper中PageInfo类说明"></a>3、PageHelper中PageInfo类说明</h3><p>PageHelper中PageInfo类说明：<br>    public class PageInfo<T> implements Serializable {<br>        private static final long serialVersionUID = 1L;<br>        //当前页<br>        private int pageNum;<br>        //每页的数量<br>        private int pageSize;<br>        //当前页的数量<br>        private int size;<br>        //当前页面第一个元素在数据库中的行号<br>        private int startRow;<br>        //当前页面最后一个元素在数据库中的行号<br>        private int endRow;<br>        //总记录数<br>        private long total;<br>        //总页数<br>        private int pages;<br>        //结果集<br>        private List<T> list;<br>        //前一页<br>        private int prePage;<br>        //下一页<br>        private int nextPage;<br>        //是否为第一页<br>        private boolean isFirstPage = false;<br>        //是否为最后一页<br>        private boolean isLastPage = false;<br>        //是否有前一页<br>        private boolean hasPreviousPage = false;<br>        //是否有下一页<br>        private boolean hasNextPage = false;<br>        //导航页码数<br>        private int navigatePages;<br>        //所有导航页号<br>        private int[] navigatepageNums;<br>        //导航条上的第一页<br>        private int navigateFirstPage;<br>        //导航条上的最后一页<br>        private int navigateLastPage;<br>    }</p><p>数据存放在list中，前台可通过el表达式或其他方式将数据取出展示。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> java </category>
+          
+          <category> 插件 </category>
+          
+          <category> pagehelper </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> 插件 </tag>
+            
+            <tag> pagehelpe </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SpringBoot中集成swagger</title>
+      <link href="/2017/09/09/SpringBoot%E4%B8%AD%E9%9B%86%E6%88%90swagger/"/>
+      <url>/2017/09/09/SpringBoot%E4%B8%AD%E9%9B%86%E6%88%90swagger/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>swagger主要是用来解决实际接口与接口文档不一致问题。因为需求变动或者一些其他的原因导致后台接口出现了变动，但是却没有及时的更新接口文档，调用方拿到的文档不是最新的文档。swagger能够根据后台接口实时生成文档。</p><a id="more"></a><h3 id="1、新建springboot项目"><a href="#1、新建springboot项目" class="headerlink" title="1、新建springboot项目"></a>1、新建springboot项目</h3><p> 新建一个springboot项目，在pom.xml文件中增加swagger的依赖。<br><dependency><br><groupId>io.springfox</groupId><br><artifactId>springfox-swagger2</artifactId><br><version>2.6.1</version><br></dependency><br><dependency><br><groupId>io.springfox</groupId><br><artifactId>springfox-swagger-ui</artifactId><br><version>2.6.1</version><br></dependency></p><h3 id="2、新建swagger配置类"><a href="#2、新建swagger配置类" class="headerlink" title="2、新建swagger配置类"></a>2、新建swagger配置类</h3><pre><code>@Configuration@EnableSwagger2public class SwaggerConfig {    @Bean    public Docket api() {        return new Docket(DocumentationType.SWAGGER_2)        .apiInfo(apiInfo())        .select()        .apis(RequestHandlerSelectors.basePackage(&quot;com.example&quot;))        .paths(PathSelectors.any())        .build();    }    private ApiInfo apiInfo() {        return new ApiInfoBuilder()        .title(&quot;Springboot使用swagger在线文档&quot;)        .description(&quot;swagger UI接入教程&quot;)        .version(&quot;1.0&quot;)        .build();    }}</code></pre><h3 id="3、接口上加上注解ApiOperation"><a href="#3、接口上加上注解ApiOperation" class="headerlink" title="3、接口上加上注解ApiOperation"></a>3、接口上加上注解ApiOperation</h3><pre><code>修改接口，在接口上加上注解ApiOperation，接口修改后如下。@ApiOperation(value = &quot;获取所有人员信息接口(分页)&quot;,notes = &quot;获取所有人员信息接口(分页)&quot;)@RequestMapping(value =&quot;/selectPersonAll&quot;, method = RequestMethod.GET)public PageInfo selectPersonAll(@RequestParam Integer pageNum, @RequestParam Integer pageSize){    return personService.selectPersonAll(pageNum,pageSize);}</code></pre><h3 id="4、重启项目"><a href="#4、重启项目" class="headerlink" title="4、重启项目"></a>4、重启项目</h3><p>重启项目，在浏览器地址栏中输入项目地址，在加上/swagger-ui.html，点击回车。就能够看到对应的接口文档了，还可以直接在页面中测试接口。<br><img src="/image/swagger.png" alt="效果图预览"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> springboot </category>
+          
+          <category> swagger </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> springboot </tag>
+            
+            <tag> swagger </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>linux下重启oracle服务</title>
+      <link href="/2017/07/17/linux%E5%92%8Cwindows%E4%B8%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+      <url>/2017/07/17/linux%E5%92%8Cwindows%E4%B8%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><a id="more"></a><h3 id="1-linux下重启oracle服务步骤："><a href="#1-linux下重启oracle服务步骤：" class="headerlink" title="1.linux下重启oracle服务步骤："></a>1.linux下重启oracle服务步骤：</h3><pre><code> 1.使用Xshell连接linux服务器。 2.以oracle身份登录数据库，命令：su – oracle 3.进入Sqlplus控制台，命令：sqlplus /nolog 4.以系统管理员登录，命令：connect / as sysdba 5.关闭数据库，命令：shutdown immediate 6.退出sqlplus控制台，命令：exithexO 7.进入监听器控制台，命令：lsnrctl 8.启动监听器，命令：start 9.退出监听器控制台，命令：exit</code></pre><h3 id="2-linux下日志查找："><a href="#2-linux下日志查找：" class="headerlink" title="2.linux下日志查找："></a>2.linux下日志查找：</h3><pre><code>cat 文件名|grep &#39;关键字&#39;</code></pre><h3 id="3-windows下关闭占用端口的进程："><a href="#3-windows下关闭占用端口的进程：" class="headerlink" title="3.windows下关闭占用端口的进程："></a>3.windows下关闭占用端口的进程：</h3><pre><code>netstat -aon|findstr &quot;端口&quot;tasklist|findstr &quot;pid&quot;</code></pre><h3 id="4-windows下使用telnet："><a href="#4-windows下使用telnet：" class="headerlink" title="4.windows下使用telnet："></a>4.windows下使用telnet：</h3><pre><code> win + R 进入命令行窗口 telnet 127.0.0.1 10001 ctrl + ] send 数据</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+          <category> centos </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> centos </tag>
+            
+            <tag> linux </tag>
+            
+            <tag> oracle </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Centos7上搭建nexus</title>
+      <link href="/2017/03/08/Centos7%E4%B8%8A%E6%90%AD%E5%BB%BAnexus/"/>
+      <url>/2017/03/08/Centos7%E4%B8%8A%E6%90%AD%E5%BB%BAnexus/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>  记录一次在centos服务器上搭建私服过程，要使用nexus服务需要安装jdk和maven，jdk已经安装过，只需要安装maven.</p><a id="more"></a><h3 id="第一步：安装maven"><a href="#第一步：安装maven" class="headerlink" title="第一步：安装maven"></a>第一步：安装maven</h3><pre><code>使用xshell连接远程服务器，进入到目录 /usr/local    cd /usr/local新建目录 maven     mkdir maven将安装包上传到这个目录下使用命令 tar -zxvf 解压文件    tar -zxvf apache-maven-3.6.3-bin.tar.gz配置环境变量    vim /etc/profile在文件后边追加如下内容    export PATH=$PATH:/usr/local/maven/apache-maven-3.6.3/bin让配置生效    source /etc/profile查看maven版本    mvn -v</code></pre><p>  maven版本信息<br>   <img src="/image/maven.jpg" alt="效果图预览">        </p><h3 id="第二步：安装nexus"><a href="#第二步：安装nexus" class="headerlink" title="第二步：安装nexus"></a>第二步：安装nexus</h3><pre><code>使用xshell连接远程服务器，进入到目录 /usr/local    cd /usr/local新建目录 nexus     mkdir nexus将安装包上传到这个目录下使用命令 tar -zxvf 解压文件    tar -zxvf nexus-3.13.0-01-unix.tar.gz解压后又两个目录    nexus-3.13.0-01：包含了 Nexus 运行所需要的文件。是 Nexus 运行必须的    sonatype-work： 包含了 Nexus 生成的配置文件、日志文件、仓库文件等。当我们需要备份 Nexus 的时候默认备份此目录即可修改环境变量    vim /etc/profile在文件后边追加文本  export NEXUS_HOME=/usr/local/nexus/nexus-3.13.0  export PATH=$PATH:$NEXUS_HOME/bin让配置生效   source /etc/profile进入到nexus目录下,启动nexus    cd  /usr/local/nexus/nexus-3.13.0-01/bin启动nexus    ./nexus start查看nexus状态    ./nexus status 开放8081端口，nexus默认使用的端口是8081   firewall-cmd --zone=public --add-port=8081/tcp --permanent</code></pre><p>在浏览器中输入<a href="http://120.27.248.244:8081/" target="_blank" rel="noopener">http://120.27.248.244:8081/</a><br>    <img src="/image/nexus1.jpg" alt="效果图预览"></p><h3 id="第三步：配置nexus"><a href="#第三步：配置nexus" class="headerlink" title="第三步：配置nexus"></a>第三步：配置nexus</h3><p>使用admin登录私服</p><p>   <img src="/image/nexus2.jpg" alt="效果图预览"></p><p>创建 3rdPart  Repositories<br>   <img src="/image/nexus3.jpg" alt="效果图预览"><br>   <img src="/image/nexus4.jpg" alt="效果图预览"> </p><p>创建 alyun-proxy  Repositories<br>   <img src="/image/nexus5.jpg" alt="效果图预览"><br>   <img src="/image/nexus6.jpg" alt="效果图预览">  </p><p>调整 Repositories 的位置<br>   <img src="/image/nexus7.jpg" alt="效果图预览"><br>   <img src="/image/nexus8.jpg" alt="效果图预览">  </p><p>私服搭建完毕，效果如下<br>    <img src="/image/nexus9.jpg" alt="效果图预览">  </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> java </category>
+          
+          <category> centos </category>
+          
+          <category> linux </category>
+          
+          <category> nexus </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> centos </tag>
+            
+            <tag> linux </tag>
+            
+            <tag> nexus </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Centos7上搭建web应用环境</title>
+      <link href="/2017/02/10/Centos7%E4%B8%8A%E6%90%AD%E5%BB%BAweb%E7%8E%AF%E5%A2%83/"/>
+      <url>/2017/02/10/Centos7%E4%B8%8A%E6%90%AD%E5%BB%BAweb%E7%8E%AF%E5%A2%83/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>  记录一次在centos服务器上搭建web应用环境过程。</p><a id="more"></a><h3 id="第一步：安装jdk"><a href="#第一步：安装jdk" class="headerlink" title="第一步：安装jdk"></a>第一步：安装jdk</h3><pre><code> 在java官网上下载jdk。 使用xshell连接上远程服务器，进入到目录/usr/local/下   cd   /usr/local/ 新建目录 java 作为java的安装目录   mkdir java 将安装包上传到java 目录下，使用命令将安装包解压   tar -zxvf  jdk-8u221-linux-x64.tar.gz 修改系统环境变量    vim /etc/profile 在文件中追加如下内容   export JAVA_HOME=/usr/local/java/jdk1.8.0_221   export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar   export PATH=$PATH:$JAVA_HOME/bin 保存退出编辑后运行下面命令让配置生效   source /etc/profile 查看jdk配置是否成功   java -version 出现java版本信息说明安装成功。</code></pre><h3 id="第二步：安装tomcat"><a href="#第二步：安装tomcat" class="headerlink" title="第二步：安装tomcat"></a>第二步：安装tomcat</h3><pre><code>  在官网上下载tomcat。 使用xshell连接上远程服务器，进入到目录/usr/local/下   cd   /usr/local/ 新建目录 tomcat 作为tomcat的安装目录   mkdir tomcat 将安装包上传到tomcat 目录下，使用命令将安装包解压    tar -zxvf  apache-tomcat-7.0.96.tar.gz 进入server目录下，修改端口为80    cd  /usr/local/tomcat/apache-tomcat-7.0.96/conf    vim  server.xml 修改端口为80后，保存退出 进入到webapps目录下    cd  /usr/local/tomcat/apache-tomcat-7.0.96/webapps 将应用程序包放到webapps目录下。</code></pre><h3 id="第三步：开放80端口"><a href="#第三步：开放80端口" class="headerlink" title="第三步：开放80端口"></a>第三步：开放80端口</h3><pre><code>开放80端口   firewall-cmd --zone=public --add-port=80/tcp --permanent查询端口号80 是否开启  firewall-cmd --query-port=80/tcp重启防火墙   firewall-cmd --reload查询有哪些端口是开启的   firewall-cmd --list-port</code></pre><p>在浏览器上输入地址就可以访问到项目。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> java </category>
+          
+          <category> centos </category>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> centos </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Oracle数据库修改表结构</title>
+      <link href="/2017/01/10/oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E8%A1%A8%E7%BB%93%E6%9E%84/"/>
+      <url>/2017/01/10/oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E8%A1%A8%E7%BB%93%E6%9E%84/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>   开发过程中经常回遇到需求变动,现有表结构不能满足现有需求，我们需要修改表结构。最常见的就是增加删除字段、修改字段类型、建立索引等。</p><a id="more"></a><h3 id="一-创建一个表"><a href="#一-创建一个表" class="headerlink" title="一.创建一个表"></a>一.创建一个表</h3><pre><code>表结构如下：   create table test(        id varchar2(50) not null,        registTime varchar2(80) not null    );  </code></pre><h3 id="二-新增字段"><a href="#二-新增字段" class="headerlink" title="二.新增字段"></a>二.新增字段</h3><pre><code> 使用下面这句sql新增 alter table test add (name varchar2(30) default &#39;不详&#39;);  说明：    test 是要修改的表名，    name 是要新增字段的名字，    varchar2(30)是新增字段的类型，    default &#39;不详&#39; 是这个新增字段的默认值，在插入数据时，如果name字段为空，会自动赋值“不详”。</code></pre><h3 id="三-修改字段"><a href="#三-修改字段" class="headerlink" title="三.修改字段"></a>三.修改字段</h3><pre><code>使用下面这句sql修改 alter table test modify (registTime date); 说明：   test 是要修改的表名，   registTime 是要修改字段的名字，   date是修改后字段的类型。 </code></pre><h3 id="四-删除字段"><a href="#四-删除字段" class="headerlink" title="四.删除字段"></a>四.删除字段</h3><pre><code> 使用下面这句sql删除  alter table test drop column name;说明：  test 是要修改的表名，  name 是要删除字段的名字。</code></pre><h3 id="五-设置主键"><a href="#五-设置主键" class="headerlink" title="五.设置主键"></a>五.设置主键</h3><pre><code>使用下面这句sql设置alter table test add constraint pk_test primary key(id);说明：  test是表名，  id是要设置主键的字段，  pk_test 是主键的名称</code></pre><h3 id="六-设置索引"><a href="#六-设置索引" class="headerlink" title="六.设置索引"></a>六.设置索引</h3><pre><code>使用下面这句sql设置create index iden_idnumber on test(id);说明：   test是表名，   id是要设置索引的字段，   iden_idnumber 是索引的名称（oracle中主键默认有索引）</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Oracle </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Oracle数据库</title>
+      <link href="/2017/01/09/oracle%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <url>/2017/01/09/oracle%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>   开发人员导入导出，备份数据库是基本技能。虽然记得怎么做，但好记性不如乱笔头，还是做下笔记，防止自己忘记。不会导库的人员也可以参考一下，利人利己。</p><a id="more"></a><h3 id="一-导出数据库"><a href="#一-导出数据库" class="headerlink" title="一.导出数据库"></a>一.导出数据库</h3><pre><code>第一步：先使用plsql连上数据库，点击file-&gt;new-&gt;sql window,新建一个窗口。   执行下面这句sql   select &#39;alter table &#39;||table_name||&#39; allocate extent;&#39; from user_tables where num_rows=0;   执行这句sql是为了到出库时，能把空表也导出。第二步：按下WIN+R键，输入cmd，进入到dos窗口。   在dos窗口下执行下面这句命令导出库即可   exp sys/oracle@127.0.0.1:1521/orcl file=D:\test.dmp    说明：    sys：是数据库用户的用户名    oracle：数据库用户的密码    127.0.0.1:1521/orcl：是远程数据库的地址    D:\test.dmp：是导出数据库要保存的地址</code></pre><h3 id="二-导入数据库"><a href="#二-导入数据库" class="headerlink" title="二.导入数据库"></a>二.导入数据库</h3><pre><code>第一步：先使用plsql连上数据库，点击file-&gt;new-&gt;sql window,新建一个窗口。第二步：使用下边这句sql创建表空间    create tablespace TEST_BIZ datafile &#39;E:\TEST_BIZ.dbf&#39; size 50M autoextend on next 10M maxsize unlimited;    说明：    TEST_BIZ ：是要创建表空间的名字    E:\TEST_BIZ.dbf：是表空间放在那里第三步：使用下面这句sql创建用户    create user TEST_USER identified by TEST_PASSWORD default tablespace TEST_BIZ;    说明：    TEST_USER ：创建的用户名    TEST_PASSWORD ：创建的用户密码    TEST_BIZ：这个用户使用的表空间第四步：使用下面的sql为用户授权    grant dba to TEST_USER;第五步：按下WIN+R键，输入cmd，进入到dos窗口。      在dos窗口下执行下面的命令    imp TEST_USER/TEST_PASSWORD@127.0.0.1:1521/orcl file=D:\test.dmp full=y ignore=y        说明：        TEST_USER：用户名        TEST_PASSWORD：密码        127.0.0.1:1521/orcl：远程主机的地址        D:\test.dmp：dmp文件的位置</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Oracle </category>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据库 </tag>
+            
+            <tag> Oracle </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>java基础知识</title>
+      <link href="/2016/12/28/java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+      <url>/2016/12/28/java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="java基础知识"><a href="#java基础知识" class="headerlink" title="java基础知识"></a>java基础知识</h2><h3 id="1-java三大特性"><a href="#1-java三大特性" class="headerlink" title="1.java三大特性"></a>1.java三大特性</h3><pre><code>   抽象：抽象是将一类对象的共同特征总结出来构造类的过程，包括数据抽象和行为抽象两方面。抽象只关注对象有哪些属性和行为，并不关注这些行为的细节是什么。    继承：继承是从已有类得到继承信息创建新类的过程。提供继承信息的类被称为父类（超类、基类）；得到继承信息的类被称为子类（派生类）。   封装：通常认为封装是把数据和操作数据的方法绑定起来，对数据的访问只能通过已定义的接口。面向对象的本质就是将现实世界描绘成一系列完全自治、封闭的对象。我们在类中编写的方法就是对实现细节的一种封装；我们编写一个类就是对数据和数据操作的封装。</code></pre><h3 id="2-java修饰符"><a href="#2-java修饰符" class="headerlink" title="2.java修饰符"></a>2.java修饰符</h3><p><img src="/image/decorate.jpg" alt="效果图预览"> </p><h3 id="3-Java-原始类型大小"><a href="#3-Java-原始类型大小" class="headerlink" title="3.Java 原始类型大小"></a>3.Java 原始类型大小</h3><pre><code>boolean    1字节byte       1字节char       2字节short      2字节int        4字节float      4字节double     8字节long       8字节</code></pre><h3 id="4-构造器（constructor）是否可被重写（override）"><a href="#4-构造器（constructor）是否可被重写（override）" class="headerlink" title="4.构造器（constructor）是否可被重写（override）"></a>4.构造器（constructor）是否可被重写（override）</h3><pre><code>构造器不能被继承，因此不能被重写，但可以被重载。</code></pre><h3 id="5-String和StringBuilder、StringBuffer的区别"><a href="#5-String和StringBuilder、StringBuffer的区别" class="headerlink" title="5.String和StringBuilder、StringBuffer的区别"></a>5.String和StringBuilder、StringBuffer的区别</h3><pre><code>Java平台提供了两种类型的字符串：String和StringBuffer/StringBuilder，它们可以储存和操作字符串。其中String是只读字符串，也就意味着String引用的字符串内容是不能被改变的。而StringBuffer/StringBuilder类表示的字符串对象可以直接进行修改。StringBuilder是Java 5中引入的，它和StringBuffer的方法完全相同，区别在于它是在单线程环境下使用的，因为它的所有方面都没有被synchronized修饰，因此它的效率也比StringBuffer要高。</code></pre><h3 id="6-重载（Overload）和重写（Override）的区别"><a href="#6-重载（Overload）和重写（Override）的区别" class="headerlink" title="6.重载（Overload）和重写（Override）的区别"></a>6.重载（Overload）和重写（Override）的区别</h3><pre><code>方法的重载和重写都是实现多态的方式，区别在于前者实现的是编译时的多态性，而后者实现的是运行时的多态性。重载发生在一个类中，同名的方法如果有不同的参数列表（参数类型不同、参数个数不同或者二者都不同）则视为重载；重写发生在子类与父类之间，重写要求子类被重写方法与父类被重写方法有相同的返回类型，比父类被重写方法更好访问，不能比父类被重写方法声明更多的异常（里氏代换原则）。重载对返回类型没有特殊的要求。</code></pre><h3 id="7-JVM加载class文件的原理机制"><a href="#7-JVM加载class文件的原理机制" class="headerlink" title="7.JVM加载class文件的原理机制"></a>7.JVM加载class文件的原理机制</h3><pre><code> JVM会确保这个类已经被加载、连接（验证、准备和解析）和初始化。 类的加载是指把类的.class文件中的数据读入到内存中，通常是创建一个字节数组读入.class文件，然后产生与所加载类对应的Class对象。加载完成后，Class对象还不完整，所以此时的类还不可用。当类被加载后就进入连接阶段，这一阶段包括验证、准备（为静态变量分配内存并设置默认的初始值）和解析（将符号引用替换为直接引用）三个步骤。 最后JVM对类进行初始化，包括：1)如果类存在直接的父类并且这个类还没有被初始化，那么就先初始化父类；2)如果类中存在初始化语句，就依次执行这些初始化语句。</code></pre><h3 id="8-垃圾回收相关的JVM参数"><a href="#8-垃圾回收相关的JVM参数" class="headerlink" title="8.垃圾回收相关的JVM参数"></a>8.垃圾回收相关的JVM参数</h3><pre><code> -Xms / -Xmx — 堆的初始大小 / 堆的最大大小 -Xmn — 堆中年轻代的大小 -XX:-DisableExplicitGC — 让System.gc()不产生任何作用 -XX:+PrintGCDetails — 打印GC的细节 -XX:+PrintGCDateStamps — 打印GC操作的时间戳 -XX:NewSize / XX:MaxNewSize — 设置新生代大小/新生代最大大小 -XX:NewRatio — 可以设置老生代和新生代的比例 -XX:PrintTenuringDistribution — 设置每次新生代GC后输出幸存者乐园中对象年龄的分布 -XX:InitialTenuringThreshold / -XX:MaxTenuringThreshold：设置老年代阀值的初始值和最大值 -XX:TargetSurvivorRatio：设置幸存区的目标使用率</code></pre><h3 id="9-Error和Exception有什么区别"><a href="#9-Error和Exception有什么区别" class="headerlink" title="9.Error和Exception有什么区别"></a>9.Error和Exception有什么区别</h3><pre><code>Error表示系统级的错误和程序不必处理的异常，是恢复不是不可能但很困难的情况下的一种严重问题；比如内存溢出，不可能指望程序能处理这样的情况；Exception表示需要捕捉或者需要程序进行处理的异常，是一种设计或实现问题；也就是说，它表示如果程序运行正常，从不会发生的情况。</code></pre><h3 id="10-Thread类的sleep-方法和对象的wait-方法都可以让线程暂停执行，它们有什么区别"><a href="#10-Thread类的sleep-方法和对象的wait-方法都可以让线程暂停执行，它们有什么区别" class="headerlink" title="10.Thread类的sleep()方法和对象的wait()方法都可以让线程暂停执行，它们有什么区别"></a>10.Thread类的sleep()方法和对象的wait()方法都可以让线程暂停执行，它们有什么区别</h3><pre><code>sleep()方法（休眠）是线程类（Thread）的静态方法，调用此方法会让当前线程暂停执行指定的时间，将执行机会（CPU）让给其他线程，但是对象的锁依然保持，因此休眠时间结束后会自动恢复（线程回到就绪状态，请参考第66题中的线程状态转换图）。wait()是Object类的方法，调用对象的wait()方法导致当前线程放弃对象的锁（线程暂停执行），进入对象的等待池（wait pool），只有调用对象的notify()方法（或notifyAll()方法）时才能唤醒等待池中的线程进入等锁池（lock pool），如果线程重新获得对象的锁就可以进入就绪状态。</code></pre><h3 id="11-事务的ACID是指什么"><a href="#11-事务的ACID是指什么" class="headerlink" title="11.事务的ACID是指什么"></a>11.事务的ACID是指什么</h3><pre><code> 原子性(Atomic)：事务中各项操作，要么全做要么全不做，任何一项操作的失败都会导致整个事务的失败；  一致性(Consistent)：事务结束后系统状态是一致的；  隔离性(Isolated)：并发执行的事务彼此无法看到对方的中间状态；  持久性(Durable)：事务完成后所做的改动都会被持久化，即使发生灾难性的失败。通过日志和同步备份可以在故障发生后重建数据。 脏读（Dirty Read）：A事务读取B事务尚未提交的数据并在此基础上操作，而B事务执行回滚，那么A读取到的数据就是脏数据。 不可重复读（Unrepeatable Read）：事务A重新读取前面读取过的数据，发现该数据已经被另一个已提交的事务B修改过了。 幻读（Phantom Read）：事务A重新执行一个查询，返回一系列符合查询条件的行，发现其中插入了被事务B提交的行。</code></pre><h3 id="12-获得一个类的类对象有哪些方式"><a href="#12-获得一个类的类对象有哪些方式" class="headerlink" title="12.获得一个类的类对象有哪些方式"></a>12.获得一个类的类对象有哪些方式</h3><pre><code> 方法1：类型.class，例如：String.class  方法2：对象.getClass()，例如：&quot;hello&quot;.getClass()  方法3：Class.forName()，例如：Class.forName(&quot;java.lang.String&quot;)</code></pre><h3 id="13-如何通过反射创建对象"><a href="#13-如何通过反射创建对象" class="headerlink" title="13.如何通过反射创建对象"></a>13.如何通过反射创建对象</h3><pre><code> 方法1：通过类对象调用newInstance()方法，例如：String.class.newInstance()  方法2：通过类对象的getConstructor()或getDeclaredConstructor()方法获得构造器（Constructor）对象并调用其newInstance()方法创建对象，例如：String.class.getConstructor(String.class).newInstance(&quot;Hello&quot;);</code></pre><h3 id="14-java中wait和sleep有什么区别"><a href="#14-java中wait和sleep有什么区别" class="headerlink" title="14.java中wait和sleep有什么区别"></a>14.java中wait和sleep有什么区别</h3><pre><code> 最大区别是等待时wait会释放锁，而sleep会一直持有锁，wait通常用于线程时交互，sleep通常被用于暂停执行</code></pre><h3 id="15-HTTP请求方法get和post有什么区别"><a href="#15-HTTP请求方法get和post有什么区别" class="headerlink" title="15. HTTP请求方法get和post有什么区别"></a>15. HTTP请求方法get和post有什么区别</h3><pre><code> 1：Post传输数据时，不需要在URL中显示出来，而Get方法要在URL中显示。 2：Post传输的数据量大，可以达到2M，而Get方法由于受到URL长度限制,只能传递大约1024字节. 3：Post就是为了将数据传送到服务器段,Get就是为了从服务器段取得数据.而Get 之所以也能传送数据,只是用来设计告诉服务器,你到底需要什么样的数据.Post的信息作为http请求的内容，而Get是在Http头部传输的。</code></pre><h3 id="16-java中代码块执行顺序"><a href="#16-java中代码块执行顺序" class="headerlink" title="16. java中代码块执行顺序"></a>16. java中代码块执行顺序</h3><p>   父类中静态代码块-》子类中静态代码块-》父类中普通代码块-》父类中构造函数-》子类中普通代码块-》子类中构造函数</p><h3 id="17-为什么hashmap的长度要是2-N"><a href="#17-为什么hashmap的长度要是2-N" class="headerlink" title="17.为什么hashmap的长度要是2^N"></a>17.为什么hashmap的长度要是2^N</h3><pre><code>hash&amp;length-1)只有hashmap的长度为2^N,length-1转化成二进制才全是1，按位与才能均匀的分布到每个桶中。</code></pre><h3 id="18-网络架构"><a href="#18-网络架构" class="headerlink" title="18. 网络架构"></a>18. 网络架构</h3><p><img src="/image/%E7%BD%91%E7%BB%9C%E5%9B%BE.jpg" alt="效果图预览"></p><h3 id="19-三次握手"><a href="#19-三次握手" class="headerlink" title="19. 三次握手"></a>19. 三次握手</h3><p><img src="/image/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="效果图预览"></p><h3 id="20-Error和Exception的区别"><a href="#20-Error和Exception的区别" class="headerlink" title="20. Error和Exception的区别"></a>20. Error和Exception的区别</h3><pre><code>Error：程序无法处理的系统错误，编译器不做检查；</code></pre><p>　　Exception：程序可以处理的异常，捕获后可能恢复；<br>   总结：前者是程序无法处理的错误，后者是可以处理的异常。</p><pre><code>Error：属于JVM需要负担的责任；</code></pre><p>　　Exception：<br>           RuntimeException（非受检异常）是程序应该负担的责任；<br>　　　　　　Checked Exception （受检异常）可检查异常时Java编译器应该负担的责任。<br>      RuntimeException：<br>        　　1、NullPropagation：空指针异常；<br>        　　2、ClassCastException：类型强制转换异常<br>        　　3、IllegalArgumentException：传递非法参数异常<br>        　　4、IndexOutOfBoundsException：下标越界异常<br>        　　5、NumberFormatException：数字格式异常</p><pre><code>    非RuntimeException：    　　1、ClassNotFoundException：找不到指定class的异常    　　2、IOException：IO操作异常    Error：    　　1、NoClassDefFoundError：找不到class定义的异常    　　2、StackOverflowError：深递归导致栈被耗尽而抛出的异常    　　3、OutOfMemoryError：内存溢出异常</code></pre><h3 id="21-Executors创建线程池"><a href="#21-Executors创建线程池" class="headerlink" title="21.Executors创建线程池"></a>21.Executors创建线程池</h3><pre><code>   只需要调用Executors中相应的便捷方法即可，比如Executors.newFixedThreadPool(int nThreads)，但是便捷不仅隐藏了复杂性，也为我们埋下了潜在的隐患（OOM，线程耗尽）。   方法名                            功能newFixedThreadPool(int nThreads)    创建固定大小的线程池newSingleThreadExecutor()    创建只有一个线程的线程池newCachedThreadPool()    创建一个不限线程数上限的线程池，任何提交的任务都将立即执行    // Java线程池的完整构造函数    public ThreadPoolExecutor(            int corePoolSize, // 线程池长期维持的线程数，即使线程处于Idle状态，也不会回收。            int maximumPoolSize, // 线程数的上限            long keepAliveTime, // 超过corePoolSize的线程的idle时长，             TimeUnit unit, // 超过这个时间，多余的线程会被回收。            BlockingQueue&lt;Runnable&gt; workQueue, // 任务的排队队列            ThreadFactory threadFactory, // 新线程的产生方式            RejectedExecutionHandler handler) // 拒绝策略拒绝策略    CallerRunsPolicy：处理策略：不管线程池死活，来任务了，我就执行，不管你能不能真的执行。注意：这里的执行就是执行ThreadPoolExecutor.execute()。    AbortPolicy：处理策略：抛异常。这个是默认处理策略。    DiscardPolicy：处理策略：什么都不做。相当于放弃了当前任务的执行。    DiscardOldestPolicy：处理策略：移出任务队列头部的任务，然后执行当前线程。相当于放弃了任务队列头部的任务。</code></pre><h3 id="22、公平锁和非公平锁"><a href="#22、公平锁和非公平锁" class="headerlink" title="22、公平锁和非公平锁"></a>22、公平锁和非公平锁</h3><pre><code>公平锁：多个线程按照申请锁的顺序去获得锁，线程会直接进入队列去排队，永远都是队列的第一位才能得到锁    优点：所有的线程都能得到资源，不会饿死在队列中。    缺点：吞吐量会下降很多，队列里面除了第一个线程，其他的线程都会阻塞，cpu唤醒阻塞线程的开销会很大。非公平锁：多个线程去获取锁的时候，会直接去尝试获取，获取不到，再去进入等待队列，如果能获取到，就直接获取到锁。    优点：可以减少CPU唤醒线程的开销，整体的吞吐效率会高点，CPU也不必取唤醒所有线程，会减少唤起线程的数量。    缺点：你们可能也发现了，这样可能导致队列中间的线程一直获取不到锁或者长时间获取不到锁，导致饿死。</code></pre><h3 id="23、ReentrantLook实现原理"><a href="#23、ReentrantLook实现原理" class="headerlink" title="23、ReentrantLook实现原理"></a>23、ReentrantLook实现原理</h3><pre><code>ReentrantLock主要利用CAS+AQS队列来实现。它支持公平锁和非公平锁，两者的实现类似。CAS：Compare and Swap，比较并交换。CAS有3个操作数：内存值V、预期值A、要修改的新值B。当且仅当预期值A和内存值V相同时，将内存值V修改为B，否则什么都不做。该操作是一个原子操作，被广泛的应用在Java的底层实现中。在Java中，CAS主要是由sun.misc.Unsafe这个类通过JNI调用CPU底层指令实现。AQS使用一个FIFO的队列表示排队等待锁的线程，队列头节点称作“哨兵节点”或者“哑节点”，它不与任何线程关联。其他的节点与等待线程关联，每个节点维护一个等待状态waitStatus.ReentrantLock的基本实现可以概括为：先通过CAS尝试获取锁。如果此时已经有线程占据了锁，那就加入AQS队列并且被挂起。当锁被释放之后，排在CLH队列队首的线程会被唤醒，然后CAS再次尝试获取锁。</code></pre><h3 id="24、线程的生命周期"><a href="#24、线程的生命周期" class="headerlink" title="24、线程的生命周期"></a>24、线程的生命周期</h3><pre><code> 新建：就是刚使用new方法，new出来的线程； 就绪：就是调用的线程的start()方法后，这时候线程处于等待CPU分配资源阶段，谁先抢的CPU资源，谁开始执行; 运行：当就绪的线程被调度并获得CPU资源时，便进入运行状态，run方法定义了线程的操作和功能; 阻塞：在运行状态的时候，可能因为某些原因导致运行状态的线程变成了阻塞状态，比如sleep()、wait()之后线程就处于了阻塞状态，这个时候需要其他机制将处于阻塞状态的线程唤醒，比如调用notify或者notifyAll()方法。唤醒的线程不会立刻执行run方法，它们要再次等待CPU分配资源进入运行状态; 销毁：如果线程正常执行完毕后或线程被提前强制性的终止或出现异常导致结束，那么线程就要被销毁，释放资源;</code></pre><h3 id="25-分布式事务"><a href="#25-分布式事务" class="headerlink" title="25.分布式事务"></a>25.分布式事务</h3><pre><code>atomikos</code></pre><h3 id="26-GC原理和G1算法"><a href="#26-GC原理和G1算法" class="headerlink" title="26.GC原理和G1算法"></a>26.GC原理和G1算法</h3><pre><code>  从最高层看，G1的collector一侧其实就是两个大部分：    全局并发标记（global concurrent marking）    拷贝存活对象（evacuation）非并发，暂停拷贝而这两部分可以相对独立的执行。</code></pre><h3 id="27-jvm调优"><a href="#27-jvm调优" class="headerlink" title="27.jvm调优"></a>27.jvm调优</h3><pre><code>  https://www.cnblogs.com/anyehome/p/9071619.html</code></pre><h3 id="28-spring-bean的生命周期"><a href="#28-spring-bean的生命周期" class="headerlink" title="28.spring bean的生命周期"></a>28.spring bean的生命周期</h3><p>实例化 -&gt; 属性赋值 -&gt; 初始化 -&gt; 销毁</p><h3 id="29-Servlet生命周期详解"><a href="#29-Servlet生命周期详解" class="headerlink" title="29.Servlet生命周期详解"></a>29.Servlet生命周期详解</h3><p>加载-》初始化-》服务-》销毁-》卸载</p><pre><code>加载Servlet    Web容器负责加载Servlet，当web容器启东时或者在第一次使用这个Servlet的时候，容器会负责创建Servlet实例，但是用户必须通过web.xml指定Servlet的位置，成功加载后，Web容器会通过反射的方式对Servlet进行实例化。初始化    当一个servlet被实例化之后，容器将调用init()方法初始化这个对象，以便在处理请求之前完成一些动作。服务    执行方法销毁   大部分web容器关闭或者检测到一个servlet要从容器中被删除时，会自动调用destory方法。卸载   当一个servlet调用玩destory后，此实例将被垃圾回收，当需要再次使用时，将会重新调用init方法。需要注意的是，在正常情况下，Servlet只会初始化一次，但是当Servlet长时间不使用的话，也会被容器自动销毁，而如果需要再次使用时，会重新进行初始化操作，即在特殊情况下初始化操作和销毁操作也会执行多次。</code></pre><h3 id="30-web-xml中load-on-startup的作用"><a href="#30-web-xml中load-on-startup的作用" class="headerlink" title="30.web.xml中load-on-startup的作用"></a>30.web.xml中load-on-startup的作用</h3><pre><code>1)load-on-startup元素标记容器是否在启动的时候就加载这个servlet(实例化并调用其init()方法)。2)它的值必须是一个整数，表示servlet应该被载入的顺序2)当值为0或者大于0时，表示容器在应用启动时就加载并初始化这个servlet；3)当值小于0或者没有指定时，则表示容器在该servlet被选择时才会去加载。4)正数的值越小，该servlet的优先级越高，应用启动时就越先加载。5)当值相同时，容器就会自己选择顺序来加载。所以，&lt;load-on-startup&gt;x&lt;/load-on-startup&gt;，中x的取值1，2，3，4，5代表的是优先级，而非启动延迟时间。</code></pre><h3 id="31-java中拦截器和过滤器"><a href="#31-java中拦截器和过滤器" class="headerlink" title="31.java中拦截器和过滤器"></a>31.java中拦截器和过滤器</h3><p><img src="/image/%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8.png" alt="效果图预览">  </p><p> 过滤器可以简单的理解为“取你所想取”，过滤器关注的是web请求；拦截器可以简单的理解为“拒你所想拒”，拦截器关注的是方法调用，比如拦截敏感词汇。<br> 拦截器是基于java反射机制来实现的，而过滤器是基于函数回调来实现的。（有人说，拦截器是基于动态代理来实现的）<br> 拦截器不依赖servlet容器，过滤器依赖于servlet容器。<br> 拦截器只对Action起作用，过滤器可以对所有请求起作用。<br> 拦截器可以访问Action上下文和值栈中的对象，过滤器不能。<br> 在Action的生命周期中，拦截器可以多次调用，而过滤器只能在容器初始化时调用一次。</p><h3 id="32-synchronized与lock不同"><a href="#32-synchronized与lock不同" class="headerlink" title="32.synchronized与lock不同"></a>32.synchronized与lock不同</h3><pre><code>   synchronized是关键字，lock是接口   synchronized能自动释放锁，lock是接口不能   synchronized不知道有没有拿到锁，而lock可以   synchronized 能锁住方法和代码块，而lock只能锁住代码块   synchronized是非公平锁，而ReentrantLock可以控制。</code></pre><h3 id="33-java并发内存模型以及内存操作规则"><a href="#33-java并发内存模型以及内存操作规则" class="headerlink" title="33.java并发内存模型以及内存操作规则"></a>33.java并发内存模型以及内存操作规则</h3><pre><code>  lock(锁定)：作用于主内存，它把一个变量标记为一条线程独占状态；  unlock(解锁)：作用于主内存，它将一个处于锁定状态的变量释放出来，释放后的变量才能够被其他线程锁定；  read(读取)：作用于主内存，它把变量值从主内存传送到线程的工作内存中，以便随后的load动作使用；  load(载入)：作用于工作内存，它把read操作的值放入工作内存中的变量副本中；  use(使用)：作用于工作内存，它把工作内存中的值传递给执行引擎，每当虚拟机遇到一个需要使用这个变量的指令时候，将会执行这个动作；  assign(赋值)：作用于工作内存，它把从执行引擎获取的值赋值给工作内存中的变量，每当虚拟机遇到一个给变量赋值的指令时候，执行该操作；  store(存储)：作用于工作内存，它把工作内存中的一个变量传送给主内存中，以备随后的write操作使用；  write(写入)：作用于主内存，它把store传送值放到主内存中的变量中。</code></pre><h3 id="34-二叉树的深度优先遍历和广度优先遍历"><a href="#34-二叉树的深度优先遍历和广度优先遍历" class="headerlink" title="34.二叉树的深度优先遍历和广度优先遍历"></a>34.二叉树的深度优先遍历和广度优先遍历</h3><pre><code>二叉树的深度优先遍历的非递归的通用做法是采用栈，广度优先遍历的非递归的通用做法是采用队列。先序遍历：对任一子树，先访问根，然后遍历其左子树，最后遍历其右子树。中序遍历：对任一子树，先遍历其左子树，然后访问根，最后遍历其右子树。后序遍历：对任一子树，先遍历其左子树，然后遍历其右子树，最后访问根。广度优先遍历：又叫层次遍历，从上往下对每一层依次访问，在每一层中，从左往右（也可以从右往左）访问结点，访问完一层就进入下一层，直到没有结点可以访问为止。</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hello-world</title>
+      <link href="/2016/12/23/hello-world/"/>
+      <url>/2016/12/23/hello-world/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 通用 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 兴趣 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
