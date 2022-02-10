@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>堆,栈</title>
+      <link href="/2022/02/08/java%E4%B8%AD%E5%A0%86%E6%A0%88%E4%BF%A1%E6%81%AF/"/>
+      <url>/2022/02/08/java%E4%B8%AD%E5%A0%86%E6%A0%88%E4%BF%A1%E6%81%AF/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><a id="more"></a><p>堆栈分析</p><h3 id="1、堆栈"><a href="#1、堆栈" class="headerlink" title="1、堆栈"></a>1、堆栈</h3><pre><code>   (1)使用命令 top -p &lt;pid&gt;,显示java进程，比如14203。   (2)按H,获取每个线程的cpu情况。（shift+H）。  （3）找到内存和cpu占用最高的线程tid，，比如14204。  （4）转换为十六进制得到377c,此为线程id的十六进制表示。  （5）执行jstack &lt;pid&gt;|grep -A &lt;thread ox16 id&gt; ,得到线程信息中137这个线程所在行的后面10行。  （6）查看对应的堆栈信息找出可能存在问题的代码</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 堆栈分析 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 堆 </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>安全框架</title>
       <link href="/2020/03/25/%E6%9D%83%E9%99%90%E6%A1%86%E6%9E%B6/"/>
       <url>/2020/03/25/%E6%9D%83%E9%99%90%E6%A1%86%E6%9E%B6/</url>
@@ -97,9 +124,9 @@
       
         <tags>
             
-            <tag> mysql </tag>
-            
             <tag> 数据库 </tag>
+            
+            <tag> mysql </tag>
             
         </tags>
       
@@ -555,9 +582,9 @@
       
         <tags>
             
-            <tag> 数据库 </tag>
-            
             <tag> Oracle </tag>
+            
+            <tag> 数据库 </tag>
             
         </tags>
       
