@@ -29,6 +29,31 @@
     
     
     <entry>
+      <title>DDD领域驱动设计</title>
+      <link href="/2023/07/18/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/"/>
+      <url>/2023/07/18/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr><p>领域驱动设计（Domain-driven Design，DDD）是一种软件设计方法，该方法的核心思想是将业务领域作为设计和开发的中心，强调对业务领域的深入理解、业务语言的建模以及领域对象的设计和实现。</p><a id="more"></a><h3 id="DDD设计的两个阶段包括两部分，战略设计部分和战术设计部分："><a href="#DDD设计的两个阶段包括两部分，战略设计部分和战术设计部分：" class="headerlink" title="DDD设计的两个阶段包括两部分，战略设计部分和战术设计部分："></a>DDD设计的两个阶段包括两部分，战略设计部分和战术设计部分：</h3><pre><code>战略设计战略设计主要从业务视角出发，包括了业务场景分析、领域建模、划分边界上下文三个阶段。限界上下文可以作为微服务设计的参考边界。战术设计战术设计则从技术视角出发，侧重于领域模型的技术实现，完成软件开发和落地，战术设计包括：聚合根、实体、值对象、领域服务、应用服务和资源库等代码逻辑的技术设计和技术设计。</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> DDD领域驱动设计 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> DDD领域驱动设计 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>堆,栈</title>
       <link href="/2022/02/08/java%E4%B8%AD%E5%A0%86%E6%A0%88%E4%BF%A1%E6%81%AF/"/>
       <url>/2022/02/08/java%E4%B8%AD%E5%A0%86%E6%A0%88%E4%BF%A1%E6%81%AF/</url>
