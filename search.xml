@@ -33,7 +33,7 @@
       <link href="/2023/07/18/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/"/>
       <url>/2023/07/18/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr><p>领域驱动设计（Domain-driven Design，DDD）是一种软件设计方法，该方法的核心思想是将业务领域作为设计和开发的中心，强调对业务领域的深入理解、业务语言的建模以及领域对象的设计和实现。</p><a id="more"></a><h3 id="DDD设计的两个阶段包括两部分，战略设计部分和战术设计部分："><a href="#DDD设计的两个阶段包括两部分，战略设计部分和战术设计部分：" class="headerlink" title="DDD设计的两个阶段包括两部分，战略设计部分和战术设计部分："></a>DDD设计的两个阶段包括两部分，战略设计部分和战术设计部分：</h3><pre><code>战略设计战略设计主要从业务视角出发，包括了业务场景分析、领域建模、划分边界上下文三个阶段。限界上下文可以作为微服务设计的参考边界。战术设计战术设计则从技术视角出发，侧重于领域模型的技术实现，完成软件开发和落地，战术设计包括：聚合根、实体、值对象、领域服务、应用服务和资源库等代码逻辑的技术设计和技术设计。</code></pre>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr><p>领域驱动设计（Domain-driven Design，DDD）是一种软件设计方法，该方法的核心思想是将业务领域作为设计和开发的中心，强调对业务领域的深入理解、业务语言的建模以及领域对象的设计和实现。</p><a id="more"></a><h3 id="DDD设计的两个阶段包括两部分"><a href="#DDD设计的两个阶段包括两部分" class="headerlink" title="DDD设计的两个阶段包括两部分"></a>DDD设计的两个阶段包括两部分</h3><h4 id="战略设计"><a href="#战略设计" class="headerlink" title="战略设计"></a>战略设计</h4><pre><code>战略设计主要从业务视角出发，包括了业务场景分析、领域建模、划分边界上下文三个阶段。限界上下文可以作为微服务设计的参考边界。</code></pre><h4 id="战术设计"><a href="#战术设计" class="headerlink" title="战术设计"></a>战术设计</h4><pre><code>战术设计则从技术视角出发，侧重于领域模型的技术实现，完成软件开发和落地，战术设计包括：聚合根、实体、值对象、领域服务、应用服务和资源库等代码逻辑的技术设计和技术设计。</code></pre>]]></content>
       
       
       <categories>
@@ -148,6 +148,31 @@
         <tags>
             
             <tag> ShardingJDBC，分库分表，脱敏 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>java中事务</title>
+      <link href="/2020/03/08/java%E4%B8%AD%E4%BA%8B%E5%8A%A1/"/>
+      <url>/2020/03/08/java%E4%B8%AD%E4%BA%8B%E5%8A%A1/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr><p> 事务分为编程式事务和声明式事务两种，编程式事务指在代码中手动的管理事务的提交、回滚等操作，代码侵入性比较强。声明式事务是基于 AOP 面向切面的，它将具体业务与事务处理部分解耦，代码侵入性很低，声明式事务也有两种实现方式，一种是基于 TX 和 AOP 的 xml 配置文件方式，二种就是基于 @Transactional 注解了</p><a id="more"></a><h3 id="Transactional"><a href="#Transactional" class="headerlink" title="@Transactional"></a>@Transactional</h3><pre><code> @Transactional 可以作用在类上，当作用在类上的时候，表示所有该类的 public 方法都配置相同的事务属性信息。@Transactional 也可以作用在方法上，当方法上也配置了 @Transactional，方法的事务会覆盖类的事务配置信息。</code></pre><p><img src="/image/Transactiona%E6%B3%A8%E8%A7%A3.png" alt="效果图预览">   </p><pre><code> 回滚是只判断异常类型是RuntimeException 和 Error 的才会进行回滚，别的异常类型是不会回滚的。</code></pre><h3 id="propagation属性"><a href="#propagation属性" class="headerlink" title="propagation属性"></a>propagation属性</h3><p>  事务七种传播行为<br><img src="/image/%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E5%B1%9E%E6%80%A7.png" alt="效果图预览">   </p><h3 id="Transactional-的失效场景"><a href="#Transactional-的失效场景" class="headerlink" title="@Transactional 的失效场景"></a>@Transactional 的失效场景</h3><pre><code>1、@Transactional 应用在非 public 修饰的方法上，@Transactional 将会失效。protected、private 修饰的方法上使用 @Transactional 注解，虽然事务无效，但不会有任何报错，这是我们很容犯错的一点。2、@Transactional 注解属性 propagation 设置错误。PROPAGATION_SUPPORTS、PROPAGATION_NOT_SUPPORTED、PROPAGATION_NEVER上面这三种都没有讲到，因为用了它们事务是不会发生回滚，加了等于没加。3、@Transactional 注解属性 rollbackFor 设置错误，默认的只会对 RuntimeException 类型和 Error 类型的才进行回滚。如果在事务中抛出其他类型的异常，却希望 Spring 能够回滚事务，就需要指定 rollbackFor 属性。4、同一个类中方法调用，导致 @Transactional 失效。总方法调子方法的时候，要放在不同的 service 里面，如果放在一个类里面，事务调用是不会生效的。5、异常被吃了，吃掉以后虽然不影响其他事务，但是其他数据的 commit 会造成数据不一致，所以有些时候 try catch 反倒会画蛇添足。6、数据库引擎不支持事务，这一点很简单，myisam 引擎是不支持事务的，innodb 引擎支持事务。7、数据源没有配置事务管理器，这个也很简单，要使用事务肯定要配事务管理器。Hibernate 用的是HibernateTransactionManager，JDBC 和 Mybatis 用的是 DataSourceTransactionManager。8 、最后就是一个方法内多数据库（多数据源）的情况下会失效，这个也是我同事做实验得出来的。</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 事务 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 事务 </tag>
             
         </tags>
       
