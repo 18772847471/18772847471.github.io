@@ -393,6 +393,31 @@
     
     
     <entry>
+      <title>集合</title>
+      <link href="/2018/03/06/%E9%9B%86%E5%90%88/"/>
+      <url>/2018/03/06/%E9%9B%86%E5%90%88/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><pre><code>在Java中，集合是一种非常重要的数据结构，用于存储一组元素。</code></pre><hr><h3 id="集合框架"><a href="#集合框架" class="headerlink" title="集合框架"></a>集合框架</h3><p><img src="/image/%E9%9B%86%E5%90%88.png" alt="效果图预览"></p><h3 id="集合简介"><a href="#集合简介" class="headerlink" title="集合简介"></a>集合简介</h3><p>  （1）集合有两个父接口 Collection、Map<br>  （2）Collection有两个子接口 List、set<br>  （3）List有两个常见的实现类 ArrayList、LinkedList<br>  （4）Set有两个常见的实现类 HashSet、TreeSet<br>  （5）Map有两个常见的实现类 HashMap、HashTable</p><h3 id="不同集合的特点"><a href="#不同集合的特点" class="headerlink" title="不同集合的特点"></a>不同集合的特点</h3><p>   （1）List             特点：有序、可重复<br>   （2）Set              特点：无序、不可重复<br>   （3）Collection       特点：无序、可重复<br>   （4）Map              特点：无序，不可重复，存放【键值对】（key 键 – value 值）</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 集合 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 集合 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Centos7上搭建ftp</title>
       <link href="/2017/09/25/Centos7%E4%B8%8A%E6%90%AD%E5%BB%BAftp/"/>
       <url>/2017/09/25/Centos7%E4%B8%8A%E6%90%AD%E5%BB%BAftp/</url>
@@ -710,6 +735,35 @@
         <tags>
             
             <tag> 兴趣 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HashMap</title>
+      <link href="/0218/05/01/HashMap/"/>
+      <url>/0218/05/01/HashMap/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr><h3 id="1-HashMap-中的hash-方法为什么要右移-16-位异或"><a href="#1-HashMap-中的hash-方法为什么要右移-16-位异或" class="headerlink" title="1.HashMap 中的hash 方法为什么要右移 16 位异或"></a>1.HashMap 中的hash 方法为什么要右移 16 位异或</h3><p>   是为了减少碰撞，进一步降低hash冲突的几率。int类型的数值是4个字节的，右移16位异或可以同时保留高16位于低16位的特征</p><p>   当数组的长度很短时，只有低位数的hashcode值能参与运算。而让高16位参与运算可以更好的均匀散列，减少碰撞，进一步降低hash冲突的几率。并且使得高16位和低16位的信息都被保留了。</p><h3 id="2-HashMap-是怎么解决哈希冲突的"><a href="#2-HashMap-是怎么解决哈希冲突的" class="headerlink" title="2.HashMap 是怎么解决哈希冲突的"></a>2.HashMap 是怎么解决哈希冲突的</h3><h4 id="什么是Hash算法"><a href="#什么是Hash算法" class="headerlink" title="什么是Hash算法"></a>什么是Hash算法</h4><pre><code>（1）Hash算法，就是把任意长度的输入，通过散列算法，变成固定长度的输出，这个输出结果是散列值。（2）Hash表又叫做“散列表”，它是通过key直接访问在内存存储位置的数据结构，在具体实现上，我们通过hash函数把key映射到表中的某个位置，来获取这个位置的数据，从而加快查找速度。</code></pre><h4 id="什么hash冲突"><a href="#什么hash冲突" class="headerlink" title="什么hash冲突"></a>什么hash冲突</h4><pre><code> 是由于哈希算法被计算的数据是无限的，而计算后的结果范围有限，所以总会存在不同的数据经过计算后得到的值相同，这就是哈希冲突。</code></pre><h4 id="解决hash冲突的方法"><a href="#解决hash冲突的方法" class="headerlink" title="解决hash冲突的方法"></a>解决hash冲突的方法</h4><pre><code> 通常解决hash冲突的方法有4种。（1）开放定址法，也称为线性探测法，就是从发生冲突的那个位置开始，按照一定的次序从hash表中找到一个空闲的位置，然后把发生冲突的元素存入到这个空闲位置中。ThreadLocal就用到了线性探测法来解决hash冲突的。在hash表索引1的位置存了一个key=name，当再次添加key=hobby时，hash计算得到的索引也是1，这个就是hash冲突。而开放定址法，就是按顺序向前找到一个空闲的位置来存储冲突的key。（2）链式寻址法，这是一种非常常见的方法，简单理解就是把存在hash冲突的key，以单向链表的方式来存储，比如HashMap就是采用链式寻址法来实现的。存在冲突的key直接以单向链表的方式进行存储。（3）再hash法，就是当通过某个hash函数计算的key存在冲突时，再用另外一个hash函数对这个key做hash，一直运算直到不再产生冲突。这种方式会增加计算时间，性能影响较大。（4）建立公共溢出区， 就是把hash表分为基本表和溢出表两个部分，凡是存在冲突的元素，一律放入到溢出表中。</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> HashMap </category>
+          
+          <category> Map </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HashMap </tag>
+            
+            <tag> Map </tag>
             
         </tags>
       
