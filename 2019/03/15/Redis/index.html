@@ -5,13 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Redis, Hexo">
-    <meta name="description" content="  Redis.
+    <meta name="description" content="  Redis是一个开源的，内存中的数据结构存储系统，它可以用作数据库、缓存和消息中间件
 
 
 第一步：Redis支持的数据类型  String字符串：
   格式: set key value
-  string类型是二进制安全的。意思是redis的string可以包含任何数据。比如jpg图片或者序列化的对象 。
-">
+  string类型是二进制安全的。意思是red">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -459,14 +458,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1k
+                        2.8k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        3 分
+                        10 分
                     </div>
                     
                 
@@ -477,7 +476,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>  Redis.</p>
+                <p>  Redis是一个开源的，内存中的数据结构存储系统，它可以用作数据库、缓存和消息中间件</p>
 <a id="more"></a>
 
 <h3 id="第一步：Redis支持的数据类型"><a href="#第一步：Redis支持的数据类型" class="headerlink" title="第一步：Redis支持的数据类型"></a>第一步：Redis支持的数据类型</h3><pre><code>  String字符串：
@@ -527,7 +526,59 @@
 AOF方式原理：AOF就可以做到全程持久化，Redis每执行一个修改数据的命令，都会把这个命令添加到AOF文件中，当Redis重启时，将会读取AOF文件进行“重放”以恢复到 Redis关闭前的最后时刻。由于os会在内核中缓存 write做的修改，所以可能不是立即写到磁盘上。这样aof方式的持久化也还是有可能会丢失部分修改。不过我们可以通过配置文件告诉redis我们想要 通过fsync函数强制os写入到磁盘的时机。有三种方式如下（默认是：每秒fsync一次） 
 
  Redis内建支持两种持久化方案，snapshot快照和AOF 增量Log方式。快照顾名思义就是隔一段时间将完整的数据Dump下来存储在文件中。AOF增量Log则是记录对数据的修改操作（实际上记录的就是每个对数据产生修改的命令本身），两种方案可以并存，也各有优缺点，具体参见</code></pre><h3 id="四-过期数据删除策略"><a href="#四-过期数据删除策略" class="headerlink" title="四.过期数据删除策略"></a>四.过期数据删除策略</h3><pre><code>惰性删除发生在redis处理读写请求的过程，如get/set等命令。
-定期删除发生在redis内部定时任务执行过程中，限制占用cpu的时间。</code></pre><p>   redis的定期删除是通过定时任务实现的，也就是定时任务会循环调用serverCron方法。然后定时检查过期数据的方法是databasesCron。<br> 定期删除的一大特点就是考虑了定时删除过期数据会占用cpu时间，所以每次执行databasesCron的时候会限制cpu的占用不超过25%。</p>
+定期删除发生在redis内部定时任务执行过程中，限制占用cpu的时间。
+
+redis的定期删除是通过定时任务实现的，也就是定时任务会循环调用serverCron方法。然后定时检查过期数据的方法是databasesCron。</code></pre><p>    定期删除的一大特点就是考虑了定时删除过期数据会占用cpu时间，所以每次执行databasesCron的时候会限制cpu的占用不超过25%。</p>
+<h3 id="五-Redis为什么这么快"><a href="#五-Redis为什么这么快" class="headerlink" title="五.Redis为什么这么快"></a>五.Redis为什么这么快</h3><pre><code> 1. 内存存储：Redis将数据存储在内存中，而不是磁盘上。由于内存的读写速度远远快于磁盘，这使得Redis能够实现非常低延迟的数据访问。
+
+ 2. 单线程模型：Redis采用单线程模型来处理客户端请求。这意味着所有的请求都是按顺序依次执行的，避免了多线程之间的竞争和同步开销。虽然单线程看起来效率较低，但由于Redis主要进行内存操作，而不是计算密集型任务，因此单线程足以应对大多数场景。
+
+ 3. IO多路复用模型-非阻塞I/O：Redis使用了非阻塞I/O模型来处理网络请求。它通过使用事件轮询机制（如epoll、kqueue等）来监听客户端连接和数据到达事件，并立即响应这些事件。这种方式避免了传统阻塞I/O模型中的等待时间，提高了系统的并发性能。
+
+ 4. 基于异步方式持久化数据：Redis支持多种持久化方式，包括RDB（快照）和AOF（日志）。其中AOF采用了异步方式将写入操作追加到文件中，而不是每次写入都同步到磁盘上。这种异步方式可以大大提高写入性能。
+
+ 5. 数据结构优化：Redis提供了丰富的数据结构（如字符串、哈希表、列表、集合等），并对每种数据结构进行了优化。例如，在哈希表中使用了散列表来实现O(1)时间复杂度的查找和插入操作，在列表中使用了双向链表来支持快速插入和删除操作等。</code></pre><h3 id="六-缓存击穿、缓存穿透、缓存雪崩"><a href="#六-缓存击穿、缓存穿透、缓存雪崩" class="headerlink" title="六.缓存击穿、缓存穿透、缓存雪崩"></a>六.缓存击穿、缓存穿透、缓存雪崩</h3><pre><code> 缓存击穿：
+     定义：某个热点key在某个时间点过期的时候，恰好在这个时间点对这个Key的查询请求特别多，这些请求发现缓存中没有这个key的数据，于是都去请求数据库，导致数据库压力瞬间增大。
+     解决方案：可以设置热点数据永不过期。
+
+  缓存穿透：
+     定义：用户查询数据，在数据库没有，自然在缓存中也不会有。这样就导致用户查询的时候，在缓存中找不到，每次都要去数据库再查询一遍，然后返回空（相当于进行了两次无用的查询）。
+     解决方案：可以将空对象也缓存起来，或者采用布隆过滤器，将所有可能存在的数据哈希到一个足够大的bitmap中，一个一定不存在的数据会被这个bitmap拦截掉，从而避免了对底层存储系统的查询压力。
+
+  缓存雪崩：
+     定义：由于原有缓存失效，新缓存未到时间，所有原本应该访问缓存的请求都去查询数据库了，而对数据库CPU和内存造成巨大压力，严重的会造成数据库宕机。从而形成一系列连锁反应，造成整个系统崩溃。
+     解决方案：尽量让失效的时间点不分布在同一个时间点，避免缓存集体失效。</code></pre><h3 id="七-RDB快照和AOF日志"><a href="#七-RDB快照和AOF日志" class="headerlink" title="七.RDB快照和AOF日志"></a>七.RDB快照和AOF日志</h3><pre><code> RDB快照是一种全量持久化方式，它会周期性地将内存中的数据以二进制格式保存到磁盘上的RDB文件。RDB文件是一个经过压缩的二进制文件，包含了数据库在某个时间点的数据快照。RDB快照有助于实现紧凑的数据存储，适合用于备份和恢复。
+
+  优点：
+     紧凑的数据格式： RDB文件是一个二进制文件，采用了紧凑的编码格式，因此在磁盘上占用的空间相对较小。
+     快速恢复： 在恢复数据时，通过加载RDB文件，可以快速地将数据恢复到指定时间点的状态。
+     适用于备份和恢复： RDB文件适用于进行数据备份、迁移和灾难恢复，可以方便地复制到其他服务器上。
+  缺点：
+     数据丢失： 由于RDB是周期性的全量持久化，可能会导致某个时间点之后的数据丢失。
+     IO开销： RDB持久化时，需要将整个数据集写入磁盘，可能在大数据集上引起IO开销，影响性能。
+     耗时： 在生成RDB快照的过程中，如果数据集很大，可能会占用较多的CPU资源，导致短时间内的性能下降。
+
+ AOF日志是一种追加式持久化方式，它记录了每个写操作命令，以追加的方式将命令写入AOF文件。通过重新执行AOF文件中的命令，可以重建出数据在内存中的状态。AOF日志提供了更精确的持久化，适用于需要更高数据安全性和实时性的场景。
+
+优点：
+  AOF日志可以实现更精确的数据持久化，每个写操作都会被记录。
+  在AOF文件中，数据可以更好地恢复，因为它保存了所有的写操作历史。
+  AOF日志适用于需要实时恢复数据的场景，如秒级数据恢复要求。
+缺点：
+  AOF日志相对于RDB快照来说，可能会占用更多的磁盘空间，因为它是记录每个写操作的文本文件。
+  AOF日志在恢复大数据集时可能会比RDB快照慢，因为需要逐条执行写操作。
+
+ 生成RDB文件方式：
+     手动触发 SAVE命令，
+     后台触发 GSAVE命令，
+     自动触发 配置文件（redis.conf）中可以设置save参数
+
+ AOF日志三种写回策略：
+     (1). always（始终同步）、
+     (2). everysec（每秒同步）
+     (3). no（不同步）</code></pre><h3 id="八-跳跃表"><a href="#八-跳跃表" class="headerlink" title="八.跳跃表"></a>八.跳跃表</h3><pre><code>Redis 有一个叫做 有序列表 zset 的数据结构，它类似于 Java 中的 SortedSet 和 HashMap 的结合体，一方面它是一个 set 保证了内部 value 的唯一性，另一方面又可以给每个 value 赋予一个排序的权重值 score，来达到 排序 的目的。
+
+跳跃表（Skip List）是一种基于链表的数据结构，它可以实现诸如有序集合（Sorted Set）等数据结构，能够提供平均 O(log n) 的查找效率。Redis中就使用跳跃表来实现有序集合。</code></pre><p>   跳跃表（skiplist）是一种有序数据结构，它通过在每个节点中维持多个指向其它节点的指针，从而达到快速访问节点的目的。和链表、字典等数据结构被广泛地应用在 Redis 内部不同，Redis 只在两个地方用到了跳跃表，一个是实现有序集合健，另一个是在集群节点中用做内部数据结构，除此之外，跳跃表在 Redis 里没有其它用途。</p>
 
             </div>
             <hr/>
@@ -971,7 +1022,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">28.1k</span>&nbsp;字
+                class="white-color">30.5k</span>&nbsp;字
             
             
             

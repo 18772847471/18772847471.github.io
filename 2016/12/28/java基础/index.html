@@ -454,14 +454,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        9.4k
+                        9.6k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        34 分
+                        35 分
                     </div>
                     
                 
@@ -782,7 +782,13 @@ CMSInitiatingOccupancyFraction低于70% 需要调整xmn或SurvivorRatior值。
 先序遍历：对任一子树，先访问根，然后遍历其左子树，最后遍历其右子树。
 中序遍历：对任一子树，先遍历其左子树，然后访问根，最后遍历其右子树。
 后序遍历：对任一子树，先遍历其左子树，然后遍历其右子树，最后访问根。
-广度优先遍历：又叫层次遍历，从上往下对每一层依次访问，在每一层中，从左往右（也可以从右往左）访问结点，访问完一层就进入下一层，直到没有结点可以访问为止。</code></pre>
+广度优先遍历：又叫层次遍历，从上往下对每一层依次访问，在每一层中，从左往右（也可以从右往左）访问结点，访问完一层就进入下一层，直到没有结点可以访问为止。</code></pre><h3 id="35-对象内存布局"><a href="#35-对象内存布局" class="headerlink" title="35.对象内存布局"></a>35.对象内存布局</h3><pre><code>我们都知道对象在堆里存放的，那么它的内部结构是怎样的呢，下面以64为操作系统来说明
+
+首先对象包含对象头，实例数据，对齐填充。
+
+对象头：包含mark word 和 Klass 指针 ，在64位下，mark word 占 8个字节，Klass占8个字节如果对象是数组类型还会有一块标志数组长度的数据是4个字节
+实例数据：对象中包含的实例变量，不包括静态变量，静态变量不属于对象
+对齐填充：对象的大小都必须是8的整数倍，如果前两者不是8的整数倍就会在这里填充字节，使对象达到8的整数倍</code></pre>
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -1003,12 +1009,12 @@ CMSInitiatingOccupancyFraction低于70% 需要调整xmn或SurvivorRatior值。
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                        <span class="chip bg-color">数据库</span>
-                    </a>
-                    
                     <a href="/tags/Oracle/">
                         <span class="chip bg-color">Oracle</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                        <span class="chip bg-color">数据库</span>
                     </a>
                     
                 </div>
@@ -1209,7 +1215,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">28.1k</span>&nbsp;字
+                class="white-color">30.5k</span>&nbsp;字
             
             
             
