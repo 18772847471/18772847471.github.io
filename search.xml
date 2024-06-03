@@ -79,6 +79,31 @@
     
     
     <entry>
+      <title>synchronized 和 ReentrantLock</title>
+      <link href="/2022/11/09/synchronized%20%E5%92%8C%20ReentrantLock/"/>
+      <url>/2022/11/09/synchronized%20%E5%92%8C%20ReentrantLock/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr><h3 id="synchronized和ReentrantLock不同"><a href="#synchronized和ReentrantLock不同" class="headerlink" title="synchronized和ReentrantLock不同"></a>synchronized和ReentrantLock不同</h3><pre><code>1、用法不同：synchronized 可以用来修饰普通方法、静态方法和代码块，而 ReentrantLock 只能用于代码块。2、获取锁和释放锁的机制不同：synchronized 是自动加锁和释放锁的，而 ReentrantLock 需要手动加锁和释放锁。3、锁类型不同：synchronized 是非公平锁，而 ReentrantLock 默认为非公平锁，也可以手动指定为公平锁，通过new ReentrantLock() 指定4、响应中断不同：ReentrantLock 可以响应中断，解决死锁的问题，而 synchronized 不能响应中断。5、底层实现不同：synchronized 是 JVM 层面通过监视器实现的，而 ReentrantLock 是基于 AQS 实现的。</code></pre><h3 id="synchronized-是可重入锁"><a href="#synchronized-是可重入锁" class="headerlink" title="synchronized 是可重入锁"></a>synchronized 是可重入锁</h3><pre><code>synchronized 是可重入锁，也就是说，允许一个线程二次请求自己持有对象锁的临界资源，这种情况称为可重入锁。synchronized 锁对象的时候有个计数器，他会记录下线程获取锁的次数，在执行完对应的代码块之后，计数器就会-1，直到计数器清零，就释放锁了。synchronized 之所以，是可重入的。是因为 synchronized 锁对象有个计数器，会随着线程获取锁后 +1 计数，当线程执行完毕后 -1，直到清零释放锁。Synchronized的可重入性是通过JVM内部机制实现的。具体来说，每个锁对象都有一个计数器来记录当前持有该锁的线程重入的次数。当一个线程首次获取该锁时，计数器会加1。如果同一个线程再次获取该锁，计数器会再次加1，这就是所谓的重入。相应的，每次线程释放锁时，计数器会减1。只有当计数器减为0时，锁才会真正释放，其他线程才有机会获取该锁。通过这种计数器机制，Synchronized实现了可重入性，允许同一个线程多次获取同一个锁而不会发生死锁。同时，这也保证了同步代码块或方法在被一个线程重入时，仍然能够保持正确的同步状态。需要注意的是，Synchronized的可重入性是自动的，无需程序员显式控制。但这也意味着在使用Synchronized时需要注意避免不必要的重入，以免增加不必要的开销和复杂性。</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 锁 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 锁 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>堆,栈</title>
       <link href="/2022/02/08/java%E4%B8%AD%E5%A0%86%E6%A0%88%E4%BF%A1%E6%81%AF/"/>
       <url>/2022/02/08/java%E4%B8%AD%E5%A0%86%E6%A0%88%E4%BF%A1%E6%81%AF/</url>
@@ -772,7 +797,7 @@
       <link href="/0218/05/01/HashMap/"/>
       <url>/0218/05/01/HashMap/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr><h3 id="1-HashMap-中的hash-方法为什么要右移-16-位异或"><a href="#1-HashMap-中的hash-方法为什么要右移-16-位异或" class="headerlink" title="1.HashMap 中的hash 方法为什么要右移 16 位异或"></a>1.HashMap 中的hash 方法为什么要右移 16 位异或</h3><p>   是为了减少碰撞，进一步降低hash冲突的几率。int类型的数值是4个字节的，右移16位异或可以同时保留高16位于低16位的特征</p><p>   当数组的长度很短时，只有低位数的hashcode值能参与运算。而让高16位参与运算可以更好的均匀散列，减少碰撞，进一步降低hash冲突的几率。并且使得高16位和低16位的信息都被保留了。</p><h3 id="2-HashMap-是怎么解决哈希冲突的"><a href="#2-HashMap-是怎么解决哈希冲突的" class="headerlink" title="2.HashMap 是怎么解决哈希冲突的"></a>2.HashMap 是怎么解决哈希冲突的</h3><h4 id="什么是Hash算法"><a href="#什么是Hash算法" class="headerlink" title="什么是Hash算法"></a>什么是Hash算法</h4><pre><code>（1）Hash算法，就是把任意长度的输入，通过散列算法，变成固定长度的输出，这个输出结果是散列值。（2）Hash表又叫做“散列表”，它是通过key直接访问在内存存储位置的数据结构，在具体实现上，我们通过hash函数把key映射到表中的某个位置，来获取这个位置的数据，从而加快查找速度。</code></pre><h4 id="什么hash冲突"><a href="#什么hash冲突" class="headerlink" title="什么hash冲突"></a>什么hash冲突</h4><pre><code> 是由于哈希算法被计算的数据是无限的，而计算后的结果范围有限，所以总会存在不同的数据经过计算后得到的值相同，这就是哈希冲突。</code></pre><h4 id="解决hash冲突的方法"><a href="#解决hash冲突的方法" class="headerlink" title="解决hash冲突的方法"></a>解决hash冲突的方法</h4><pre><code> 通常解决hash冲突的方法有4种。（1）开放定址法，也称为线性探测法，就是从发生冲突的那个位置开始，按照一定的次序从hash表中找到一个空闲的位置，然后把发生冲突的元素存入到这个空闲位置中。ThreadLocal就用到了线性探测法来解决hash冲突的。在hash表索引1的位置存了一个key=name，当再次添加key=hobby时，hash计算得到的索引也是1，这个就是hash冲突。而开放定址法，就是按顺序向前找到一个空闲的位置来存储冲突的key。（2）链式寻址法，这是一种非常常见的方法，简单理解就是把存在hash冲突的key，以单向链表的方式来存储，比如HashMap就是采用链式寻址法来实现的。存在冲突的key直接以单向链表的方式进行存储。（3）再hash法，就是当通过某个hash函数计算的key存在冲突时，再用另外一个hash函数对这个key做hash，一直运算直到不再产生冲突。这种方式会增加计算时间，性能影响较大。（4）建立公共溢出区， 就是把hash表分为基本表和溢出表两个部分，凡是存在冲突的元素，一律放入到溢出表中。</code></pre>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr><h3 id="1-HashMap-中的hash-方法为什么要右移-16-位异或"><a href="#1-HashMap-中的hash-方法为什么要右移-16-位异或" class="headerlink" title="1.HashMap 中的hash 方法为什么要右移 16 位异或"></a>1.HashMap 中的hash 方法为什么要右移 16 位异或</h3><p>   是为了减少碰撞，进一步降低hash冲突的几率。int类型的数值是4个字节的，右移16位异或可以同时保留高16位于低16位的特征</p><p>   当数组的长度很短时，只有低位数的hashcode值能参与运算。而让高16位参与运算可以更好的均匀散列，减少碰撞，进一步降低hash冲突的几率。并且使得高16位和低16位的信息都被保留了。</p><h3 id="2-HashMap-是怎么解决哈希冲突的"><a href="#2-HashMap-是怎么解决哈希冲突的" class="headerlink" title="2.HashMap 是怎么解决哈希冲突的"></a>2.HashMap 是怎么解决哈希冲突的</h3><h4 id="什么是Hash算法"><a href="#什么是Hash算法" class="headerlink" title="什么是Hash算法"></a>什么是Hash算法</h4><pre><code>（1）Hash算法，就是把任意长度的输入，通过散列算法，变成固定长度的输出，这个输出结果是散列值。（2）Hash表又叫做“散列表”，它是通过key直接访问在内存存储位置的数据结构，在具体实现上，我们通过hash函数把key映射到表中的某个位置，来获取这个位置的数据，从而加快查找速度。</code></pre><h4 id="什么hash冲突"><a href="#什么hash冲突" class="headerlink" title="什么hash冲突"></a>什么hash冲突</h4><pre><code> 是由于哈希算法被计算的数据是无限的，而计算后的结果范围有限，所以总会存在不同的数据经过计算后得到的值相同，这就是哈希冲突。</code></pre><h4 id="解决hash冲突的方法"><a href="#解决hash冲突的方法" class="headerlink" title="解决hash冲突的方法"></a>解决hash冲突的方法</h4><pre><code> 通常解决hash冲突的方法有4种。（1）开放定址法，也称为线性探测法，就是从发生冲突的那个位置开始，按照一定的次序从hash表中找到一个空闲的位置，然后把发生冲突的元素存入到这个空闲位置中。ThreadLocal就用到了线性探测法来解决hash冲突的。在hash表索引1的位置存了一个key=name，当再次添加key=hobby时，hash计算得到的索引也是1，这个就是hash冲突。而开放定址法，就是按顺序向前找到一个空闲的位置来存储冲突的key。（2）链式寻址法，这是一种非常常见的方法，简单理解就是把存在hash冲突的key，以单向链表的方式来存储，比如HashMap就是采用链式寻址法来实现的。存在冲突的key直接以单向链表的方式进行存储。（3）再hash法，就是当通过某个hash函数计算的key存在冲突时，再用另外一个hash函数对这个key做hash，一直运算直到不再产生冲突。这种方式会增加计算时间，性能影响较大。（4）建立公共溢出区， 就是把hash表分为基本表和溢出表两个部分，凡是存在冲突的元素，一律放入到溢出表中。</code></pre><h3 id="3-HashMap链表转化为红黑树"><a href="#3-HashMap链表转化为红黑树" class="headerlink" title="3.HashMap链表转化为红黑树"></a>3.HashMap链表转化为红黑树</h3><pre><code>在Java的HashMap实现中，当哈希桶中的单链表长度超过一定阈值（默认为8），它会将这个链表转化为红黑树。这个策略是为了提高HashMap在处理大量元素时的性能，尤其是在高负载因子情况下（即哈希桶中元素数量相对于容量较多）。</code></pre><h3 id="4-HashMap-扩容因子："><a href="#4-HashMap-扩容因子：" class="headerlink" title="4.HashMap 扩容因子："></a>4.HashMap 扩容因子：</h3><pre><code> 为了在容量和性能之间实现平衡，HashMap 将加载因子设置为 0.75。这一设定旨在维持合适的容器大小，以兼顾性能和空间的最佳折中。 链表退化：当哈希表中的哈希碰撞（多个键被映射到相同的哈希桶位置）较多时，链表可能会变得很长，导致在查找元素时的性能下降。长链表的查找时间复杂度为 O(n)，其中n是链表的长度。当链表长度超过一定阈值时，它可能会退化为一个非常长的链表，因此需要一种更高效的数据结构。 红黑树效率：红黑树是一种自平衡的二叉搜索树，它的查找、插入和删除操作的时间复杂度是O(log n)，其中n是树的节点数。相比于长链表，红黑树更适合用于高负载的情况，因为它能够保持较低的时间复杂度。 防止DoS攻击：将链表转化为红黑树可以有效防止一些哈希碰撞导致的性能下降。攻击者可能会故意创建具有相同哈希值的键，以使它们都被放入同一个桶中，并且长链表会使查找时间变得非常长。通过将链表转化为红黑树，这些攻击会受到一定的限制，因为树的高度受到了控制。</code></pre><h3 id="5-HashMap-啥时候扩容，为什么扩容"><a href="#5-HashMap-啥时候扩容，为什么扩容" class="headerlink" title="5.HashMap 啥时候扩容，为什么扩容"></a>5.HashMap 啥时候扩容，为什么扩容</h3><pre><code> HashMap在元素数量达到阈值时会进行扩容。这个阈值通常是HashMap容量的0.75倍，也就是说，当HashMap中的元素数量超过了容量的75%时，就会触发扩容操作。 扩容的原因是为了减少哈希冲突，提高查询效率。当HashMap中的元素数量过多，哈希冲突的概率就会增大，这会导致查询效率降低。通过扩容，可以使得元素分布到更多的桶中，降低哈希冲突的概率，提高查询效率。 扩容的过程是这样的：首先，会创建一个新的数组，其容量是原数组的两倍，然后重新计算原数组中所有元素的哈希值，并将它们放入新的数组。这个过程需要一定的计算资源，因此扩容是一个相对耗时的操作。</code></pre>]]></content>
       
       
       <categories>

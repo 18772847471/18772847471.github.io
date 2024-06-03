@@ -463,14 +463,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        686
+                        1.4k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        2 分
+                        4 分
                     </div>
                     
                 
@@ -494,7 +494,16 @@
 
 （3）再hash法，就是当通过某个hash函数计算的key存在冲突时，再用另外一个hash函数对这个key做hash，一直运算直到不再产生冲突。这种方式会增加计算时间，性能影响较大。
 
-（4）建立公共溢出区， 就是把hash表分为基本表和溢出表两个部分，凡是存在冲突的元素，一律放入到溢出表中。</code></pre>
+（4）建立公共溢出区， 就是把hash表分为基本表和溢出表两个部分，凡是存在冲突的元素，一律放入到溢出表中。</code></pre><h3 id="3-HashMap链表转化为红黑树"><a href="#3-HashMap链表转化为红黑树" class="headerlink" title="3.HashMap链表转化为红黑树"></a>3.HashMap链表转化为红黑树</h3><pre><code>在Java的HashMap实现中，当哈希桶中的单链表长度超过一定阈值（默认为8），它会将这个链表转化为红黑树。这个策略是为了提高HashMap在处理大量元素时的性能，尤其是在高负载因子情况下（即哈希桶中元素数量相对于容量较多）。</code></pre><h3 id="4-HashMap-扩容因子："><a href="#4-HashMap-扩容因子：" class="headerlink" title="4.HashMap 扩容因子："></a>4.HashMap 扩容因子：</h3><pre><code> 为了在容量和性能之间实现平衡，HashMap 将加载因子设置为 0.75。这一设定旨在维持合适的容器大小，以兼顾性能和空间的最佳折中。
+
+ 链表退化：当哈希表中的哈希碰撞（多个键被映射到相同的哈希桶位置）较多时，链表可能会变得很长，导致在查找元素时的性能下降。长链表的查找时间复杂度为
+ O(n)，其中n是链表的长度。当链表长度超过一定阈值时，它可能会退化为一个非常长的链表，因此需要一种更高效的数据结构。
+
+ 红黑树效率：红黑树是一种自平衡的二叉搜索树，它的查找、插入和删除操作的时间复杂度是O(log n)，其中n是树的节点数。相比于长链表，红黑树更适合用于高负载的情况，因为它能够保持较低的时间复杂度。
+
+ 防止DoS攻击：将链表转化为红黑树可以有效防止一些哈希碰撞导致的性能下降。攻击者可能会故意创建具有相同哈希值的键，以使它们都被放入同一个桶中，并且长链表会使查找时间变得非常长。通过将链表转化为红黑树，这些攻击会受到一定的限制，因为树的高度受到了控制。</code></pre><h3 id="5-HashMap-啥时候扩容，为什么扩容"><a href="#5-HashMap-啥时候扩容，为什么扩容" class="headerlink" title="5.HashMap 啥时候扩容，为什么扩容"></a>5.HashMap 啥时候扩容，为什么扩容</h3><pre><code> HashMap在元素数量达到阈值时会进行扩容。这个阈值通常是HashMap容量的0.75倍，也就是说，当HashMap中的元素数量超过了容量的75%时，就会触发扩容操作。
+ 扩容的原因是为了减少哈希冲突，提高查询效率。当HashMap中的元素数量过多，哈希冲突的概率就会增大，这会导致查询效率降低。通过扩容，可以使得元素分布到更多的桶中，降低哈希冲突的概率，提高查询效率。
+ 扩容的过程是这样的：首先，会创建一个新的数组，其容量是原数组的两倍，然后重新计算原数组中所有元素的哈希值，并将它们放入新的数组。这个过程需要一定的计算资源，因此扩容是一个相对耗时的操作。</code></pre>
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -925,7 +934,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">26.8k</span>&nbsp;字
+                class="white-color">28.1k</span>&nbsp;字
             
             
             
