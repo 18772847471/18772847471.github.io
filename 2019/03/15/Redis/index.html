@@ -458,14 +458,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2.8k
+                        3.4k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        10 分
+                        12 分
                     </div>
                     
                 
@@ -579,7 +579,13 @@ redis的定期删除是通过定时任务实现的，也就是定时任务会循
      (3). no（不同步）</code></pre><h3 id="八-跳跃表"><a href="#八-跳跃表" class="headerlink" title="八.跳跃表"></a>八.跳跃表</h3><pre><code>Redis 有一个叫做 有序列表 zset 的数据结构，它类似于 Java 中的 SortedSet 和 HashMap 的结合体，一方面它是一个 set 保证了内部 value 的唯一性，另一方面又可以给每个 value 赋予一个排序的权重值 score，来达到 排序 的目的。
 
 跳跃表（Skip List）是一种基于链表的数据结构，它可以实现诸如有序集合（Sorted Set）等数据结构，能够提供平均 O(log n) 的查找效率。Redis中就使用跳跃表来实现有序集合。</code></pre><p>   跳跃表（skiplist）是一种有序数据结构，它通过在每个节点中维持多个指向其它节点的指针，从而达到快速访问节点的目的。和链表、字典等数据结构被广泛地应用在 Redis 内部不同，Redis 只在两个地方用到了跳跃表，一个是实现有序集合健，另一个是在集群节点中用做内部数据结构，除此之外，跳跃表在 Redis 里没有其它用途。</p>
-
+<h3 id="九-Redis-与-MySQL如何保证双写一致性"><a href="#九-Redis-与-MySQL如何保证双写一致性" class="headerlink" title="九.Redis 与 MySQL如何保证双写一致性"></a>九.Redis 与 MySQL如何保证双写一致性</h3><p>   1.选择合适的数据同步方式：根据应用的需求和数据访问模式，选择合适的数据同步方式。同步方式包括单向同步、双向同步和不同步等。<br>   2.使用事务：在 MySQL 中使用事务来确保数据的原子性。在 Redis 中，可以使用 MULTI/EXEC 命令组来执行事务操作。<br>   3.避免长时间的事务：MySQL 中的长时间事务可能会导致 Redis 中的数据不同步。因此，在设计数据库操作时，应尽量避免长时间的事务。<br>   4.主从复制：使用 MySQL 的主从复制功能，将数据变更同步到从数据库。然后，使用 Redis 的订阅/发布功能，将从数据库中的数据变更同步到 Redis。这种方式可以实现 MySQL 和 Redis 的双向同步。<br>   5.分布式事务：使用分布式事务协议，如两阶段提交或三阶段提交，来确保 Redis 和 MySQL 之间的数据一致性。分布式事务可以保证多个数据库之间的数据一致性。<br>   6.定时同步：对于一些不需要实时同步的数据，可以使用定时同步的方式。例如，每天定时将 MySQL 中的数据同步到 Redis 中。<br>   7.数据校验：定期进行数据校验，以确保 Redis 和 MySQL 中的数据一致。如果数据不一致，及时进行修复。</p>
+<pre><code>具体解决方案：
+   1、延时双删
+   2、Binlog实现异步重试删除</code></pre><h3 id="十-Redis-为什么是单线程"><a href="#十-Redis-为什么是单线程" class="headerlink" title="十.Redis 为什么是单线程"></a>十.Redis 为什么是单线程</h3><pre><code>  Redis操作基于内存，绝大多数操作的性能瓶颈不在CPU
+  单线程模型，避免了线程间切换带来的性能开销
+  使用单线程模型也能并发的处理客户端的请求（多路复用I/O）
+  使用单线程模型，可维护性更高，开发，调试和维护的成本更低</code></pre><h3 id="十一-Redis-的Hash-冲突"><a href="#十一-Redis-的Hash-冲突" class="headerlink" title="十一.Redis 的Hash 冲突"></a>十一.Redis 的Hash 冲突</h3><pre><code> Redis通过链式哈希解决冲突，也就是同一个桶里面的元素使用链表保存。但是当链表过长就会导致查找性能变差可能。所以redis为了追求块，使用了两个全局哈希表。用于rehash操作，增加现有的哈希桶数量，减少哈希冲突。</code></pre>
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -1022,7 +1028,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">30.5k</span>&nbsp;字
+                class="white-color">31.1k</span>&nbsp;字
             
             
             
