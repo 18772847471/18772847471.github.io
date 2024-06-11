@@ -79,6 +79,31 @@
     
     
     <entry>
+      <title>Dubbo</title>
+      <link href="/2022/12/14/Dubbo/"/>
+      <url>/2022/12/14/Dubbo/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> dubbo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> dubbo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>synchronized 和 ReentrantLock</title>
       <link href="/2022/11/09/synchronized%20%E5%92%8C%20ReentrantLock/"/>
       <url>/2022/11/09/synchronized%20%E5%92%8C%20ReentrantLock/</url>
@@ -96,6 +121,31 @@
         <tags>
             
             <tag> 锁 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Nginx</title>
+      <link href="/2022/05/08/Nginx/"/>
+      <url>/2022/05/08/Nginx/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Nginx </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Nginx </tag>
             
         </tags>
       
@@ -173,6 +223,56 @@
         <tags>
             
             <tag> ElasticSearch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>java中多线程</title>
+      <link href="/2021/04/17/java%E4%B8%AD%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+      <url>/2021/04/17/java%E4%B8%AD%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> 多线程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 多线程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>RocketMQ</title>
+      <link href="/2021/03/06/RocketMQ/"/>
+      <url>/2021/03/06/RocketMQ/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><pre><code>RocketMQ 是阿里巴巴开源的分布式消息中间件。支持事务消息、顺序消息、批量消息、定时消息、消息回溯等。它里面有几个区别于标准消息中件间的概念，如Group、Topic、Queue等。系统组成则由Producer、Consumer、Broker、NameServer等。</code></pre><hr><h3 id="RockerMQ架构上主要分为四部分"><a href="#RockerMQ架构上主要分为四部分" class="headerlink" title="RockerMQ架构上主要分为四部分"></a>RockerMQ架构上主要分为四部分</h3><pre><code>Producer: 消息生产者角色，支持分布式集群部署，主要用于发送消息，通常集成于业务系统。它相当于是发信者。Consumer: 消息消费者角色，支持分布式集群部署，支持以push推，pull拉两种模式对消息进行消费。同时也支持集群方式和广播方式的消费，通常集成于业务系统。它相当于收信者。Broker: 主要负责消息的存储、投递和查询以及服务高可用保证。它相当于是邮局 其内部包含以下几个重要子模块。    4.1. Remoting Module: 整个Broker的实体，负责处理来自Clients端的请求。    4.2. Client Manager: 负责管理客户端（Producer/Consumer）和维护Topic订阅信息。    4.3. Store Service: 提供方便简单的API接口处理消息存储到物理磁盘和查询功能。NameServer: 它是Broker的注册中心，支持Broker的动态注册与发现。它主要包括两个功能：Broker管理，NameServer接受Broker集群的注册信息并且保存下来作为路由信息的提供者。然后提供心跳检测机制，检查Broker是否存活；路由信息管理，每个NameServer通常也是集群方式部署，各实例互不进行通信，Broker向每一台NameServer注册自己的路由信息， 所以，每一个NameServer实例上面都保存一份完整的路由信息，当某个NameServer因某种原因下线了，Broker仍然可以向其他NameServer同步其路由信息。NameServer是无状态的。</code></pre><h3 id="消息生产"><a href="#消息生产" class="headerlink" title="消息生产"></a>消息生产</h3><pre><code>生产者（Producer）：用于产生消息的运行实体，一般集成于业务调用链路的上游。生产者是轻量级匿名无身份的。</code></pre><h3 id="消息存储"><a href="#消息存储" class="headerlink" title="消息存储"></a>消息存储</h3><pre><code>主题（Topic）:    RocketMQ 消息传输和存储的分组容器，主题内部由多个队列组成，消息的存储和水平扩展实际是通过主题内的队列实现的。队列（MessageQueue）:    RocketMQ 消息传输和存储的实际单元容器，类比于其他消息队列中的分区。RocketMQ 通过流式特性的无限队列结构来存储消息，消息在队列内具有顺序存储特性。消息（Message）:    RocketMQ 的最小传输单元，消息具备不可变性，在初始化发送和完成存储后即不可变。</code></pre><h3 id="消息消费"><a href="#消息消费" class="headerlink" title="消息消费"></a>消息消费</h3><pre><code>消费者分组（ConsumerGroup）:    RocketMQ发布订阅模型中定义的独立的消费身份分组。用于统一管理底层运行的多个消费者（Consumer）。同一个消费者组的多个消费者必须保持消费逻辑和配置一致，共同分担该消费者组订阅的消息，实现消费能力的水平扩展。消费者（Consumer）:    RocketMQ 消费消息的运行实体，一般集成在业务调用链路的下游。消费者必须指定到某一个消费者组中。订阅关系（Subscription）:    RocketMQ 发布订阅模型中消息过滤、重试、消费进度的规则配置。订阅关系以消费组粒度进行管理，消费组通过定义订阅关系控制指定消费组下的消费者如何实现消息过滤、消费重试及消费进度恢复等。RocketMQ 的订阅关系除过滤表达式之外都是持久化的，即服务端重启或请求断开，订阅关系依然保留。</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> RocketMQ </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> RocketMQ </tag>
             
         </tags>
       
@@ -299,9 +399,9 @@
       
         <tags>
             
-            <tag> 数据库 </tag>
-            
             <tag> mysql </tag>
+            
+            <tag> 数据库 </tag>
             
         </tags>
       
@@ -811,9 +911,9 @@
       
         <tags>
             
-            <tag> Oracle </tag>
-            
             <tag> 数据库 </tag>
+            
+            <tag> Oracle </tag>
             
         </tags>
       
