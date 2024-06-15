@@ -603,6 +603,53 @@ $(function () {
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/2024/01/07/AQS%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="AQS实现原理">
+                            
+                            <span class="card-title">AQS实现原理</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                AbstractQueuedSynchronizer（AQS）是Java中用于构建同步器的基础框架。它提供了一个灵活的、可重用的同步器实现，可以用来构建各种同步工具，如ReentrantLock、Semaphore、CountDownLat
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-07
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/AQS/" class="post-category">
+                                    AQS
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/AQS/">
+                            <span class="chip bg-color">AQS</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/2023/12/25/canal/">
                         <div class="card-image">
                             
@@ -812,8 +859,11 @@ DDD设计的两个阶段包括两部分战
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                
+                                dubbo：是一个基于soa思想的rpc框架soa思想面向服务的架构
 
+给每一个模块暴露对应的ip和端口，当做一个服务进行运行
+重点在于服务的管理（负载均衡，容灾模式，服务的横向扩展）Dubbo三大组件注册中心：
+    协调 Consum
                             
                         </div>
                         <div class="publish-info">
@@ -909,8 +959,7 @@ synchronized和ReentrantLock不同1、用法不同：synchronized 可以用来�
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                
-
+                                Nginx (engine x) 是一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。
                             
                         </div>
                         <div class="publish-info">
@@ -1096,13 +1145,13 @@ Lucene是一个Java语言的搜索引擎类库，是Apache公司的顶级项目�
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/04/17/java%E4%B8%AD%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                    <a href="/2021/05/28/ThreadLocal%E5%8E%9F%E7%90%86/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="java中多线程">
+                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="ThreadLocal原理">
                             
-                            <span class="card-title">java中多线程</span>
+                            <span class="card-title">ThreadLocal原理</span>
                         </div>
                     </a>
 
@@ -1110,19 +1159,22 @@ Lucene是一个Java语言的搜索引擎类库，是Apache公司的顶级项目�
                         <div class="summary block-with-text">
                             
                                 
+ThreadLocal原理  
+Thread线程类有一个类型为ThreadLocal.ThreadLocalMap的实例变量threadLocals，即每个线程都有一个属于自己的ThreadLocalMap。
 
+ThreadLocalMa
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-28
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-category">
-                                    多线程
+                                <a href="/categories/ThreadLocal/" class="post-category">
+                                    ThreadLocal
                                 </a>
                                 
                                 
@@ -1133,66 +1185,8 @@ Lucene是一个Java语言的搜索引擎类库，是Apache公司的顶级项目�
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
-                            <span class="chip bg-color">多线程</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/03/07/SpringBoot%E9%9B%86%E6%88%90RocketMQ/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="SpringBoot集成RocketMQ">
-                            
-                            <span class="card-title">SpringBoot集成RocketMQ</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                
-引入依赖&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.rocketmq&lt;/groupId&gt;
-    &lt;artifactId&gt;rocketmq-spring-boo
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-07
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/SpringBoot/" class="post-category">
-                                    SpringBoot
-                                </a>
-                                
-                                <a href="/categories/SpringBoot/RocketMQ/" class="post-category">
-                                    RocketMQ
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/RocketMQ/">
-                            <span class="chip bg-color">RocketMQ</span>
-                        </a>
-                        
-                        <a href="/tags/SpringBoot/">
-                            <span class="chip bg-color">SpringBoot</span>
+                        <a href="/tags/ThreadLocal/">
+                            <span class="chip bg-color">ThreadLocal</span>
                         </a>
                         
                     </div>
@@ -1243,7 +1237,7 @@ Lucene是一个Java语言的搜索引擎类库，是Apache公司的顶级项目�
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">48.1k</span>&nbsp;字
+                class="white-color">53.9k</span>&nbsp;字
             
             
             

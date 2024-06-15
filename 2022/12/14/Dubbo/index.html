@@ -5,8 +5,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Dubbo, Hexo">
-    <meta name="description" content="
-">
+    <meta name="description" content="dubbo：是一个基于soa思想的rpc框架soa思想面向服务的架构
+
+给每一个模块暴露对应的ip和端口，当做一个服务进行运行
+重点在于服务的管理（负载均衡，容灾模式，服务的横向扩展）Dubbo三大组件注册中心：
+    协调 Consum">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -454,14 +457,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        0
+                        3.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        13 分
                     </div>
                     
                 
@@ -472,8 +475,308 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <hr>
+                <h2 id="dubbo：是一个基于soa思想的rpc框架"><a href="#dubbo：是一个基于soa思想的rpc框架" class="headerlink" title="dubbo：是一个基于soa思想的rpc框架"></a>dubbo：是一个基于soa思想的rpc框架</h2><h3 id="soa思想"><a href="#soa思想" class="headerlink" title="soa思想"></a>soa思想</h3><pre><code>面向服务的架构
 
+给每一个模块暴露对应的ip和端口，当做一个服务进行运行
+重点在于服务的管理（负载均衡，容灾模式，服务的横向扩展）</code></pre><h3 id="Dubbo三大组件"><a href="#Dubbo三大组件" class="headerlink" title="Dubbo三大组件"></a>Dubbo三大组件</h3><pre><code>注册中心：
+    协调 Consumer 与 Provider 之间的地址注册与发现
+配置中心:
+   存储 Dubbo 启动阶段的全局配置，保证配置的跨环境共享与全局一致性
+   负责服务治理规则（路由规则、动态配置等）的存储与推送。
+元数据中心:
+   接收 Provider 上报的服务接口元数据，为 Admin 等控制台提供运维能力（如服务测试、接口文档等）
+   作为服务发现机制的补充，提供额外的接口/方法级别配置信息的同步能力，相当于注册中心的额外扩展</code></pre><p> <img src="/image/dubbo%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="效果图预览">  </p>
+<h3 id="Spring中使用"><a href="#Spring中使用" class="headerlink" title="Spring中使用"></a>Spring中使用</h3><h4 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h4><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+    &lt;version&gt;4.3.2.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
+    &lt;version&gt;4.3.2.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+    &lt;version&gt;4.3.2.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+    &lt;artifactId&gt;dubbo&lt;/artifactId&gt;
+    &lt;version&gt;2.5.3&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.zookeeper&lt;/groupId&gt;
+    &lt;artifactId&gt;zookeeper&lt;/artifactId&gt;
+    &lt;version&gt;3.4.6&lt;/version&gt;
+&lt;/dependency&gt;</code></pre><h4 id="服务提供者"><a href="#服务提供者" class="headerlink" title="服务提供者"></a>服务提供者</h4><pre><code> // 服务提供者接口
+public interface UserService {
+
+String findName(String name);
+void addUser(String username);
+}
+
+public class UserServiceImpl implements UserService {
+    @Override
+    public String findName(String name) {
+        System.out.println(&quot;姓名：&quot; + name);
+        return &quot;hello&quot; + name;
+    }
+
+    @Override
+    public void addUser(String username) {
+        System.out.println(&quot;添加用户，用户名为：&quot; + username);
+    }
+}
+
+spring.xml
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:dubbo=&quot;http://code.alibabatech.com/schema/dubbo&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd&quot;&gt;
+
+    &lt;dubbo:application name=&quot;dubbo_product&quot;/&gt;
+
+    &lt;dubbo:registry address=&quot;multicast://224.5.6.7:1234&quot;/&gt;
+
+    &lt;dubbo:protocol name=&quot;dubbo&quot; port=&quot;20880&quot;/&gt;
+
+    &lt;dubbo:service interface=&quot;service.UserService&quot; ref=&quot;userService&quot;/&gt;
+
+    &lt;bean id=&quot;userService&quot; class=&quot;service.UserServiceImpl&quot;/&gt;
+&lt;/beans&gt;
+
+开启服务
+
+public class TestDubbo {
+    public static void main(String[] args) throws IOException {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(&quot;spring-dubbo.xml&quot;);
+        context.start();
+        System.out.println(&quot;服务提供者，开始提供服务。。。。&quot;);
+
+        System.in.read();
+    }
+}</code></pre><h4 id="服务消费者"><a href="#服务消费者" class="headerlink" title="服务消费者"></a>服务消费者</h4><pre><code>需要将服务提供接口拷贝到当前服务下
+
+public interface UserService {
+    String findName(String name);
+    void addUser(String username);
+}
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:dubbo=&quot;http://code.alibabatech.com/schema/dubbo&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd&quot;&gt;
+
+    &lt;dubbo:application name=&quot;dubbo_consumer&quot;/&gt;
+    &lt;dubbo:registry address=&quot;multicast://224.5.6.7:1234&quot;/&gt;
+    &lt;dubbo:protocol name=&quot;dubbo&quot; port=&quot;20880&quot;/&gt;
+&lt;!-- &lt;dubbo:registry address=&quot;zookeeper://224.5.6.7:1234&quot;/&gt;
+    &lt;dubbo:protocol name=&quot;zookeeper&quot; port=&quot;20880&quot;/&gt; --&gt;
+    &lt;dubbo:reference interface=&quot;service.UserService&quot; ref=&quot;userService&quot;/&gt;
+&lt;/beans&gt;
+
+测试
+
+public class TestDubbo {
+    public static void main(String[] args) throws IOException {
+
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(&quot;spring-dubbo.xml&quot;);
+        UserService userService = (UserService) context.getBean(&quot;userService&quot;);
+
+        userService.addUser(&quot;测试人员&quot;);
+
+        String name = userService.findName(&quot;xiaoming&quot;);
+        System.out.println(name);
+    }
+}</code></pre><h3 id="SpringCloud整合Dubbo"><a href="#SpringCloud整合Dubbo" class="headerlink" title="SpringCloud整合Dubbo"></a>SpringCloud整合Dubbo</h3><h4 id="引入依赖-1"><a href="#引入依赖-1" class="headerlink" title="引入依赖"></a>引入依赖</h4><pre><code> &lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-dubbo&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre><h4 id="服务提供方"><a href="#服务提供方" class="headerlink" title="服务提供方"></a>服务提供方</h4><pre><code> // 服务提供者接口
+public interface ProductService {
+
+String findName(String name);
+}
+
+public class ProductServiceImpl implements ProductService {
+    @Override
+    public String findName(String name) {
+        System.out.println(&quot;姓名：&quot; + name);
+        return &quot;hello&quot; + name;
+    }
+}
+
+application.yaml
+
+dubbo:
+    application:
+        name: product     # 服务名
+    protocol:
+        name: dubbo       # 暴露的协议名称
+        port: 20880       # 暴露的协议端口
+    registry:
+        address: spring-cloud://XX:8848 # Dubbo 服务注册中心配置，其中子属性address 的值 &quot;spring-cloud://XX&quot;，说明挂载到 SpringCloud 的注册中心</code></pre><h4 id="服务消费方"><a href="#服务消费方" class="headerlink" title="服务消费方"></a>服务消费方</h4><p>   同样需要将服务方的接口copy到消费放的项目目录下</p>
+<pre><code>public interface ProductService {
+    String findName(String name);
+}
+
+application.yaml
+
+dubbo:
+    application:
+        name: users
+    protocol:
+        name: dubbo
+        port: 20880
+    registry:
+        address: spring-cloud://XX:8848
+    cloud:
+        subscribed-services: * # 表示要订阅服务的服务名，可以配置&#39;*&#39;，代表订阅所有服务，不推荐使用。若需订阅多应用，使用 &quot;,&quot; 分割。</code></pre><h4 id="调用服务"><a href="#调用服务" class="headerlink" title="调用服务"></a>调用服务</h4><pre><code>public class UsersServiceImpl implements UserService {
+
+    @Reference
+    private ProductService productService;
+
+
+    @GetMapping(&quot;/users&quot;)
+    public String getUsers() {
+        String result = productService.findName(&quot;xiaochen&quot;);
+        return &quot;users ok!!!  result:&quot; + result;
+    }
+}</code></pre><h3 id="配置优先级"><a href="#配置优先级" class="headerlink" title="配置优先级"></a>配置优先级</h3><pre><code>xml配置
+    不同粒度配置的覆盖关系
+
+    以 timeout 为例，其它 retries, loadbalance, actives 等类似：
+
+    方法级优先，接口级次之，全局配置再次之。
+    如果级别一样，则消费方优先，提供方次之。
+
+属性配置
+    从Dubbo支持的配置来源说起，默认有6种配置来源：
+
+        JVM System Properties，JVM -D 参数
+        System environment，JVM进程的环境变量
+        Externalized Configuration，外部化配置，从配置中心读取
+        Application Configuration，应用的属性配置，从Spring应用的Environment中提取&quot;dubbo&quot;打头的属性集
+        API / XML /注解等编程接口采集的配置可以被理解成配置来源的一种，是直接面向用户编程的配置采集方式
+        从classpath读取配置文件 dubbo.properties
+API配置：https://dubbo.apache.org/zh/docs/references/configuration/api/
+
+注解配置：https://dubbo.apache.org/zh/docs/references/configuration/annotation/</code></pre><h3 id="启动时检查"><a href="#启动时检查" class="headerlink" title="启动时检查"></a>启动时检查</h3><pre><code>https://dubbo.apache.org/zh/docs/advanced/preflight-check/
+
+Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，以便上线时，能及早发现问题，默认 check=&quot;true&quot;。
+
+可以通过 check=&quot;false&quot; 关闭检查，比如，测试时，有些服务不关心，或者出现了循环依赖，必须有一方先启动。
+
+另外，如果你的 Spring 容器是懒加载的，或者通过 API 编程延迟引用服务，请关闭 check，否则服务临时不可用时，会抛出异常，拿到 null 引用，如果 check=&quot;false&quot;，总是会返回引用，当服务恢复时，能自动连上。
+
+通过 spring 配置文件
+
+    关闭某个服务的启动时检查 (没有提供者时报错)：
+
+    &lt;dubbo:reference interface=&quot;com.foo.BarService&quot; check=&quot;false&quot; /&gt;
+    关闭所有服务的启动时检查 (没有提供者时报错)：
+
+    &lt;dubbo:consumer check=&quot;false&quot; /&gt;
+    关闭注册中心启动时检查 (注册订阅失败时报错)：
+
+    &lt;dubbo:registry check=&quot;false&quot; /&gt;
+通过 dubbo.properties
+
+    dubbo.reference.com.foo.BarService.check=false
+    dubbo.consumer.check=false
+    dubbo.registry.check=false
+
+通过 -D 参数
+
+    java -Ddubbo.reference.com.foo.BarService.check=false
+    java -Ddubbo.consumer.check=false 
+    java -Ddubbo.registry.check=false</code></pre><h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><pre><code>在集群负载均衡时，Dubbo 提供了多种均衡策略，缺省为 random 随机调用。
+
+具体实现上，Dubbo 提供的是客户端负载均衡，即由 Consumer 通过负载均衡算法得出需要将请求提交到哪个 Provider 实例。
+
+目前 Dubbo 内置了如下负载均衡算法，可直接配置使用：
+
+    算法    特性    备注
+    Random LoadBalance    加权随机    默认算法，默认权重相同
+    RoundRobin LoadBalance    加权轮询    借鉴于 Nginx 的平滑加权轮询算法，默认权重相同，
+    LeastActive LoadBalance    最少活跃优先 + 加权随机    背后是能者多劳的思想
+    ShortestResponse LoadBalance    最短响应优先 + 加权随机    更加关注响应速度
+    ConsistentHash LoadBalance    一致性 Hash    确定的入参，确定的提供者，适用于有状态请求</code></pre><p>   常见有四种负载均衡：</p>
+<pre><code>random
+    随机，按权重设置随机概率。
+    在一个截面上碰撞的概率高，但调用量越大分布越均匀，而且按概率使用权重后也比较均匀，有利于动态调整提供者权重。
+
+roundRobin （默认）
+    轮询，按公约后的权重设置轮询比率。
+    存在慢的提供者类即请求问题，比如：第二台机器很慢，但没挂，当请求调到第二台时就卡在那，久而久之，所有请求都卡在调到第二台上。
+
+leastActive
+    最少活跃调用数，相同活跃数的随机，活跃数指调用前后计数差。
+    使慢的提供者收到更少请求，因为越慢的提供者的调用前后计数差会越大。
+
+consistentHash
+    一致性Hash，相同参数的请求总是发到同一提供者。
+    当某一台提供者挂时，原本发往该提供者的请求，基于虚拟节点，平摊到其他提供者，不会引起剧烈变动</code></pre><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><pre><code>服务端服务级别
+    &lt;dubbo:service interface=&quot;...&quot; loadbalance=&quot;roundrobin&quot; /&gt;
+
+客户端服务级别
+    &lt;dubbo:reference interface=&quot;...&quot; loadbalance=&quot;roundrobin&quot; /&gt;
+
+服务端方法级别
+    &lt;dubbo:service interface=&quot;...&quot;&gt;
+        &lt;dubbo:method name=&quot;...&quot; loadbalance=&quot;roundrobin&quot;/&gt;
+    &lt;/dubbo:service&gt;
+
+客户端方法级别
+
+    &lt;dubbo:reference interface=&quot;...&quot;&gt;
+        &lt;dubbo:method name=&quot;...&quot; loadbalance=&quot;roundrobin&quot;/&gt;</code></pre><h3 id="集群容错"><a href="#集群容错" class="headerlink" title="集群容错"></a>集群容错</h3><pre><code>Dubbo 提供了多种容错方案，缺省为 failover 重试。
+
+Failover Cluster
+    失败自动切换，当出现失败，重试其它服务器。通常用于读操作，但重试会带来更长延迟。可通过 retries=&quot;2&quot; 来设置重试次数(不含第一次)。
+
+Failfast Cluster
+    快速失败，只发起一次调用，失败立即报错。通常用于非幂等性的写操作，比如新增记录。
+
+Failsafe Cluster
+    失败安全，出现异常时，直接忽略。通常用于写入审计日志等操作。
+
+Failback Cluster
+    失败自动恢复，后台记录失败请求，定时重发。通常用于消息通知操作。
+
+Forking Cluster
+    并行调用多个服务器，只要一个成功即返回。通常用于实时性要求较高的读操作，但需要浪费更多服务资源。可通过 forks=&quot;2&quot; 来设置最大并行数。
+
+Broadcast Cluster
+    广播调用所有提供者，逐个调用，任意一台报错则报错。通常用于通知所有提供者更新缓存或日志等本地资源信息。
+
+配置服务提供方和消费方集群模式
+
+&lt;dubbo:service cluster=&quot;failsafe&quot; /&gt;
+或
+
+&lt;dubbo:reference cluster=&quot;failsafe&quot; /&gt;</code></pre><h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h3><pre><code>需要通过不同的派发策略和不同的线程池配置的组合来应对不同的场景
+
+Dispatcher
+
+    all 所有消息都派发到线程池，包括请求，响应，连接事件，断开事件，心跳等。
+    direct 所有消息都不派发到线程池，全部在 IO 线程上直接执行。
+    message 只有请求响应消息派发到线程池，其它连接断开事件，心跳等消息，直接在 IO 线程上执行。
+    execution 只有请求消息派发到线程池，不含响应，响应和其它连接断开事件，心跳等消息，直接在 IO 线程上执行。
+    connection 在 IO 线程上，将连接断开事件放入队列，有序逐个执行，其它消息派发到线程池。
+
+ThreadPool
+
+    fixed 固定大小线程池，启动时建立线程，不关闭，一直持有。(缺省)
+    cached 缓存线程池，空闲一分钟自动删除，需要时重建。
+    limited 可伸缩线程池，但池中的线程数只会增长不会收缩。只增长不收缩的目的是为了避免收缩时突然来了大流量引起的性能问题。
+    eager 优先创建Worker线程池。在任务数量大于corePoolSize但是小于maximumPoolSize时，优先创建Worker来处理任务。当任务数量大于maximumPoolSize时，将任务放入阻塞队列中。阻塞队列充满时抛出RejectedExecutionException。(相比于cached:cached在任务数量超过maximumPoolSize时直接抛出异常而不是将任务放入阻塞队列)</code></pre><h3 id="服务分组"><a href="#服务分组" class="headerlink" title="服务分组"></a>服务分组</h3><pre><code>当一个接口有多种实现时，可以用 group 区分。</code></pre><h4 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h4><pre><code>&lt;dubbo:service group=&quot;feedback&quot; interface=&quot;com.xxx.IndexService&quot; /&gt;
+&lt;dubbo:service group=&quot;member&quot; interface=&quot;com.xxx.IndexService&quot; /&gt;</code></pre><h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><pre><code>&lt;dubbo:reference id=&quot;feedbackIndexService&quot; group=&quot;feedback&quot; interface=&quot;com.xxx.IndexService&quot; /&gt;
+&lt;dubbo:reference id=&quot;memberIndexService&quot; group=&quot;member&quot; interface=&quot;com.xxx.IndexService&quot; /&gt;</code></pre><h4 id="任意组"><a href="#任意组" class="headerlink" title="任意组"></a>任意组</h4><pre><code> &lt;dubbo:reference id=&quot;barService&quot; interface=&quot;com.foo.BarService&quot; group=&quot;*&quot; /&gt;</code></pre>
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -894,7 +1197,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">48.1k</span>&nbsp;字
+                class="white-color">53.9k</span>&nbsp;字
             
             
             
