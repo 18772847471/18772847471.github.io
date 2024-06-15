@@ -5,8 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="neo4j图数据, Hexo">
-    <meta name="description" content="
-">
+    <meta name="description" content=" Neo4j - Things，not string历史悠久且长期处于图数据库领域的主力地位，其功能强大，性能也不错，单节点的服务器可承载上亿级的节点和关系。社区版最多支持 320 亿个节点、320 亿个关系和 640亿个属性。优点：Neo">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -454,14 +453,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        0
+                        3.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        14 分
                     </div>
                     
                 
@@ -472,8 +471,207 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <hr>
+                <h2 id="Neo4j-Things，not-string"><a href="#Neo4j-Things，not-string" class="headerlink" title=" Neo4j - Things，not string"></a> Neo4j - Things，not string</h2><p>历史悠久且长期处于图数据库领域的主力地位，其功能强大，性能也不错，单节点的服务器可承载上亿级的节点和关系。社区版最多支持 320 亿个节点、320 亿个关系和 640亿个属性。<br>优点：Neo4j有自己的后端存储，不必如同JanusGraph等一样还要依赖另外的数据库存储。 Neo4j在每个节点中存储了每个边的指针，因而遍历时效率相当高。<br>缺点：企业版付费。开源的社区版本只支持单机，不支持分布式。社区版只能部署成单实例，企业版可以部署成高可用集群，从而可以解决高并发量的问题；社区版不能做集群，单个实例故障时影响系统正常运行。社区版只支持冷备份，即需要停止服务后才能进行备份。</p>
+<h3 id="一、-三要素"><a href="#一、-三要素" class="headerlink" title="一、 三要素"></a>一、 三要素</h3><pre><code>在知识图谱中，通过三元组 &lt;实体 × 关系 × 属性&gt; 集合的形式来描述事物之间的关系：
+实体：又叫作本体，指客观存在并可相互区别的事物，可以是具体的人、事、物，也可以是抽象的概念或联系，实体是知识图谱中最基本的元素
+关系：在知识图谱中，边表示知识图谱中的关系，用来表示不同实体间的某种联系
+属性：知识图谱中的实体和关系都可以有各自的属性</code></pre><h3 id="二、-Neo4j安装"><a href="#二、-Neo4j安装" class="headerlink" title="二、 Neo4j安装"></a>二、 Neo4j安装</h3><pre><code>底层依赖于关键的图数据库，在这里我们选择 Neo4j，它是一款高性能的 nosql 图形数据库，能够将结构化的数据存储在图而不是表中。
+下载地址：https://Neo4j.com/download/other-releases/
+需要注意的是，Neo4j 4.x 以上的版本都需要依赖 jdk11 环境，所以如果运行环境是 jdk8 的话，只能下载 3.x 版本就行，下载解压完成后，在bin目录下通过命令启动</code></pre><h4 id="2-1-Neo4j环境Linux下搭建"><a href="#2-1-Neo4j环境Linux下搭建" class="headerlink" title="2.1 Neo4j环境Linux下搭建"></a>2.1 Neo4j环境Linux下搭建</h4><pre><code>(1).切换到Linux下 到安装目录neo4j 上传安装包 或者 下载安装包
+使用 ftp 工具上传neo4j-community-3.5.17.tar 到 liunx 下
+或者 wget https://neo4j.com/artifact.php?name=neo4j-community-3.5.17-unix.tar.gz
+(2). 解压
+tar -xvf neo4j-community-3.5.17.tar
+(3). 修改配置文件 neo4j.conf
+vi conf/neo4j.conf
+主要是修改 允许远程访问的地址 把对应的注释打开即可
+dbms.connectors.default_listen_address=0.0.0.0
+(4).开放对应的访问端口 默认要开放7474 和 7687或者直接关闭防火墙（生产环境上不会直接关防火墙）
+firewall-cmd --zone=public --add-port=7474/tcp --permanent
+firewall-cmd --zone=public --add-port=7687/tcp --permanent
+systemctl reload firewalld
+(5).启动（安装jdk8及以上否则启动报错）
+./bin/neo4j start
+(6).使用浏览器 访问服务器上的 neo4j
+http://XXXX:7474 用户名 密码
+默认的账号是 neo4j 密码 neo4j 这里第一次登录的话会要求修改密码</code></pre><h4 id="2-2-Neo4j-CQL"><a href="#2-2-Neo4j-CQL" class="headerlink" title="2.2 Neo4j CQL"></a>2.2 Neo4j CQL</h4><pre><code>CQL代表Cypher查询语言。 像关系型数据库具有查询语言SQL，Neo4j使用CQL作为查询语言。
+Neo4j CQL：它是Neo4j图形数据库的查询语言。它是一种声明性模式匹配语言。它遵循SQL语法。它的语法是非常简单且人性化、可读的格式。</code></pre><h5 id="2-2-1-CREATE"><a href="#2-2-1-CREATE" class="headerlink" title="2.2.1 CREATE"></a>2.2.1 CREATE</h5><pre><code>CREATE (
+&lt;node-name&gt;:&lt;label-name&gt;
+[{
+&lt;property1-name&gt;:&lt;property1-Value&gt;
+........
+&lt;propertyn-name&gt;:&lt;propertyn-Value&gt;
+}]
+)
 
+例如：
+CREATE (person:Person {cid:1,name:&quot;范闲&quot;,age:24,gender:0,character:&quot;A&quot;,money:1000});
+CREATE (person:Person {cid:2,name:&quot;林婉儿&quot;,age:20,gender:1,character:&quot;B&quot;,money:800});
+CREATE (person:Person {cid:3,name:&quot;庆帝&quot;,age:49,gender:0,character:&quot;A&quot;,money:8900});</code></pre><h5 id="2-2-2-MATCH-RETURN"><a href="#2-2-2-MATCH-RETURN" class="headerlink" title="2.2.2 MATCH RETURN"></a>2.2.2 MATCH RETURN</h5><pre><code>MATCH
+(
+&lt;node-name&gt;:&lt;label-name&gt;
+)
+RETURN
+&lt;node-name&gt;.&lt;property1-name&gt;,
+...
+&lt;node-name&gt;.&lt;propertyn-name&gt;
+
+
+例如：
+MATCH(person:Person) return person;
+MATCH(person:Person) return person.name,person.age;</code></pre><h5 id="2-2-3-关系创建"><a href="#2-2-3-关系创建" class="headerlink" title="2.2.3 关系创建"></a>2.2.3 关系创建</h5><h6 id="2-2-3-1使用现有节点创建没有属性的关系"><a href="#2-2-3-1使用现有节点创建没有属性的关系" class="headerlink" title="2.2.3.1使用现有节点创建没有属性的关系"></a>2.2.3.1使用现有节点创建没有属性的关系</h6><pre><code>MATCH (&lt;node1-name&gt;:&lt;node1-label-name&gt;),(&lt;node2-name&gt;:&lt;node2-label-name&gt;)
+CREATE
+(&lt;node1-name&gt;)-[&lt;relationship-name&gt;:&lt;relationship-label-name&gt;]-&gt;(&lt;node2-
+name&gt;)
+RETURN 相应的内容
+
+
+创建关系
+match(person:Person {name:&quot;范闲&quot;}) ,(person2:Person {name:&quot;林婉儿&quot;})
+create(person)-[r:Couple]-&gt;(person2);
+查询关系
+match p = (person:Person {name:&quot;范闲&quot;})-[r:Couple]-&gt;(person2:Person) return p
+match (p1:Person {name:&quot;范闲&quot;})-[r:Couple]-(p2:Person) return p1,p2
+match (p1:Person {name:&quot;范闲&quot;})-[r:Couple]-(p2:Person) return r</code></pre><h6 id="2-2-3-2使用现有节点创建有属性的关系"><a href="#2-2-3-2使用现有节点创建有属性的关系" class="headerlink" title="2.2.3.2使用现有节点创建有属性的关系"></a>2.2.3.2使用现有节点创建有属性的关系</h6><pre><code>MATCH (&lt;node1-label-name&gt;:&lt;node1-name&gt;),(&lt;node2-label-name&gt;:&lt;node2-name&gt;)
+CREATE
+(&lt;node1-label-name&gt;)-[&lt;relationship-label-name&gt;:&lt;relationship-name&gt;
+{&lt;define-properties-list&gt;}]-&gt;(&lt;node2-label-name&gt;)
+RETURN &lt;relationship-label-name&gt;
+其中&lt;define-properties-list&gt; 是分配给新创建关系的属性（名称 - 值对）的列表。
+{
+&lt;property1-name&gt;:&lt;property1-value&gt;,
+&lt;property2-name&gt;:&lt;property2-value&gt;,
+...
+&lt;propertyn-name&gt;:&lt;propertyn-value&gt;
+}</code></pre><h6 id="2-2-3-3使用新节点创建没有属性的关系"><a href="#2-2-3-3使用新节点创建没有属性的关系" class="headerlink" title="2.2.3.3使用新节点创建没有属性的关系"></a>2.2.3.3使用新节点创建没有属性的关系</h6><pre><code>CREATE
+(&lt;node1-label-name&gt;:&lt;node1-name&gt;)
+-[&lt;relationship-label-name&gt;:&lt;relationship-name&gt;]-&gt;
+(&lt;node1-label-name&gt;:&lt;node1-name&gt;)
+create(person1:Person {cid:4,name:&quot;长公主&quot;,age:49,gender:1,character:&quot;A&quot;,money:5000})
+-[r:Friend]-&gt;
+(person2:Person {cid:7,name:&quot;九品射手燕小乙&quot;,age:48,gender:0,character:&quot;B&quot;,money:1000});</code></pre><h6 id="2-2-3-4使用新节点创建没有属性的关系"><a href="#2-2-3-4使用新节点创建没有属性的关系" class="headerlink" title="2.2.3.4使用新节点创建没有属性的关系"></a>2.2.3.4使用新节点创建没有属性的关系</h6><pre><code>CREATE
+(&lt;node1-label-name&gt;:&lt;node1-name&gt;{&lt;define-properties-list&gt;})
+-[&lt;relationship-label-name&gt;:&lt;relationship-name&gt;{&lt;define-properties-list&gt;}]
+-&gt;(&lt;node1-label-name&gt;:&lt;node1-name&gt;{&lt;define-properties-list&gt;});
+create (person1:Person {cid:9,name:&quot;靖王子&quot;,age:23,gender:0,character:&quot;A&quot;,money:3000})
+-[r:Friend {date:&quot;11-02-2000&quot;}]-&gt;
+(person2:Person {cid:8,name:&quot;二皇子&quot;,age:24,gender:0,character:&quot;B&quot;,money:6000});
+关系和节点的属性可以使用的类型</code></pre><h5 id="2-2-4-WHERE-子句"><a href="#2-2-4-WHERE-子句" class="headerlink" title="2.2.4 WHERE 子句"></a>2.2.4 WHERE 子句</h5><pre><code>简单的WHERE子句
+WHERE &lt;condition&gt;
+复杂的WHERE子句
+WHERE &lt;condition&gt; &lt;boolean-operator&gt; &lt;condition&gt;</code></pre><h5 id="2-2-5DELETE-子句-和-REMOVE子句"><a href="#2-2-5DELETE-子句-和-REMOVE子句" class="headerlink" title="2.2.5DELETE 子句 和 REMOVE子句"></a>2.2.5DELETE 子句 和 REMOVE子句</h5><pre><code>DELETE 子句: 删除节点。删除节点及相关节点和关系。
+REMOVE子句: 删除节点或关系的标签,删除节点或关系的属性。
+match p = (:Person {name:&quot;林婉儿&quot;})-[r:Couple]-(:Person) delete r;
+MATCH (person:Person {name:&quot;小美女&quot;})
+REMOVE person.cid;
+REMOVE子句主要用于删除节点或关系的属性，这点跟DELETE有些差别。
+DELETE是删除节点或关系，但不删除属性。
+DELETE和REMOVE命令之间的主要区别 -
+DELETE操作用于删除节点和关联关系。
+REMOVE操作用于删除标签和属性。
+REMOVE命令用于
+    删除节点或关系的标签
+    删除节点或关系的属性
+CQL DELETE和REMOVE命令之间的相似性 -
+这两个命令不应单独使用。
+两个命令都应该与MATCH命令一起使用。</code></pre><h5 id="2-2-6-SET子句"><a href="#2-2-6-SET子句" class="headerlink" title="2.2.6 SET子句"></a>2.2.6 SET子句</h5><pre><code>向现有节点或关系添加新属性，更新属性值 .
+MATCH (person:Person {cid:1})
+SET person.money = 3456,person.age=25</code></pre><h5 id="2-2-7-ORDER-BY-子句"><a href="#2-2-7-ORDER-BY-子句" class="headerlink" title="2.2.7 ORDER BY 子句"></a>2.2.7 ORDER BY 子句</h5><pre><code>“ORDER BY”子句，对MATCH查询返回的结果进行排序。
+我们可以按升序或降序对行进行排序。
+默认情况下，它按升序对行进行排序。 如果我们要按降序对它们进行排序，我们需要使用DESC子句。
+MATCH (person:Person) RETURN person.name,person.money ORDER BY person.money DESC;</code></pre><h5 id="2-2-8-SKIP-和-LIMIT"><a href="#2-2-8-SKIP-和-LIMIT" class="headerlink" title="2.2.8 SKIP 和 LIMIT"></a>2.2.8 SKIP 和 LIMIT</h5><pre><code>Neo4j CQL已提供“SKIP”子句来过滤或限制查询返回的行数。 它修整了CQL查询结果集顶部的结果。
+Neo4j CQL已提供“LIMIT”子句来过滤或限制查询返回的行数。 它修剪CQL查询结果集底部的结果。
+MATCH (person:Person)
+RETURN ID(person),person.name,person.money
+ORDER BY person.money DESC skip 4 limit 2</code></pre><h5 id="2-2-9-DISTINCT-排重"><a href="#2-2-9-DISTINCT-排重" class="headerlink" title="2.2.9 DISTINCT 排重"></a>2.2.9 DISTINCT 排重</h5><pre><code>这个函数的用法就像SQL中的distinct关键字，返回的是所有不同值。
+MATCH (p:Person) RETURN Distinct(p.cid);</code></pre><h5 id="2-2-10-操作符"><a href="#2-2-10-操作符" class="headerlink" title="2.2.10 操作符"></a>2.2.10 操作符</h5><pre><code>操作符是对Cypher查询进行算术运算，逻辑运算等。</code></pre><h6 id="2-2-10-1-通用操作符"><a href="#2-2-10-1-通用操作符" class="headerlink" title="2.2.10.1 通用操作符"></a>2.2.10.1 通用操作符</h6><pre><code> distinct 用于移除重复值， n.property 用于访问属性，[]是变量的列表
+
+ CREATE (a:Person { name: &#39;Anne&#39;, eyeColor: &#39;blue&#39; }),(b:Person { name: &#39;Bill&#39;, eyeColor: &#39;brown&#39; }),(c:Person { name: &#39;Carol&#39;, eyeColor: &#39;blue&#39; })
+WITH [a, b, c] AS ps
+UNWIND ps AS p
+RETURN DISTINCT p.eyeColor</code></pre><h6 id="2-2-10-2-数学操作符"><a href="#2-2-10-2-数学操作符" class="headerlink" title="2.2.10.2 数学操作符"></a>2.2.10.2 数学操作符</h6><pre><code>加减乘除：+,-,*,/
+取模：%
+取幂：^</code></pre><h6 id="2-2-10-3-比较运算符"><a href="#2-2-10-3-比较运算符" class="headerlink" title="2.2.10.3 比较运算符"></a>2.2.10.3 比较运算符</h6><pre><code>等于：=
+不等于：&lt;&gt;
+小于、大于、小于等于、大于等于：&lt;、&gt;、&lt;=、&gt;=
+IS NULL和 IS NOT NULL</code></pre><h6 id="2-2-10-4-逻辑运算符"><a href="#2-2-10-4-逻辑运算符" class="headerlink" title="2.2.10.4 逻辑运算符"></a>2.2.10.4 逻辑运算符</h6><pre><code>与（AND）,或（OR）,异或（XOR）,非（NOT）
+WITH [2, 4, 7, 9, 12] AS numberlist
+UNWIND numberlist AS number
+WITH number
+WHERE number = 4 OR (number &gt; 6 AND number &lt; 10)
+RETURN number</code></pre><h6 id="2-2-10-5-字符串"><a href="#2-2-10-5-字符串" class="headerlink" title="2.2.10.5 字符串"></a>2.2.10.5 字符串</h6><pre><code>字符串拼接：+
+匹配正则：=~
+
+WITH [&#39;mouse&#39;, &#39;chair&#39;, &#39;door&#39;, &#39;house&#39;] AS wordlist
+UNWIND wordlist AS word
+WITH word
+WHERE word =~ &#39;.*ous.*&#39;
+RETURN word
+
+对于字符串，使用 STARTS WITH、ENDS WITH和CONTAINS 过滤字符串：
+
+WITH [&#39;John&#39;, &#39;Mark&#39;, &#39;Jonathan&#39;, &#39;Bill&#39;] AS somenames
+UNWIND somenames AS names
+WITH names AS candidate
+WHERE candidate STARTS WITH &#39;Jo&#39;
+RETURN candidate</code></pre><h6 id="2-2-10-6-列表操作"><a href="#2-2-10-6-列表操作" class="headerlink" title="2.2.10.6 列表操作"></a>2.2.10.6 列表操作</h6><pre><code>+，列表追加
+IN：检查成员
+[]：索引，特殊地，[start .. end]，从start开始，递增1，但是不包括end
+
+RETURN [1,2,3,4,5]+[6,7] AS myList
+
+WITH [2, 3, 4, 5] AS numberlist
+UNWIND numberlist AS number
+WITH number
+WHERE number IN [2, 3, 8]
+RETURN number
+
+WITH [&#39;Anne&#39;, &#39;John&#39;, &#39;Bill&#39;, &#39;Diane&#39;, &#39;Eve&#39;] AS names
+RETURN names[1..3] AS result</code></pre><h6 id="2-2-10-7-访问属性"><a href="#2-2-10-7-访问属性" class="headerlink" title="2.2.10.7 访问属性"></a>2.2.10.7 访问属性</h6><pre><code>使用 . 号访问属性
+MATCH (n) WHERE 21 &lt; n.age AND n.age &lt;= 30 RETURN n</code></pre><h3 id="三、-Springboot整合-Neo4j"><a href="#三、-Springboot整合-Neo4j" class="headerlink" title="三、 Springboot整合 Neo4j"></a>三、 Springboot整合 Neo4j</h3><h4 id="3-1-引入依赖"><a href="#3-1-引入依赖" class="headerlink" title="3.1 引入依赖"></a>3.1 引入依赖</h4><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-data-neo4j&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre><h4 id="3-2-增加配置"><a href="#3-2-增加配置" class="headerlink" title="3.2 增加配置"></a>3.2 增加配置</h4><pre><code>spring:
+    data:
+        neo4j:
+            uri: bolt://XX:7687
+            username: 用户民
+            password: 密码</code></pre><h4 id="3-3-核心代码"><a href="#3-3-核心代码" class="headerlink" title="3.3 核心代码"></a>3.3 核心代码</h4><h4 id="3-3-1设置节点"><a href="#3-3-1设置节点" class="headerlink" title="3.3.1设置节点"></a>3.3.1设置节点</h4><pre><code>@Data
+@Node(&quot;Organization&quot;)
+public class Organization {
+    @Id
+    @GeneratedValue
+    private Long id;
+    @Property(name = &quot;orgName&quot;)
+    private String orgName;
+    @Relationship(type = &quot;父&quot;, direction = Relationship.Direction.OUTGOING)
+    private Organization parentOrganization;
+}</code></pre><h4 id="3-3-2-设置Repository"><a href="#3-3-2-设置Repository" class="headerlink" title="3.3.2 设置Repository"></a>3.3.2 设置Repository</h4><pre><code>@EnableNeo4jRepositories
+public interface OrganizationRepository extends Neo4jRepository&lt;Organization,Long&gt; {
+}</code></pre><h4 id="3-3-3设置事务"><a href="#3-3-3设置事务" class="headerlink" title="3.3.3设置事务"></a>3.3.3设置事务</h4><pre><code>@Configuration
+@EnableNeo4jRepositories(basePackages = &quot;com.cloud.cmp.neo4j.mapper&quot;)
+@EnableTransactionManagement
+public class Neo4jConfig {
+}</code></pre><h3 id="四、数据同步"><a href="#四、数据同步" class="headerlink" title="四、数据同步"></a>四、数据同步</h3><h4 id="4-1Apoc安装"><a href="#4-1Apoc安装" class="headerlink" title="4.1Apoc安装"></a>4.1Apoc安装</h4><pre><code>APOC 是 neo4j 自带一款强大的功能组件。它引入了用户自定义过程和函数概念，某些Cypher本身不能轻易实现的自定义功能可以由 APOC 完成。它是用Java实现的，Apoc 库由许多(大约450个)过程和函数组成，用于在数据集成、图形算法或数据转换等领域帮助完成许多不同的任务。
+APOC依赖于Neo4j的内部api，在Neo4j时，需要使用匹配的APOC版本，确保Neo4j和APOC之间的前两个版本号匹配。</code></pre><h5 id="4-1-1下载APOC"><a href="#4-1-1下载APOC" class="headerlink" title="4.1.1下载APOC"></a>4.1.1下载APOC</h5><pre><code>在Neo4j的APOC手册中有APOC的下载地址，通过链接下载指定的APOC版本，本次选用apoc-3.5.0.11-all.jar。</code></pre><h5 id="4-1-2安装APOC"><a href="#4-1-2安装APOC" class="headerlink" title="4.1.2安装APOC"></a>4.1.2安装APOC</h5><pre><code>下载APOC的jar文件后，将jar文件复制到Neo4j的plugins目录下。</code></pre><h5 id="4-1-3修改配置文件"><a href="#4-1-3修改配置文件" class="headerlink" title="4.1.3修改配置文件"></a>4.1.3修改配置文件</h5><pre><code>在neo4j.conf 配置文件中添加：
+dbms.security.procedures.unrestricted=apoc.*</code></pre><h5 id="4-1-4重启Neo4j服务"><a href="#4-1-4重启Neo4j服务" class="headerlink" title="4.1.4重启Neo4j服务"></a>4.1.4重启Neo4j服务</h5><pre><code>Kill -9 25961 
+./neo4j start</code></pre><h5 id="4-1-5在可视化界面运行"><a href="#4-1-5在可视化界面运行" class="headerlink" title="4.1.5在可视化界面运行"></a>4.1.5在可视化界面运行</h5><pre><code>return apoc.version(); 出现对应的版本号，证明安装成功。</code></pre><h4 id="4-2常用函数"><a href="#4-2常用函数" class="headerlink" title="4.2常用函数"></a>4.2常用函数</h4><h5 id="4-2-1-UPPER-函数"><a href="#4-2-1-UPPER-函数" class="headerlink" title="4.2.1 UPPER 函数"></a>4.2.1 UPPER 函数</h5><pre><code>UPPER 用于将所有字母更改为大写字母。
+Match (n:Person) return UPPER (n.name);</code></pre><h5 id="4-2-2-LOWER函数"><a href="#4-2-2-LOWER函数" class="headerlink" title="4.2.2 LOWER函数"></a>4.2.2 LOWER函数</h5><pre><code>LOWER 用于将所有字母改为小写字母。
+Match (n:Person) return LOWER(n.name);</code></pre><h5 id="4-2-3-SUBSTRING3函数"><a href="#4-2-3-SUBSTRING3函数" class="headerlink" title="4.2.3 SUBSTRING3函数"></a>4.2.3 SUBSTRING3函数</h5><pre><code>SUBSTRING 用于获取给定String的子字符串。
+Match (n:Person) return SUBSTRING(n.id,2,0),n.id;</code></pre><h5 id="4-2-4-REPLACE-函数"><a href="#4-2-4-REPLACE-函数" class="headerlink" title="4.2.4 REPLACE 函数"></a>4.2.4 REPLACE 函数</h5><pre><code>REPLAC 用于替换一个字符串的子字符串。</code></pre><h5 id="4-2-5-聚合函数"><a href="#4-2-5-聚合函数" class="headerlink" title="4.2.5 聚合函数"></a>4.2.5 聚合函数</h5><pre><code>COUNT —— 它返回由MATCH命令返回的行数。
+MAX —— 它从MATCH命令返回的一组行返回最大值。
+MIN —— 它返回由MATCH命令返回的一组行的最小值。
+SUM —— 它返回由MATCH命令返回的所有行的求和值。
+AVG —— 它返回由MATCH命令返回的所有行的平均值。</code></pre><h4 id="4-3-Neo4j-驱动程序"><a href="#4-3-Neo4j-驱动程序" class="headerlink" title="4.3 Neo4j 驱动程序"></a>4.3 Neo4j 驱动程序</h4><h5 id="4-3-1-引入pom文件"><a href="#4-3-1-引入pom文件" class="headerlink" title="4.3.1 引入pom文件"></a>4.3.1 引入pom文件</h5><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.neo4j.driver&lt;/groupId&gt;
+    &lt;artifactId&gt;neo4j-java-driver&lt;/artifactId&gt;
+    &lt;version&gt;1.5.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre><h5 id="4-3-2-创建驱动程序的数据库对象"><a href="#4-3-2-创建驱动程序的数据库对象" class="headerlink" title="4.3.2 创建驱动程序的数据库对象"></a>4.3.2 创建驱动程序的数据库对象</h5><pre><code>1) 向数据库对象请求一个新的驱动程序。
+2) 向驱动程序对象请求一个新会。；
+3) 请求会话对象创建事务。
+4) 使用事务对象运行语句，它返回一个表示结果的对象。
+5) 处理结果。
+6) 关闭会话。  </code></pre>
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -649,49 +847,46 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/12/20/neo4j%E5%9B%BE%E6%95%B0%E6%8D%AE/">
+                <a href="/2023/12/25/canal/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="neo4j图数据">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="canal">
                         
-                        <span class="card-title">neo4j图数据</span>
+                        <span class="card-title">canal</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-
+                             canal，译意为水道/管道/沟渠，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-20
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-25
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
-                                    图数据库
+                            <a href="/categories/canal/" class="post-category">
+                                    canal
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                        <span class="chip bg-color">图数据库</span>
+                    <a href="/tags/canal/">
+                        <span class="chip bg-color">canal</span>
                     </a>
                     
                 </div>
@@ -895,7 +1090,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">42.4k</span>&nbsp;字
+                class="white-color">48.1k</span>&nbsp;字
             
             
             
