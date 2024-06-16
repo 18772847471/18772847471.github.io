@@ -129,6 +129,81 @@
     
     
     <entry>
+      <title>SpringBoot+Dubbo+Seata</title>
+      <link href="/2023/03/14/SpringBoot+Dubbo+Seata/"/>
+      <url>/2023/03/14/SpringBoot+Dubbo+Seata/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Seata就是其中一种，它是阿里开源的分布式事务解决方案，提供了高性能且简单易用的分布式事务服务。"><a href="#Seata就是其中一种，它是阿里开源的分布式事务解决方案，提供了高性能且简单易用的分布式事务服务。" class="headerlink" title="Seata就是其中一种，它是阿里开源的分布式事务解决方案，提供了高性能且简单易用的分布式事务服务。"></a>Seata就是其中一种，它是阿里开源的分布式事务解决方案，提供了高性能且简单易用的分布式事务服务。</h2><h3 id="下载seata"><a href="#下载seata" class="headerlink" title="下载seata"></a>下载seata</h3><pre><code>打开https://github.com/seata/seata/releases，目前最新版本是v0.6.1。下载解压后，到seata-server-0.6.1\distribution\bin目录下可以看到seata-server.bat和seata-server.sh，选择一个双击执行</code></pre><h3 id="Maven依赖"><a href="#Maven依赖" class="headerlink" title="Maven依赖"></a>Maven依赖</h3><pre><code> Dubbo依赖    &lt;dependency&gt;        &lt;groupId&gt;org.apache.dubbo&lt;/groupId&gt;        &lt;artifactId&gt;dubbo&lt;/artifactId&gt;        &lt;version&gt;2.7.1&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;        &lt;groupId&gt;org.apache.dubbo&lt;/groupId&gt;        &lt;artifactId&gt;dubbo-spring-boot-starter&lt;/artifactId&gt;        &lt;version&gt;2.7.1&lt;/version&gt;    &lt;/dependency&gt;Zookeeper依赖    &lt;dependency&gt;        &lt;groupId&gt;org.apache.curator&lt;/groupId&gt;        &lt;artifactId&gt;curator-framework&lt;/artifactId&gt;        &lt;version&gt;2.13.0&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;        &lt;groupId&gt;org.apache.curator&lt;/groupId&gt;        &lt;artifactId&gt;curator-recipes&lt;/artifactId&gt;        &lt;version&gt;2.13.0&lt;/version&gt;    &lt;/dependency&gt;Seata依赖    &lt;dependency&gt;        &lt;groupId&gt;io.seata&lt;/groupId&gt;        &lt;artifactId&gt;seata-all&lt;/artifactId&gt;        &lt;version&gt;0.6.1&lt;/version&gt;    &lt;/dependency&gt;</code></pre><h3 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h3><pre><code>server.port=8011spring.datasource.url=jdbc:mysql://127.0.0.1:3306/seataspring.datasource.username=rootspring.datasource.password=rootdubbo.application.name=order-servicedubbo.registry.address=zookeeper://127.0.0.1:2181dubbo.protocol.name=dubbodubbo.protocol.port=20881dubbo.consumer.timeout=9999999dubbo.consumer.check=false</code></pre><h3 id="数据源"><a href="#数据源" class="headerlink" title="数据源"></a>数据源</h3><pre><code>Seata 是通过代理数据源实现事务分支，所以需要先配置一个数据源的代理，否则事务不会回滚。@Beanpublic DataSourceProxy dataSourceProxy(DataSource dataSource) {    return new DataSourceProxy(dataSource);}</code></pre><h3 id="Seata配置"><a href="#Seata配置" class="headerlink" title="Seata配置"></a>Seata配置</h3><pre><code>还需要配置全局事务扫描器。有两个参数，一个是应用名称，一个是事务分组。@Beanpublic GlobalTransactionScanner globalTransactionScanner() {    return new GlobalTransactionScanner(&quot;springboot-order&quot;, &quot;my_test_tx_group&quot;);}</code></pre><h3 id="配置注册中心"><a href="#配置注册中心" class="headerlink" title="配置注册中心"></a>配置注册中心</h3><pre><code> registry {    type = &quot;file&quot;    file {        name = &quot;file.conf&quot;    }    }    config {    # file、nacos 、apollo、zk、consul    type = &quot;file&quot;    file {        name = &quot;file.conf&quot;    }}service {    #vgroup-&gt;rgroup    vgroup_mapping.my_test_tx_group = &quot;default&quot;    #only support single node    default.grouplist = &quot;127.0.0.1:8091&quot;    #degrade current not support    enableDegrade = false    #disable    disable = false}</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Seata </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Seata </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Seata</title>
+      <link href="/2023/03/08/Seata/"/>
+      <url>/2023/03/08/Seata/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Seata就是其中一种，它是阿里开源的分布式事务解决方案，提供了高性能且简单易用的分布式事务服务。"><a href="#Seata就是其中一种，它是阿里开源的分布式事务解决方案，提供了高性能且简单易用的分布式事务服务。" class="headerlink" title="Seata就是其中一种，它是阿里开源的分布式事务解决方案，提供了高性能且简单易用的分布式事务服务。"></a>Seata就是其中一种，它是阿里开源的分布式事务解决方案，提供了高性能且简单易用的分布式事务服务。</h2><h3 id="Seata中四种分布式事务模式"><a href="#Seata中四种分布式事务模式" class="headerlink" title="Seata中四种分布式事务模式"></a>Seata中四种分布式事务模式</h3><pre><code>AT模式TCC模式Saga模式XA模式</code></pre><h4 id="AT模式"><a href="#AT模式" class="headerlink" title="AT模式"></a>AT模式</h4><pre><code>是一种基于本地事务+二阶段协议来实现的最终数据一致性方案，也是Seata默认的解决方案 。</code></pre><p><img src="/image/AT%E6%A8%A1%E5%BC%8F.png" alt="效果图预览"></p><h4 id="TCC模式"><a href="#TCC模式" class="headerlink" title="TCC模式"></a>TCC模式</h4><pre><code>TCC事务是Try、Confirm、Cancel三个词语的缩写，简单理解就是把一个完整的业务逻辑拆分成三个阶段，然后通过事务管理器在业务逻辑层面根据每个分支事务的执行情况分别调用该业务的Confirm或者Cacel方法。</code></pre><p><img src="/image/TCC%E6%A8%A1%E5%BC%8F.png" alt="效果图预览"></p><h4 id="Saga模式"><a href="#Saga模式" class="headerlink" title="Saga模式"></a>Saga模式</h4><pre><code>Saga模式是SEATA提供的长事务解决方案，在Saga模式中，业务流程中每个参与者都提交本地事务，当出现某一个参与者失败则补偿前面已经成功的参与者。</code></pre><p><img src="/image/Saga%E6%A8%A1%E5%BC%8F.png" alt="效果图预览"></p><h4 id="XA模式"><a href="#XA模式" class="headerlink" title="XA模式"></a>XA模式</h4><pre><code>XA可以认为是一种强一致性的事务解决方法，它利用事务资源（数据库、消息服务等）对 XA 协议的支持，以 XA 协议的机制来管理分支事务的一种 事务模式。</code></pre><p><img src="/image/XA%E6%A8%A1%E5%BC%8F.png" alt="效果图预览"></p><pre><code>分布式事务本质上要解决的就是跨网络节点的多个事务的数据一致性问题，业内常见的解决方法有两种：1、强一致性    就是所有的事务参与者要么全部成功，要么全部失败，全局事务协调者需要知道每个事务参与者的执行状态，再根据状态来决定数据的提交或者回滚！2、最终一致性，也叫弱一致性，    也就是多个网络节点的数据允许出现不一致的情况，但是在最终的某个时间点会达成数据一致。    基于 CAP 定理我们可以知道，强一致性方案对于应用的性能和可用性会有影响，所以对于数据一致性要求不高的场景，就会采用最终一致性算法。</code></pre><h3 id="Seata实现两阶段提交"><a href="#Seata实现两阶段提交" class="headerlink" title="Seata实现两阶段提交"></a>Seata实现两阶段提交</h3><pre><code>2PC，全称为两阶段提交（Two-Phase Commit），是一种在分布式系统中用来保证事务原子性和一致性的协议。它主要用于协调分布式数据库或分布式事务环境中的多个参与者，确保所有参与者要么一起成功提交事务，要么一起回滚事务，以保持数据的一致性。</code></pre><p><img src="/image/%E4%BA%8C%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4.png" alt="效果图预览"></p><pre><code>在2PC协议中有两个主要阶段：准备阶段（Prepare Phase）：    事务协调器接收到发起事务的客户端请求后，向所有参与该事务的资源管理器（例如数据库、服务节点等）发送“准备提交”请求。    每个资源管理器执行事务操作，并将事务相关的更改锁定但不提交，然后回复事务协调器它们是否准备好提交事务（根据各自是否能够成功完成事务而定）。提交阶段（Commit Phase）：    如果事务协调器收到了所有资源管理器的肯定答复，即所有参与者都准备好提交事务，则向所有参与者发出“正式提交”指令。    若协调器收到任何一个参与者的否定响应，或者在等待超时后仍有参与者未响应，则向所有参与者发出“回滚事务”的指令。</code></pre><h3 id="Seata定义了3个组件来协议分布式事务的处理过程"><a href="#Seata定义了3个组件来协议分布式事务的处理过程" class="headerlink" title="Seata定义了3个组件来协议分布式事务的处理过程"></a>Seata定义了3个组件来协议分布式事务的处理过程</h3><p> <img src="/image/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1.png" alt="效果图预览"></p><pre><code>Transaction Coordinator (TC)：事务协调器，它是独立的中间件，需要独立部署运行，它维护全局事务的运行状态，接收TM指令发起全局事务的提交与回滚，负责与RM通信协调各各分支事务的提交或回滚。Transaction Manager (TM)：事务管理器，TM需要嵌入应用程序中工作，它负责开启一个全局事务，并最终向TC发起全局提交或全局回滚的指令。Resource Manager (RM)：控制分支事务，负责分支注册、状态汇报，并接收事务协调器TC的指令，驱动分支（本地）事务的提交和回滚。</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Seata </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Seata </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Seata安装</title>
+      <link href="/2023/03/07/Seata%E5%AE%89%E8%A3%85/"/>
+      <url>/2023/03/07/Seata%E5%AE%89%E8%A3%85/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Seata就是其中一种，它是阿里开源的分布式事务解决方案，提供了高性能且简单易用的分布式事务服务。"><a href="#Seata就是其中一种，它是阿里开源的分布式事务解决方案，提供了高性能且简单易用的分布式事务服务。" class="headerlink" title="Seata就是其中一种，它是阿里开源的分布式事务解决方案，提供了高性能且简单易用的分布式事务服务。"></a>Seata就是其中一种，它是阿里开源的分布式事务解决方案，提供了高性能且简单易用的分布式事务服务。</h2><h3 id="下载seata"><a href="#下载seata" class="headerlink" title="下载seata"></a>下载seata</h3><pre><code>官方下载地址：https://github.com/seata/seata/releasesregistry.type=file:registry.type=file 其类型设置为 file 时，意味着 Seata 的服务注册中心不依赖于外部的如 Nacos、Eureka、Zookeeper 等第三方注册中心，而是使用本地文件的方式来存储和管理服务节点信息。这种模式主要用于快速测试或简单的单机部署场景，因为在这种模式下无法自动发现和管理集群环境中的其他 Seata Server 节点，不具备高可用性。config.type=file:config.type=file 表示 Seata 使用本地文件作为配置源。这意味着 Seata 会从指定的本地文件中读取全局事务协调器（TC）、事务管理器（TM）和资源管理器（RM）等组件所需的配置信息，而不是通过Nacos、Apollo或其他远程配置中心获取配置。这种方式同样适用于快速验证和简单部署情况，实际生产环境中可能需要结合分布式配置中心来动态更新和管理配置。seata启动：/bin/seata-server.bat -m file</code></pre><h3 id="依赖引入"><a href="#依赖引入" class="headerlink" title="依赖引入"></a>依赖引入</h3><pre><code>&lt;dependencies&gt;    &lt;dependency&gt;        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;    &lt;/dependency&gt;    &lt;dependency&gt;        &lt;groupId&gt;io.seata&lt;/groupId&gt;        &lt;artifactId&gt;seata-spring-boot-starter&lt;/artifactId&gt;        &lt;version&gt;1.4.2&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;        &lt;groupId&gt;com.baomidou&lt;/groupId&gt;        &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;        &lt;version&gt;3.4.1&lt;/version&gt;    &lt;/dependency&gt;    &lt;!--mysql--&gt;    &lt;dependency&gt;        &lt;groupId&gt;mysql&lt;/groupId&gt;        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;        &lt;version&gt;5.1.47&lt;/version&gt;    &lt;/dependency&gt;    &lt;dependency&gt;        &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;        &lt;artifactId&gt;lombok&lt;/artifactId&gt;    &lt;/dependency&gt;    &lt;!--bank-2 不需要--&gt;    &lt;dependency&gt;        &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt;        &lt;artifactId&gt;httpclient&lt;/artifactId&gt;    &lt;/dependency&gt;&lt;/dependencies&gt;</code></pre><h3 id="定义配置"><a href="#定义配置" class="headerlink" title="定义配置"></a>定义配置</h3><pre><code> server:    port: 8081    #port: 8082spring:    application:        name: bank-1        #name: bank-2    datasource:        url: jdbc:mysql://localhost:3306/bank1?characterEncoding=utf8&amp;useSSL=false        #url: jdbc:mysql://localhost:3306/bank2?characterEncoding=utf8&amp;useSSL=false        driver-class-name: com.mysql.jdbc.Driver        username: root        password: rootseata:    tx-service-group: order_tx_group #自定义事务组名称需要与seata-server中的对应    service:        vgroup-mapping:        order_tx_group: default # TC 集群（必须与seata-server保持一致）</code></pre><h3 id="服务调用"><a href="#服务调用" class="headerlink" title="服务调用"></a>服务调用</h3><pre><code>在调用方上加上  @GlobalTransactional 注解 ，在分支事务上加上 @Transactional 注解当业务方法开启全局异常处理器后，TM注册到TC获取到一个XID，此时在业务中，服务远程访问时，此XID会被下面分支业务方法RM接收到，当各个方法处理完成后RM会向TC直接交互把结果通过XID通知给TC，最后业务方法结束后，TM会通知TC业务已经完成，TC会根据RM通知的结果来通知各个RM提交或者回滚。但是在分布式事务中，入口TM传出时不会将XID放入请求头中向其他服务传递，这样就导致全局异常捕获失效，因此需要手动将XID设置到请求头中，携带给各分支业务来避免事务失效问题。</code></pre><h3 id="正常流程"><a href="#正常流程" class="headerlink" title="正常流程"></a>正常流程</h3><p><img src="/image/Seata%E6%AD%A3%E5%B8%B8%E6%B5%81%E7%A8%8B.png" alt="效果图预览">  </p><h3 id="回滚流程"><a href="#回滚流程" class="headerlink" title="回滚流程"></a>回滚流程</h3><p><img src="/image/Seata%E5%9B%9E%E6%BB%9A%E6%B5%81%E7%A8%8B.png" alt="效果图预览">  </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Seata </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Seata </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Dubbo</title>
       <link href="/2022/12/14/Dubbo/"/>
       <url>/2022/12/14/Dubbo/</url>
