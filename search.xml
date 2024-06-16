@@ -578,9 +578,9 @@
       
         <tags>
             
-            <tag> mysql </tag>
-            
             <tag> 数据库 </tag>
+            
+            <tag> mysql </tag>
             
         </tags>
       
@@ -710,6 +710,56 @@
         <tags>
             
             <tag> Redis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Eureka</title>
+      <link href="/2018/10/10/Eureka/"/>
+      <url>/2018/10/10/Eureka/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Eureka是Netflix的一个子模块，也是核心模块之-。-Eureka是一个基于REST的服务，用于定位服务，以实现云端中间层服务发现和故障转移，服务注册与发现对于微服务来说是非常重要的，有了服务发现与注册，只需要使用服务的标识符，就可以访问到服务，而不需要修改服务调用的配置文件了"><a href="#Eureka是Netflix的一个子模块，也是核心模块之-。-Eureka是一个基于REST的服务，用于定位服务，以实现云端中间层服务发现和故障转移，服务注册与发现对于微服务来说是非常重要的，有了服务发现与注册，只需要使用服务的标识符，就可以访问到服务，而不需要修改服务调用的配置文件了" class="headerlink" title="Eureka是Netflix的一个子模块，也是核心模块之-。 Eureka是一个基于REST的服务，用于定位服务，以实现云端中间层服务发现和故障转移，服务注册与发现对于微服务来说是非常重要的，有了服务发现与注册，只需要使用服务的标识符，就可以访问到服务，而不需要修改服务调用的配置文件了"></a>Eureka是Netflix的一个子模块，也是核心模块之-。 Eureka是一个基于REST的服务，用于定位服务，以实现云端中间层服务发现和故障转移，服务注册与发现对于微服务来说是非常重要的，有了服务发现与注册，只需要使用服务的标识符，就可以访问到服务，而不需要修改服务调用的配置文件了</h2><h3 id="Eureka的基本架构"><a href="#Eureka的基本架构" class="headerlink" title="Eureka的基本架构"></a>Eureka的基本架构</h3><pre><code>SpringCloud封装了NetFlix公司开发的Eureka模块来实现服务注册和发现(对比Zookeeper)    Eureka采用了C-S的架构设计，EurekaServer 作为服务注册功能的服务器，他是服务注册中心    而系统中的其他微服务。使用Eureka的客户端连接到EurekaServer并维持心跳连接。 这样系统的维护人员就可以通过EurekaServer来监控系统中各个微服务是否正常运行，SpringCloud的一 些其他模块(此如Zuul)就可以通过EurekaServer来发现系统中的其他微服务, 并执行相关的逻辑;和Dubbo架构对比</code></pre><h3 id="Eureka包含两个组件"><a href="#Eureka包含两个组件" class="headerlink" title="Eureka包含两个组件"></a>Eureka包含两个组件</h3><pre><code>    Eureka Server提供服务注册服务，各个节点启动后，会在EurekaServer中进行注册， 这样Eureka Server中的服务注册表中将会村粗所有可用服务节点的信息，服务节点的信息可以在界面中直观的看到。    Eureka Client是一 -个Java客户端， 用于简化EurekaServer的交互,客户端同时也具备一个内置的，使用轮询负载算法的负载均衡器。在应用启动后，将会向EurekaServer发送心跳 (默认周期为30秒) .如果Eureka Server在多个心跳周期内没有接收到某个节点的心跳, EurekaServer将会从服务注册表中把这个服务节点移除掉(默认周期为90秒)</code></pre><h3 id="Eureka-三大角色"><a href="#Eureka-三大角色" class="headerlink" title="Eureka 三大角色"></a>Eureka 三大角色</h3><pre><code>    Eureka Server：提供服务注册与发现。和zookeeper客户端一样    Service Provider：将自身服务注册到Eureka中，从而使消费方能够找到    Service Consumer：服务消费方从Eureka中获取注册服务列表，从而找到消费服务</code></pre><h3 id="Eureka-自我保护机制"><a href="#Eureka-自我保护机制" class="headerlink" title="Eureka 自我保护机制"></a>Eureka 自我保护机制</h3><pre><code>     默认情况下，如果EurekaServer在一定时间内没有接收到某 个微服务实例的心跳，EurekaServer将会注销该实例(默认90秒)。 但是当网络分区故障发生时，微服务与Eureka之间无法正常通行，以上行为可能变得非常危险了---- 因为微服务本身其实是健康的，此时本不应该注销这个服务。Eureka通过 自我保护机制来解决这个问题–当EurekaServer节点在短时间内丢失过多客户端时(可能发生了网络分区故障) , 那么这个节点就会进入自我保护模式。一旦进入该模式，EurekaServer就会保护服务注册表中的信息，不再删除服务注册表中的数据(也就是不会注销任何微服务) .当网络故障恢复后，该EurekaServer节 点会自动退出自我保护模式。    在自我保护模式中，EurekaServer会保护服务注册表中的信息， 不再注销任何服务实例。当它收到的心跳数重新恢复到阈值以上时，该EurekaServer节点就会 自动退出自我保护模式。它的设计哲学就是宁可保留错误的服务注册信息，也不盲目注销任何可能健康的服务实例。一句话:好死不如赖活着    综上，自我保护模式是-种应对网络异常的安全保护措施。它的架构哲学是宁可同时保留所有微服务(健康的微服务和不健康的微服务都会保留)，也不盲目注销任何健康的微服务。使用自我保护模式，可以让Eureka集群更加的健壮和稳定    在SpringCloud中, 可以使用 eureka. server. enable-self-preservation = false 禁用自我保护模式[不推荐关闭自我保护机制]</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Eureka </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Eureka </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Spring Cloud</title>
+      <link href="/2018/10/08/Spring%20Cloud/"/>
+      <url>/2018/10/08/Spring%20Cloud/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="SpringCloud-基于SpringBoot提供了-套微服务解决方案-包括服务注册与发现，配置中心，全链路监控-服务网关，负载均衡，熔断器等组件，除了基于NetFlix的开源组件做高度抽象封装之外，还有一些选型中立的开源组件。"><a href="#SpringCloud-基于SpringBoot提供了-套微服务解决方案-包括服务注册与发现，配置中心，全链路监控-服务网关，负载均衡，熔断器等组件，除了基于NetFlix的开源组件做高度抽象封装之外，还有一些选型中立的开源组件。" class="headerlink" title="SpringCloud,基于SpringBoot提供了-套微服务解决方案,包括服务注册与发现，配置中心，全链路监控,服务网关，负载均衡，熔断器等组件，除了基于NetFlix的开源组件做高度抽象封装之外，还有一些选型中立的开源组件。"></a>SpringCloud,基于SpringBoot提供了-套微服务解决方案,包括服务注册与发现，配置中心，全链路监控,服务网关，负载均衡，熔断器等组件，除了基于NetFlix的开源组件做高度抽象封装之外，还有一些选型中立的开源组件。</h2><h3 id="SpringCloud和SpringBoot关系"><a href="#SpringCloud和SpringBoot关系" class="headerlink" title="SpringCloud和SpringBoot关系"></a>SpringCloud和SpringBoot关系</h3><pre><code>SpringBoot专注于快速方便的开发单个个体微服务。SpringCloud是关注全局的微服务协调整理治理框架，它将SpringBoot开发的一 个个单体微服务整合并管理起来,为各个微服务之间提供:配置管理，服务发现，断路器，路由，微代理，事件总线，全局锁，决策竞选，分布式会话等等集成服务。SpringBoot可以离开SpringClooud独立使用，开发项目，但是SpringCloud离不开SpringBoot, 属于依赖关系SpringBoot专注于快速、方便的开发单个个体微服务, SpringCloud关注 全局 的服务治理框架</code></pre><h3 id="Dubbo和SpringCloud对比"><a href="#Dubbo和SpringCloud对比" class="headerlink" title="Dubbo和SpringCloud对比"></a>Dubbo和SpringCloud对比</h3><pre><code>                    Dubbo                            Spring    服务注册中心    Zookeeper                    Spring Cloud Netfilx Eureka    服务调用中心    RPC                            REST API    服务监控        Dubbo - monitor                Spring Boot Admin    断路器           不完善                        Spring Cloud Netflix Hystrix    服务网关        无                            Spring Cloud Netflix Zuul    分布式配置        无                            Spring Cloud Config    服务跟踪        无                            Spring Cloud Sleuth    消息总线        无                            Spring Cloud Bus    数据流            无                            Spring Cloud Stream    批量任务        无                            Spring Cloud Task最大区别: SpringCloud抛弃 了Dubbo的RPC通信,采用的是基于HTTP的REST方式。</code></pre><h3 id="SpringCloud实现功能"><a href="#SpringCloud实现功能" class="headerlink" title="SpringCloud实现功能"></a>SpringCloud实现功能</h3><pre><code>Distributed/versioned configuration (分布式/版本控制配置)Service registration and discovery (服务注册与发现)Routing (路由)Service-to-service calls (服务到服务的调用)Load balancing (负载均衡配置)Circuit Breakers (断路器)Distributed messaging (分布式消息管理)</code></pre><h3 id="SpringCloud下载"><a href="#SpringCloud下载" class="headerlink" title="SpringCloud下载"></a>SpringCloud下载</h3><pre><code>官网：http://projects.spring.io/spring-cloud/注意SpringCloud和Springboot有版本对应关系，可参考官网</code></pre><h3 id="SpringCloud一般有如下几个模块"><a href="#SpringCloud一般有如下几个模块" class="headerlink" title="SpringCloud一般有如下几个模块"></a>SpringCloud一般有如下几个模块</h3><pre><code>microservicecloud-api [封装的整体entity/接口/公共配置等]microservicecloud-provider [服务提供者]microservicecloud-consumer [服务消费者]springcloud-eureka-7001 [Eureka注册中心]</code></pre><h3 id="CAP是什么"><a href="#CAP是什么" class="headerlink" title="CAP是什么"></a>CAP是什么</h3><pre><code> C (Consistency) 强一致性 A (Availabilty)可用性 P (Partition tolerance)分区容错性 CAP的三进二: CA、AP、 CP</code></pre><p><img src="/image/CPA.png" alt="效果图预览">  </p><h3 id="CAP理论的核心"><a href="#CAP理论的核心" class="headerlink" title="CAP理论的核心"></a>CAP理论的核心</h3><pre><code>一个分布式系统不可能同时很好的满足-致性,可用性和分区容错性这三个需求根据CAP原理，将NoSQL数据库分成了满足CA原则，满足CP原则和满足AP原则三大类:    CA:单点集群，满足-致性，可用性的系统，通常可扩展性较差    CP: 满足- -致性，分区容错性的系统，通常性能不是特别高    AP:满足可用性。分区容错性的系统，通常可能对一致性要求低一些</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Spring Cloud </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Spring Cloud </tag>
             
         </tags>
       
@@ -1090,9 +1140,9 @@
       
         <tags>
             
-            <tag> 数据库 </tag>
-            
             <tag> Oracle </tag>
+            
+            <tag> 数据库 </tag>
             
         </tags>
       
