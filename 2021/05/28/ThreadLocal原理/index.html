@@ -5,11 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="ThreadLocal原理, Hexo">
-    <meta name="description" content="
-ThreadLocal原理  
-Thread线程类有一个类型为ThreadLocal.ThreadLocalMap的实例变量threadLocals，即每个线程都有一个属于自己的ThreadLocalMap。
-
-ThreadLocalMa">
+    <meta name="description" content="ThreadLocal英文翻译过来就是：线程本地量，它其实是一种线程的隔离机制，保障了多线程环境下对于共享变量访问的安全性。什么是ThreadLocal ThreadLocal提供了线程的局部变量，每个线程都可以通过set()和get()来">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -457,14 +453,14 @@ ThreadLocalMa">
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        128
+                        721
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        2 分
                     </div>
                     
                 
@@ -475,13 +471,24 @@ ThreadLocalMa">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <hr>
-<h3 id="ThreadLocal原理"><a href="#ThreadLocal原理" class="headerlink" title="ThreadLocal原理"></a>ThreadLocal原理</h3><p> <img src="/image/ThreadLocal%E5%86%85%E5%AD%98%E5%9B%BE.png" alt="效果图预览"> </p>
+                <h2 id="ThreadLocal英文翻译过来就是：线程本地量，它其实是一种线程的隔离机制，保障了多线程环境下对于共享变量访问的安全性。"><a href="#ThreadLocal英文翻译过来就是：线程本地量，它其实是一种线程的隔离机制，保障了多线程环境下对于共享变量访问的安全性。" class="headerlink" title="ThreadLocal英文翻译过来就是：线程本地量，它其实是一种线程的隔离机制，保障了多线程环境下对于共享变量访问的安全性。"></a>ThreadLocal英文翻译过来就是：线程本地量，它其实是一种线程的隔离机制，保障了多线程环境下对于共享变量访问的安全性。</h2><h3 id="什么是ThreadLocal"><a href="#什么是ThreadLocal" class="headerlink" title="什么是ThreadLocal"></a>什么是ThreadLocal</h3><pre><code> ThreadLocal提供了线程的局部变量，每个线程都可以通过set()和get()来对这个局部变量进行操作，但不会和其他线程的局部变量进行冲突，实现了线程的数据隔离。
+
+  简而言之：ThreadLocal中填充的变量属于当前线程，该变量对其他线程而言是不可见的。</code></pre><h3 id="ThreadLocal原理"><a href="#ThreadLocal原理" class="headerlink" title="ThreadLocal原理"></a>ThreadLocal原理</h3><p> <img src="/image/ThreadLocal%E5%86%85%E5%AD%98%E5%9B%BE.png" alt="效果图预览"> </p>
 <pre><code>Thread线程类有一个类型为ThreadLocal.ThreadLocalMap的实例变量threadLocals，即每个线程都有一个属于自己的ThreadLocalMap。
 
 ThreadLocalMap内部维护着Entry数组，每个Entry代表一个完整的对象，key是ThreadLocal本身，value是ThreadLocal的泛型值。
 
-并发多线程场景下，每个线程Thread，在往ThreadLocal里设置值的时候，都是往自己的ThreadLocalMap里存，读也是以某个ThreadLocal作为引用，在自己的map里找对应的key，从而可以实现了线程隔离。</code></pre>
+并发多线程场景下，每个线程Thread，在往ThreadLocal里设置值的时候，都是往自己的ThreadLocalMap里存，读也是以某个ThreadLocal作为引用，在自己的map里找对应的key，从而可以实现了线程隔离。</code></pre><h3 id="TheadLocal使用场景"><a href="#TheadLocal使用场景" class="headerlink" title="TheadLocal使用场景"></a>TheadLocal使用场景</h3><pre><code>  1.用来替代参数链传递：在编写API接口时，可以将需要传递的参数放入ThreadLocal中，从而不需要在每个调用的方法上都显式地传递这些参数。这种方法虽然不如将参数封装为对象传递来得常见，但在某些情况下可以简化代码结构。
+
+  2.数据库连接和会话管理：在某些应用中，如Web应用程序，ThreadLocal可以用来保持对数据库连接或会话的管理，以简化并发控制并提高性能。例如，可以使用ThreadLocal来维护一个连接池，使得每个请求都能共享相同的连接，而不是每次都需要重新建立连接。
+
+  3.全局存储信息：例如在前后端分离的应用中，ThreadLocal可以用来在服务端维护用户的上下文信息或者一些配置信息，而不需要通过HTTP请求携带大量的用户信息。这样做可以在不改变原有架构的情况下，提供更好的用户体验。</code></pre><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><pre><code>  强引用：其实就是咱们一般用“=”的赋值行为，如 Student s = new Student(),只要强引用还在，对象就不会被回收。
+
+  软引用：不是必须存活的对象，jvm在内存不够的情况下即将内存溢出前会对其进行回收。例如缓存。
+
+  弱引用：非必须存活的对象，引用关系比软引用还弱，无论内存够还是不够，下次的GC一定会被回收。
+
+  虚引用：别名幽灵引用或者幻影引用。等同于没有引用，唯一的目的是对象被回收的时候会受到系统通知。</code></pre>
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -901,7 +908,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">60.1k</span>&nbsp;字
+                class="white-color">66.1k</span>&nbsp;字
             
             
             
