@@ -454,14 +454,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        9.6k
+                        9.8k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        35 分
+                        36 分
                     </div>
                     
                 
@@ -788,7 +788,12 @@ CMSInitiatingOccupancyFraction低于70% 需要调整xmn或SurvivorRatior值。
 
 对象头：包含mark word 和 Klass 指针 ，在64位下，mark word 占 8个字节，Klass占8个字节如果对象是数组类型还会有一块标志数组长度的数据是4个字节
 实例数据：对象中包含的实例变量，不包括静态变量，静态变量不属于对象
-对齐填充：对象的大小都必须是8的整数倍，如果前两者不是8的整数倍就会在这里填充字节，使对象达到8的整数倍</code></pre>
+对齐填充：对象的大小都必须是8的整数倍，如果前两者不是8的整数倍就会在这里填充字节，使对象达到8的整数倍</code></pre><h3 id="36-深拷贝和浅拷贝"><a href="#36-深拷贝和浅拷贝" class="headerlink" title="36.深拷贝和浅拷贝"></a>36.深拷贝和浅拷贝</h3><pre><code> 深拷贝实现方式：
+   序列化实现深拷贝，实现Serializable接口。
+ 流式处理实现深拷贝：
+    Streams 的一个常见模式是将数据源中的所有元素收集到一个新的集合中</code></pre><h3 id="37-Java-有几种文件拷贝方式"><a href="#37-Java-有几种文件拷贝方式" class="headerlink" title="37.Java 有几种文件拷贝方式"></a>37.Java 有几种文件拷贝方式</h3><pre><code>第一种，使用java.io包下的库，使用FileInputStream读取，再使用FileOutputStream写出。
+第二种，利用java.nio包下的库，使用transferTo或transfFrom方法实现。
+第三种，Java 标准类库本身已经提供了 Files.copy 的实现。</code></pre>
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -1215,7 +1220,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">66.1k</span>&nbsp;字
+                class="white-color">70.2k</span>&nbsp;字
             
             
             

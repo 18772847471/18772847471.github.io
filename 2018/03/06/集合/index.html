@@ -455,7 +455,7 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        147
+                        507
                     </div>
                     
 
@@ -477,6 +477,21 @@
 <h3 id="集合框架"><a href="#集合框架" class="headerlink" title="集合框架"></a>集合框架</h3><p><img src="/image/%E9%9B%86%E5%90%88.png" alt="效果图预览"></p>
 <h3 id="集合简介"><a href="#集合简介" class="headerlink" title="集合简介"></a>集合简介</h3><p>  （1）集合有两个父接口 Collection、Map<br>  （2）Collection有两个子接口 List、set<br>  （3）List有两个常见的实现类 ArrayList、LinkedList<br>  （4）Set有两个常见的实现类 HashSet、TreeSet<br>  （5）Map有两个常见的实现类 HashMap、HashTable</p>
 <h3 id="不同集合的特点"><a href="#不同集合的特点" class="headerlink" title="不同集合的特点"></a>不同集合的特点</h3><p>   （1）List             特点：有序、可重复<br>   （2）Set              特点：无序、不可重复<br>   （3）Collection       特点：无序、可重复<br>   （4）Map              特点：无序，不可重复，存放【键值对】（key 键 – value 值）</p>
+<h3 id="Fail-safe和Fail-fast"><a href="#Fail-safe和Fail-fast" class="headerlink" title="Fail-safe和Fail-fast"></a>Fail-safe和Fail-fast</h3><pre><code>Fail-fast ： 表示快速失败，在集合遍历过程中，一旦发现容器中的数据被修改了，会立刻抛出ConcurrentModificationException异常，从而导致遍历失败。
+java.util包下的集合类都是快速失败机制的。
+
+Fail-safe：表示失败安全，也就是在这种机制下，出现集合元素的修改，不会抛出ConcurrentModificationException。
+原因是采用安全失败机制的集合容器，在遍历时不是直接在集合内容上访问的，而是先复制原有集合内容，
+
+常见的的使用Fail-safe方式遍历的容器有ConcerrentHashMap和CopyOnWriteArrayList等。</code></pre><h3 id="Arraylist-的去重机制"><a href="#Arraylist-的去重机制" class="headerlink" title="Arraylist 的去重机制"></a>Arraylist 的去重机制</h3><pre><code>contains判断去重(有序)
+迭代器去重(无序)
+HashSet去重(无序)
+LinkedHashSet去重(有序)
+TreeSet去重(无序)
+Stream去重(有序)</code></pre><h3 id="流"><a href="#流" class="headerlink" title="流"></a>流</h3><p>  从支持数据处理操作的源生成元素序列.数据源可以是集合,数组或IO资源。</p>
+<p>  从操作角度来看,流与集合是不同的. 流不存储数据值; 流的目的是处理数据,它是关于算法与计算的。</p>
+<p>  Stream可以由数组或集合创建，对流的操作分为两种：<br>    中间操作，每次返回一个新的流，可以有多个。<br>    终端操作，每个流只能进行一次终端操作，终端操作结束后流无法再次使用。终端操作会产生一个新的集合或值。</p>
+<h3 id="流的分类"><a href="#流的分类" class="headerlink" title="流的分类"></a>流的分类</h3><p> <img src="/image/%E6%B5%81.png" alt="效果图预览">  </p>
 
             </div>
             <hr/>
@@ -902,7 +917,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">66.1k</span>&nbsp;字
+                class="white-color">70.2k</span>&nbsp;字
             
             
             

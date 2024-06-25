@@ -453,14 +453,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        277
+                        1.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        3 分
                     </div>
                     
                 
@@ -474,7 +474,16 @@
                 <h2 id="java基础知识"><a href="#java基础知识" class="headerlink" title="java基础知识"></a>java基础知识</h2><h3 id="整体的流程"><a href="#整体的流程" class="headerlink" title="整体的流程"></a>整体的流程</h3><pre><code>Java 中的所有类，必须被装载到 jvm 中才能运行，这个装载工作是由 jvm 中的类加载器完成的，类加载器所做的工作实质是把类文件从硬盘读取到内存中，JVM 在加载类的时候，都是通过 ClassLoader 的 loadClass（）方法来加载 class 的，loadClass 使用双亲委派模型。</code></pre><p> <img src="/image/%E7%B1%BB%E5%8A%A0%E8%BD%BD.png" alt="效果图预览"></p>
 <h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><pre><code>通过一个类的全限定名来获取定义此类的二进制字节流
 将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构
-在内存中生成一个代表该类的 java.lang.Class 对象，作为方法区这个类的各种数据的访问入口</code></pre><h4 id="连接-验证"><a href="#连接-验证" class="headerlink" title="连接 - 验证"></a>连接 - 验证</h4><pre><code>文件格式验证、元数据验证、字节码验证、符号引用验证。</code></pre><h4 id="连接-准备"><a href="#连接-准备" class="headerlink" title="连接 - 准备"></a>连接 - 准备</h4><pre><code>准备阶段是正式为类变量（static 修饰的变量）分配内存并设置类变量初始值的极端，这些变量所使用的内存都将在方法区中进行分配。</code></pre>
+在内存中生成一个代表该类的 java.lang.Class 对象，作为方法区这个类的各种数据的访问入口</code></pre><h4 id="连接-验证"><a href="#连接-验证" class="headerlink" title="连接 - 验证"></a>连接 - 验证</h4><pre><code>文件格式验证、元数据验证、字节码验证、符号引用验证。</code></pre><h4 id="连接-准备"><a href="#连接-准备" class="headerlink" title="连接 - 准备"></a>连接 - 准备</h4><pre><code>准备阶段是正式为类变量（static 修饰的变量）分配内存并设置类变量初始值的极端，这些变量所使用的内存都将在方法区中进行分配。</code></pre><h4 id="连接-解析"><a href="#连接-解析" class="headerlink" title="连接 - 解析"></a>连接 - 解析</h4><pre><code>解析阶段是虚拟机将常量池内的符号引用替换为直接引用的过程。
+
+符号引用：只包含语义信息，不涉及具体实现，以一组符号来描述引用目标，是字面量；符号引用与虚拟机实现的内存布局无关，引用的目标并不一定已经加载到内存中。
+
+直接引用：与具体实现息息相关，是直接指向目标的指针；直接引用是可以直接指向目标的指针、相对偏移量或是一个能间接定位到目标的句柄。如果有了直接引用，那引用的目标必定已经在内存中存在。</code></pre><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><pre><code>初始化阶段，才真正开始执行类中定义的 Java 程序代码（或者说是字节码）</code></pre><h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3><p> <img src="/image/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%9A%84%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B.png" alt="效果图预览"><br>    双亲委派模型的工作过程：如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把这个请求委派给父类加载器去完成，每一个层次的类加载器都是如此，因此所有的加载请求最终都应该传送到顶层的启动类加载器中，只有当父加载器反馈自己无法完成这个加载请求（它的搜索范围中没有找到所需的类）时，子加载器才会尝试自己去加载。</p>
+<h3 id="双亲委派模型是如何实现的"><a href="#双亲委派模型是如何实现的" class="headerlink" title="双亲委派模型是如何实现的"></a>双亲委派模型是如何实现的</h3><pre><code>实现双亲委派的代码都几种在 java.lang.ClassLoader 的 loadClass() 方法中：先检查是否已经被加载过，若没有加载则调用父加载器的 loadClass() 方法，若父加载器为空则默认使用启动类加载器作为父加载器。如果父加载器加载失败，抛出 ClassNotFoundException 异常后，再调用自己的 findClass() 方法进行加载。（看源码后发现这里的抛出异常是被吞了，catch 之后不会做任何操作）</code></pre><h3 id="破坏双亲委派模型"><a href="#破坏双亲委派模型" class="headerlink" title="破坏双亲委派模型"></a>破坏双亲委派模型</h3><pre><code> 重写 loadClass() 方法
+ 逆向使用类加载器，引入线程上下文类加载器
+ 追求程序的动态性：代码热替换、模块热部署等技术</code></pre><h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><pre><code>启动类加载器（Bootstrap ClassLoader）： 这个类加载器复杂将存放在 JAVA_HOME/lib 目录中的，或者被-Xbootclasspath 参数所指定的路径种的，并且是虚拟机识别的（仅按照文件名识别，如rt.jar，名字不符合的类库即使放在lib目录下也不会重载）。
+扩展类加载器（Extension ClassLoader）： 这个类加载器由sun.misc.Launcher$ExtClassLoader实现，它负责夹杂JAVA_HOME/lib/ext 目录下的，或者被java.ext.dirs 系统变量所指定的路径种的所有类库。开发者可以直接使用扩展类加载器。
+应用程序类加载器（Application ClassLoader）： 这个类加载器由sun.misc.Launcher$AppClassLoader实现。由于这个类加载器是ClassLoader 种的getSystemClassLoader方法的返回值，所以也成为系统类加载器。它负责加载用户类路径（ClassPath）上所指定的类库。开发者可以直接使用这个类加载器，如果应用中没有定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器</code></pre>
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -943,7 +952,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">66.1k</span>&nbsp;字
+                class="white-color">70.2k</span>&nbsp;字
             
             
             
