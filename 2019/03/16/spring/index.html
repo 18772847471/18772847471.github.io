@@ -467,14 +467,14 @@ Web层解决方案 SpringMVC
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2.5k
+                        3.2k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        10 分
+                        12 分
                     </div>
                     
                 
@@ -651,7 +651,46 @@ java 是单继承
     动态生成的代理类已经继承了 Proxy 类的，就不能再继承其他的类，
     所以只能靠实现被代理类的接口的形式，故 JDK 的动态代理必须有接口。</code></pre><h3 id="十三：两种类型的动态代理"><a href="#十三：两种类型的动态代理" class="headerlink" title="十三：两种类型的动态代理"></a>十三：两种类型的动态代理</h3><pre><code>基于接口的动态代理：基于接口的动态代理是通过Java的java.lang.reflect.Proxy类实现的。对于被代理的类（或接口），必须实现至少一个接口。代理对象在运行时实现了这些接口，并将方法调用转发给InvocationHandler接口的实现类。InvocationHandler接口包含一个invoke()方法，当调用代理对象的方法时，实际上是调用了InvocationHandler的invoke()方法，在其中可以进行相关的增强逻辑。
 
-基于类的动态代理：基于类的动态代理是通过Java的java.lang.reflect.InvocationHandler接口和java.lang.reflect.Proxy类结合实现的。不同于基于接口的动态代理，基于类的动态代理是在运行时动态地创建目标类的子类，并将方法调用转发给InvocationHandler接口的实现类。这种代理方式允许对没有实现接口的类进行代理，但是需要注意的是，被代理的类不能是final类。</code></pre>
+基于类的动态代理：基于类的动态代理是通过Java的java.lang.reflect.InvocationHandler接口和java.lang.reflect.Proxy类结合实现的。不同于基于接口的动态代理，基于类的动态代理是在运行时动态地创建目标类的子类，并将方法调用转发给InvocationHandler接口的实现类。这种代理方式允许对没有实现接口的类进行代理，但是需要注意的是，被代理的类不能是final类。</code></pre><h3 id="十四：Spring-中的-Service-有多个实现类"><a href="#十四：Spring-中的-Service-有多个实现类" class="headerlink" title="十四：Spring 中的 Service 有多个实现类"></a>十四：Spring 中的 Service 有多个实现类</h3><pre><code>方法一：
+     Controller中注入service的时候使用@Autowired自动注入，@Qualifier(“beanId”)来指定注入哪一个。
+
+方法二：
+     Controller中注入service的时候使用@Resource(type = 类名.class)来指定注入哪一个。
+
+方法三：
+    每个service的impl都可以指定名称（使用@Service（“名称”））
+
+    Controller中注入service的时候使用名称来指定注入哪一个（使用@Resource(name=“名称”)）</code></pre><h3 id="十五：Autowired和-Resource两个注解的区别"><a href="#十五：Autowired和-Resource两个注解的区别" class="headerlink" title="十五：Autowired和@Resource两个注解的区别"></a>十五：Autowired和@Resource两个注解的区别</h3><pre><code>1.@Autowired是Spring的注解，@Resource是J2EE的注解，这个看一下导入注解的时候这两个注解的包名就一清二楚了。
+
+2.@Autowired默认按照byType方式进行bean匹配，@Resource默认按照byName方式进行bean匹配。
+
+3.@Autowired默认情况下必须要求依赖对象必须存在，如果要允许null值，可以设置它的required属性为false，如：@Autowired(required=false)。</code></pre><h3 id="十六：请求在Spring-Web应用中的处理流程"><a href="#十六：请求在Spring-Web应用中的处理流程" class="headerlink" title="十六：请求在Spring Web应用中的处理流程"></a>十六：请求在Spring Web应用中的处理流程</h3><pre><code>    Spring MVC 中的 DispatcherServlet 充当了 Web 应用中的 Serlvet，负责将任务分配给对应的Controller，并将最终视图返回给 Web 容器。
+
+    Spring MVC的核心组件
+
+    DispatcherServlet：
+        DispatcherServlet 是整个流程控制的中心，由它来接收请求并调用其它组件处理用户的请求，同时还负责响应结果。DispatcherServlet的存在降低了组件之间的耦合性。
+
+    HandlerMapping：
+        HandlerMapping 负责根据用户请求映射获得对应的 Handler和 HandlerInterceptor。处理方法为从 URL 获得 URI，在通过 URI 从 HandlerMapping 中找到对应的 Handler 和 HandlerInterceptor，即处理器和拦截器。
+
+    HandlerAdapter：
+        HandlerAdapter 负责按照特定规则去执行 Handler。
+
+        如果 Handler 有对应的 HandlerAdapater，HandlerAdapater 则会在调用 Handler 之前执行 HandlerInterceptor 的 preHandler() 方法对 Handler 进行拦截。
+
+    HandlerInterceptor：
+        HandlerInterceptor 主要负责在执行 Handler 前对其进行拦截。HandlerInterceptor 中的 preHandler() 方法将会提取 HTTP 请求中的数据填充到处理器 Handler 的中。
+
+    Handler：
+        Handler 即Controller ，是处理业务代码的核心器件。这部分由程序员自行编写，一般的SSM框架中，其下层还有Service和Dao</code></pre><p>Spring MVC处理请求流程：<br><img src="/image/SpringMVC.png" alt="效果图预览"><br>    当 Web 容器中的 Host 会选择对应的 Web应用来处理请求，这里将请求交给了 Spring MVC 中的 DispatcherServlet 来进一步处理请求。</p>
+<pre><code>    DispatcherServlet 通过解析 HTTP 请求的 URL 获得 URI，再根据该 URI 从 HandlerMapping 当中获得该请求对应的 Handler 和 HandlerInterceptor
+
+    DispatcherServlet 根据获得的 Handler 选择合适的 HandlerAdapter。如果成功获得 HandlerAdapter，HandlerAdapater 则会在调用 Handler 之前执行 HandlerInterceptor 的 preHandler() 方法对 Handler 进行拦截
+
+    Handler 即 Controller 会进行请求的处理，并向下调用 Service 和 Dao 来处理请求
+
+    Hander 处理完成请求后会返回模型数据，模型数据由 DispatcherServlet 封装后返回给Web 容器</code></pre>
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -1080,7 +1119,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">70.2k</span>&nbsp;字
+                class="white-color">84.3k</span>&nbsp;字
             
             
             

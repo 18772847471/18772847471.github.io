@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="linux下重启oracle服务, Hexo">
+    <meta name="keywords" content="linux, Hexo">
     <meta name="description" content="
 
 1.linux下重启oracle服务步骤： 1.使用Xshell连接linux服务器。
@@ -18,7 +18,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>linux下重启oracle服务 | Hexo</title>
+    <title>linux | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,13 +309,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        linux下重启oracle服务
+                        linux
                     </div>
                 </div>
             </div>
@@ -470,14 +470,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        174
+                        732
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        4 分
                     </div>
                     
                 
@@ -501,8 +501,58 @@
  9.退出监听器控制台，命令：exit</code></pre><h3 id="2-linux下日志查找："><a href="#2-linux下日志查找：" class="headerlink" title="2.linux下日志查找："></a>2.linux下日志查找：</h3><pre><code>cat 文件名|grep &#39;关键字&#39;</code></pre><h3 id="3-windows下关闭占用端口的进程："><a href="#3-windows下关闭占用端口的进程：" class="headerlink" title="3.windows下关闭占用端口的进程："></a>3.windows下关闭占用端口的进程：</h3><pre><code>netstat -aon|findstr &quot;端口&quot;
 tasklist|findstr &quot;pid&quot;</code></pre><h3 id="4-windows下使用telnet："><a href="#4-windows下使用telnet：" class="headerlink" title="4.windows下使用telnet："></a>4.windows下使用telnet：</h3><pre><code> win + R 进入命令行窗口
  telnet 127.0.0.1 10001
- ctrl + ]
- send 数据</code></pre>
+    ctrl + ]
+    send 数据</code></pre><h3 id="5-端口"><a href="#5-端口" class="headerlink" title="5.端口"></a>5.端口</h3><pre><code>0 – 1023： 常用端口和系统端口
+1024 – 49151： 软件的注册端口
+49152 – 65535： 动态端口或私有端口</code></pre><h4 id="5-1-使用-ss-命令"><a href="#5-1-使用-ss-命令" class="headerlink" title="5.1 使用 ss 命令"></a>5.1 使用 ss 命令</h4><pre><code># ss -tnlp | grep ssh
+LISTEN 0 128 *:22 *:* users:((&quot;sshd&quot;,pid=997,fd=3))
+LISTEN 0 128 :::22 :::* users:((&quot;sshd&quot;,pid=997,fd=4))
+
+# ss -tnlp | grep &quot;:22&quot;
+LISTEN 0 128 *:22 *:* users:((&quot;sshd&quot;,pid=997,fd=3))
+LISTEN 0 128 :::22 :::* users:((&quot;sshd&quot;,pid=997,fd=4))</code></pre><h4 id="5-2使用-netstat-命令"><a href="#5-2使用-netstat-命令" class="headerlink" title="5.2使用 netstat 命令"></a>5.2使用 netstat 命令</h4><pre><code># netstat -tnlp | grep ssh
+tcp 0 0 0.0.0.0:22 0.0.0.0:* LISTEN 997/sshd
+tcp6 0 0 :::22 :::* LISTEN 997/sshd
+
+# netstat -tnlp | grep &quot;:22&quot;
+tcp 0 0 0.0.0.0:22 0.0.0.0:* LISTEN 1208/sshd
+tcp6 0 0 :::22 :::* LISTEN 1208/sshd</code></pre><h4 id="5-3使用-lsof-命令"><a href="#5-3使用-lsof-命令" class="headerlink" title="5.3使用 lsof 命令"></a>5.3使用 lsof 命令</h4><pre><code># lsof -i -P | grep ssh
+COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME
+sshd 11584 root 3u IPv4 27625 0t0 TCP *:22 (LISTEN)
+sshd 11584 root 4u IPv6 27627 0t0 TCP *:22 (LISTEN)
+sshd 11592 root 3u IPv4 27744 0t0 TCP vps.2daygeek.com:ssh-&gt;103.5.134.167:49902 (ESTABLISHED)
+
+# lsof -i tcp:22
+COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME
+sshd 1208 root 3u IPv4 20919 0t0 TCP *:ssh (LISTEN)
+sshd 1208 root 4u IPv6 20921 0t0 TCP *:ssh (LISTEN)
+sshd 11592 root 3u IPv4 27744 0t0 TCP vps.2daygeek.com:ssh-&gt;103.5.134.167:49902 (ESTABLISHED)</code></pre><h4 id="5-4使用-fuser-命令"><a href="#5-4使用-fuser-命令" class="headerlink" title="5.4使用 fuser 命令"></a>5.4使用 fuser 命令</h4><pre><code># fuser -v 22/tcp
+USER PID ACCESS COMMAND
+22/tcp: root 1208 F.... sshd
+root 12388 F.... sshd
+root 49339 F.... sshd</code></pre><h4 id="5-5使用-nmap-命令"><a href="#5-5使用-nmap-命令" class="headerlink" title="5.5使用 nmap 命令"></a>5.5使用 nmap 命令</h4><pre><code># nmap -sV -p 22 localhost
+Starting Nmap 6.40 ( http://nmap.org ) at 2018-09-23 12:36 IST
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000089s latency).
+Other addresses for localhost (not scanned): 127.0.0.1
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.4 (protocol 2.0)
+Service detection performed. Please report any incorrect results at http://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 0.44 seconds</code></pre><h4 id="5-6使用-systemctl-命令"><a href="#5-6使用-systemctl-命令" class="headerlink" title="5.6使用 systemctl 命令"></a>5.6使用 systemctl 命令</h4><pre><code># systemctl status sshd
+● sshd.service - OpenSSH server daemon
+Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; vendor preset: enabled)
+Active: active (running) since Sun 2018-09-23 02:08:56 EDT; 6h 11min ago
+Docs: man:sshd(8)
+man:sshd_config(5)
+Main PID: 11584 (sshd)
+CGroup: /system.slice/sshd.service
+└─11584 /usr/sbin/sshd -D
+Sep 23 02:08:56 vps.2daygeek.com systemd[1]: Starting OpenSSH server daemon...
+Sep 23 02:08:56 vps.2daygeek.com sshd[11584]: Server listening on 0.0.0.0 port 22.
+Sep 23 02:08:56 vps.2daygeek.com sshd[11584]: Server listening on :: port 22.
+Sep 23 02:08:56 vps.2daygeek.com systemd[1]: Started OpenSSH server daemon.
+Sep 23 02:09:15 vps.2daygeek.com sshd[11589]: Connection closed by 103.5.134.167 port 49899 [preauth]
+Sep 23 02:09:41 vps.2daygeek.com sshd[11592]: Accepted password for root from 103.5.134.167 port 49902 ssh2</code></pre>
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -938,7 +988,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">70.2k</span>&nbsp;字
+                class="white-color">84.3k</span>&nbsp;字
             
             
             
