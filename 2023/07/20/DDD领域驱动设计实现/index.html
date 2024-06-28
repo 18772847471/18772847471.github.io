@@ -4,13 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Centos7上搭建nexus, Hexo">
-    <meta name="description" content="  记录一次在centos服务器上搭建私服过程，要使用nexus服务需要安装jdk和maven，jdk已经安装过，只需要安装maven.
-
-
-第一步：安装maven使用xshell连接远程服务器，进入到目录 /usr/local
-
-    ">
+    <meta name="keywords" content="DDD领域驱动设计实现, Hexo">
+    <meta name="description" content="
+领域驱动设计（Domain-driven Design，DDD）是一种软件设计方法，该方法的核心思想是将业务领域作为设计和开发的中心，强调对业务领域的深入理解、业务语言的建模以及领域对象的设计和实现。翻译成大白话就是：是一种解决复杂软件的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Centos7上搭建nexus | Hexo</title>
+    <title>DDD领域驱动设计实现 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,13 +305,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Centos7上搭建nexus
+                        DDD领域驱动设计实现
                     </div>
                 </div>
             </div>
@@ -427,20 +423,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/java/">
-                                <span class="chip bg-color">java</span>
-                            </a>
-                        
-                            <a href="/tags/centos/">
-                                <span class="chip bg-color">centos</span>
-                            </a>
-                        
-                            <a href="/tags/linux/">
-                                <span class="chip bg-color">linux</span>
-                            </a>
-                        
-                            <a href="/tags/nexus/">
-                                <span class="chip bg-color">nexus</span>
+                            <a href="/tags/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/">
+                                <span class="chip bg-color">DDD领域驱动设计</span>
                             </a>
                         
                     </div>
@@ -451,20 +435,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/java/" class="post-category">
-                                java
-                            </a>
-                        
-                            <a href="/categories/java/centos/" class="post-category">
-                                centos
-                            </a>
-                        
-                            <a href="/categories/java/centos/linux/" class="post-category">
-                                linux
-                            </a>
-                        
-                            <a href="/categories/java/centos/linux/nexus/" class="post-category">
-                                nexus
+                            <a href="/categories/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/" class="post-category">
+                                DDD领域驱动设计
                             </a>
                         
                     </div>
@@ -475,21 +447,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2017-03-08
+                    2023-07-20
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        437
+                        3.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        10 分
                     </div>
                     
                 
@@ -500,92 +472,157 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>  记录一次在centos服务器上搭建私服过程，要使用nexus服务需要安装jdk和maven，jdk已经安装过，只需要安装maven.</p>
+                <hr>
+<p>领域驱动设计（Domain-driven Design，DDD）是一种软件设计方法，该方法的核心思想是将业务领域作为设计和开发的中心，强调对业务领域的深入理解、业务语言的建模以及领域对象的设计和实现。翻译成大白话就是：是一种解决复杂软件的思维方式，是一种思想；以业务为主导，自顶向下的进行业务领域划分,业务模型驱动架构设计。</p>
 <a id="more"></a>
+<h3 id="一、DDD设计阶段包括两部分"><a href="#一、DDD设计阶段包括两部分" class="headerlink" title="一、DDD设计阶段包括两部分"></a>一、DDD设计阶段包括两部分</h3><h4 id="1-1战略设计定义"><a href="#1-1战略设计定义" class="headerlink" title="1.1战略设计定义"></a>1.1战略设计定义</h4><pre><code>战略设计主要从业务视角出发，包括了业务场景分析、领域建模、划分边界上下文三个阶段。限界上下文可以作为微服务设计的参考边界。
+限界上下文可以作为微服务设计的参考边界。</code></pre><h4 id="1-2战术设计定义"><a href="#1-2战术设计定义" class="headerlink" title="1.2战术设计定义"></a>1.2战术设计定义</h4><pre><code>战术设计则从技术视角出发，侧重于领域模型的技术实现，完成软件开发和落地，
 
-<h3 id="第一步：安装maven"><a href="#第一步：安装maven" class="headerlink" title="第一步：安装maven"></a>第一步：安装maven</h3><pre><code>使用xshell连接远程服务器，进入到目录 /usr/local
+战术设计包括：聚合根、实体、值对象、领域服务、应用服务和资源库等代码逻辑的技术设计和技术设计。</code></pre><h3 id="二、战略设计"><a href="#二、战略设计" class="headerlink" title="二、战略设计"></a>二、战略设计</h3><pre><code>战略设计是 DDD 过程中的核心步骤</code></pre><h4 id="2-1业务分析"><a href="#2-1业务分析" class="headerlink" title="2.1业务分析"></a>2.1业务分析</h4><pre><code>在这个阶段我们所有做的就是进行全面的业务梳理，把业务中涉及到的所有细节都梳理出来，为后续进行领域建模分析提供足够的、全面的业务输入。
 
-    cd /usr/local
+战略设计 经常使用到的业务场景分析方法主要包括
 
-新建目录 maven 
+    用例分析法
 
-    mkdir maven
+    事件风暴法：
+        事件风暴是一项团队活动，领域专家与项目团队通过头脑风暴的形式，罗列出领域中所有的领域事件，整合之后形成最终的领域事件集合，然后对每一个事件，标注出导致该事件的命令，再为每一个事件标注出命令发起方的角色。命令可以是用户发起，也可以是第三方系统调用或者定时器触发等，最后对事件进行分类，整理出实体、聚合、聚合根以及限界上下文。而事件风暴正是 DDD 战略设计中经常使用的一种方法，它可以快速分析和分解复杂的业务领域，完成领域建模。
 
-将安装包上传到这个目录下
+    四色建模法</code></pre><h4 id="2-2领域建模"><a href="#2-2领域建模" class="headerlink" title="2.2领域建模"></a>2.2领域建模</h4><pre><code>DDD领域模型 细分为两步骤。
+    第一步是发散，产生很多实体、命令、事件等领域对象，
+    第二步是收敛，我们从不同的维度对进行聚类形成聚合，建立最终领域模型， 这是一个收敛的过程。</code></pre><h5 id="2-2-1发散阶段：领域对象分析"><a href="#2-2-1发散阶段：领域对象分析" class="headerlink" title="2.2.1发散阶段：领域对象分析"></a>2.2.1发散阶段：领域对象分析</h5><pre><code> 领域对象分析，也就 实体、值对象、领域事件、领域命令的分析。</code></pre><h5 id="2-2-2收敛阶段：构建业务聚合"><a href="#2-2-2收敛阶段：构建业务聚合" class="headerlink" title="2.2.2收敛阶段：构建业务聚合"></a>2.2.2收敛阶段：构建业务聚合</h5><pre><code> 完成领域对象分析之后，需要构建业务聚合。
 
-使用命令 tar -zxvf 解压文件
+ 想要构建聚合，那么首先就要在实体中找到聚合根。
 
-    tar -zxvf apache-maven-3.6.3-bin.tar.gz
+ 聚合根的特点：
 
-配置环境变量
+    聚合根一定是实体，那么它具有全局唯一的标识，
 
-    vim /etc/profile
+    聚合根是具备生命周期的
 
-在文件后边追加如下内容
+    聚合根需要专门的模块来进行管理。</code></pre><h4 id="2-3领域建模划分边界上下文"><a href="#2-3领域建模划分边界上下文" class="headerlink" title="2.3领域建模划分边界上下文"></a>2.3领域建模划分边界上下文</h4><pre><code>获得了整个业务流程中的所有聚合后，我们需要更具业务语义上下文将具体的聚合划分到对应的上下文中，</code></pre><h3 id="三、战术设计"><a href="#三、战术设计" class="headerlink" title="三、战术设计"></a>三、战术设计</h3><pre><code>在战略设计阶段，通过事件风暴法对整体的业务进行了全部的梳理，同时构建了领域模型，以及划分了边界下文。
 
-    export PATH=$PATH:/usr/local/maven/apache-maven-3.6.3/bin
+那么接下来我们就要将领域模型映射到工程结构，以及代码中实现最终的实现落地。</code></pre><h4 id="3-1微服务拆分"><a href="#3-1微服务拆分" class="headerlink" title="3.1微服务拆分"></a>3.1微服务拆分</h4><pre><code>根据已经划分的边界上下文，拆分成微服务。</code></pre><h4 id="3-2领域分层"><a href="#3-2领域分层" class="headerlink" title="3.2领域分层"></a>3.2领域分层</h4><pre><code>在领域分层方面，可以按照cola分层结构来进行，使用cola框架进行说明。</code></pre><h4 id="3-3代码结构"><a href="#3-3代码结构" class="headerlink" title="3.3代码结构"></a>3.3代码结构</h4><pre><code> 领域对象进行进一步的细化之后，同时把对应的领域服务敲定之后，可以把这些分析后的内容映射成工程分层后的代码了。  </code></pre><h3 id="四、领域层设计"><a href="#四、领域层设计" class="headerlink" title="四、领域层设计"></a>四、领域层设计</h3><pre><code>领域模型 Model定义、分类、生命周期
 
-让配置生效
+Model（模型）：承载着业务的属性和具体的行为，是业务表达的方式，是DDD的内核。
 
-    source /etc/profile
+    Model（模型）是一个类中有属性、属性有Get/Set方法，
 
-查看maven版本
+    并且业务的行为（Action）操作也是在模型类中（充血模型）
 
-    mvn -v</code></pre><p>  maven版本信息<br>   <img src="/image/maven.jpg" alt="效果图预览">        </p>
-<h3 id="第二步：安装nexus"><a href="#第二步：安装nexus" class="headerlink" title="第二步：安装nexus"></a>第二步：安装nexus</h3><pre><code>使用xshell连接远程服务器，进入到目录 /usr/local
+    模型分为Entity、Value Object、Service这三种类型</code></pre><h4 id="4-1-Model分类"><a href="#4-1-Model分类" class="headerlink" title="4.1 Model分类"></a>4.1 Model分类</h4><pre><code>Entity (实体)
+    有特定的标识，标识着这个Model在系统中全局唯一
+    内部值可以是变化的，可能存在生命周期 (比如订单对象，状态值是连续变化的)
+    有状态的Value Object
+Value Object （值对象）
+    内部值是不变的，不存在生命周期 (比如地址对象不存在生命周期)
+    无状态对象
+Service （服务）
+    无状态对象
+    当一个属性或行为放在Entity、Value Object中模棱两可或不合适的时候就需要以Service的形式来呈现.
 
-    cd /usr/local
+三种模型复杂度：Service &gt; Entity &gt; ValueObject，优先选择简单模型</code></pre><h4 id="4-2Model的生命周期"><a href="#4-2Model的生命周期" class="headerlink" title="4.2Model的生命周期"></a>4.2Model的生命周期</h4><pre><code>Factory （工厂）：用来创建Model，以及帮助Repository (数据源)注入到Model中
+Aggreagte （聚合根）：封装Model，一个Mode中l可能包含其他Model（类似一个对象中包含其他对象的引用，实际概念更复杂）
+    聚合是用来封装真正的不变性，而不是简单的将对象组合在一起；
+    聚合应尽量设计的小；
+    聚合之间的关联通过ID，而不是对象引用；
+    聚合内强一致性，聚合之间最终一致性。
+Repository (数据源)：
+    数据源的访问网关层
+    Model通过Repository来对接不同的数据源</code></pre><h3 id="五、ECS架构"><a href="#五、ECS架构" class="headerlink" title="五、ECS架构"></a>五、ECS架构</h3><pre><code>Entity：用来代表任何一个游戏对象，但是在ECS里一个Entity最重要的仅仅是他的EntityID，一个Entity里包含多个Component
 
-新建目录 nexus 
+Component：
+       是真正的数据，ECS架构把一个个的实体对象拆分为更加细化的组件，比如位置、素材、状态等，也就是说一个Entity实际上只是一个Bag of Components。
+System（或者ComponentSystem，组件系统）：
+        是真正的行为，一个游戏里可以有很多个不同的组件系统，每个组件系统都只负责一件事，可以依次处理大量的相同组件，而不需要去理解具体的Entity。
+    所以一个ComponentSystem理论上可以有更加高效的组件处理效率，甚至可以实现并行处理，从而提升CPU利用率。
 
-    mkdir nexus
+ ECS的一些核心性能优化包括将同类型组件放在同一个Array中，然后Entity仅保留到各自组件的pointer，这样能更好的利用CPU的缓存，减少数据的加载成本，以及SIMD的优化等。
 
-将安装包上传到这个目录下
+public class Entity {
+    public Vector position; // 此处Vector是一个Component, 指向的是MovementSystem.list里的一个
+    }
 
-使用命令 tar -zxvf 解压文件
+    public class MovementSystem {
+    List&lt; Vector&gt; list;
 
-    tar -zxvf nexus-3.13.0-01-unix.tar.gz
+    // System的行为
+    public void update(float delta) {
+        for(Vector pos : list) { // 这个loop直接走了CPU缓存，性能很高，同时可以用SIMD优化
+        pos.x = pos.x + delta;
+        pos.y = pos.y + delta;
+        }
+    }
+}
 
-解压后又两个目录
+@Test
+public void test() {
+    MovementSystem system = new MovementSystem();
+    system.list = new List&lt;&gt;() { new Vector(0, 0) };
+    Entity entity = new Entity(list.get(0));
+    system.update(0.1);
+    assertTrue(entity.position.x == 0.1);
+}</code></pre><h3 id="六、DDD领域层的一些设计规范"><a href="#六、DDD领域层的一些设计规范" class="headerlink" title="六、DDD领域层的一些设计规范"></a>六、DDD领域层的一些设计规范</h3><pre><code>基于继承关系的OOP代码：
+    OOP的代码最好写，也最容易理解，所有的规则代码都写在对象里，但是当领域规则变得越来越复杂时，其结构会限制它的发展。
+    新的规则有可能会导致代码的整体重构。
 
-    nexus-3.13.0-01：包含了 Nexus 运行所需要的文件。是 Nexus 运行必须的
-    sonatype-work： 包含了 Nexus 生成的配置文件、日志文件、仓库文件等。当我们需要备份 Nexus 的时候默认备份此目录即可
+基于组件化的ECS代码：
+    ECS代码有最高的灵活性、可复用性、及性能，但极具弱化了实体类的内聚，所有的业务逻辑都写在了服务里，会导致业务的一致性无法保障，对商业系统会有较大的影响。
 
-修改环境变量
+基于领域对象 + 领域服务的DDD架构：
 
-    vim /etc/profile
+     DDD的规则其实最复杂，同时要考虑到实体类的内聚和保证不变性（Invariants），也要考虑跨对象规则代码的归属，甚至要考虑到具体领域服务的调用方式，理解成本比较高。
 
-在文件后边追加文本
+尽量通过一些设计规范，来降低DDD领域层的设计成本。</code></pre><h4 id="6-1实体类（Entity）"><a href="#6-1实体类（Entity）" class="headerlink" title="6.1实体类（Entity）"></a>6.1实体类（Entity）</h4><pre><code>大多数DDD架构的核心都是实体类，实体类包含了两块大的内容
 
-  export NEXUS_HOME=/usr/local/nexus/nexus-3.13.0
-  export PATH=$PATH:$NEXUS_HOME/bin
+    领域里的状态
 
-让配置生效
+    以及对状态操作
 
-   source /etc/profile
+Entity最重要的设计原则是保证实体的一致性，也就是说要确保无论外部怎么操作，一个实体内部的属性都不能出现相互冲突，状态不一致的情况。
 
-进入到nexus目录下,启动nexus
+实体设计原则如下：
+    创建即一致
+        constructor参数要包含所有必要属性，或者在constructor里有合理的默认值。
+        使用Factory模式来降低调用方复杂度
 
-    cd  /usr/local/nexus/nexus-3.13.0-01/bin
+    尽量避免public setter
+        因为set单一参数会导致状态不一致的情况；
+        @ Setter(AccessLevel.PRIVATE) // 确保不生成public setter
 
-启动nexus
+    通过聚合根保证父子实体的一致性
+        子实体不能单独存在，只能通过聚合根的方法获取到。任何外部的对象都不能直接保留子实体的引用
+        子实体没有独立的Repository，不可以单独保存和取出，必须要通过聚合根的Repository实例化
+        子实体可以单独修改自身状态，但是多个子实体之间的状态一致性需要聚合根来保障
 
-    ./nexus start
+    不可以强依赖其他聚合根实体或领域服务
+        只保存外部实体的ID：强烈建议使用强类型的ID对象，而不是Long型ID。强类型的ID对象不单单能自我包含验证代码，保证ID值的正确性，同时还能确保各种入参不会因为参数顺序变化而出bug。
+        针对于“无副作用”的外部依赖，通过方法入参的方式传入  
 
-查看nexus状态
+    任何实体的行为只能直接影响到本实体（和其子实体）</code></pre><h3 id="七、四层架构模式"><a href="#七、四层架构模式" class="headerlink" title="七、四层架构模式"></a>七、四层架构模式</h3><pre><code>    User Interface为用户界面层（对外访问层API），负责向用户显示信息和解释用户命令。
 
-    ./nexus status
+    Application为应用层，定义软件要完成的任务，并且指挥表达领域概念的对象来解决问题。
 
- 开放8081端口，nexus默认使用的端口是8081
+    Domain为领域层（或模型层），负责表达业务概念，业务状态信息以及业务规则。
 
-   firewall-cmd --zone=public --add-port=8081/tcp --permanent</code></pre><p>在浏览器中输入<a href="http://120.27.248.244:8081/" target="_blank" rel="noopener">http://120.27.248.244:8081/</a><br>    <img src="/image/nexus1.jpg" alt="效果图预览"></p>
-<h3 id="第三步：配置nexus"><a href="#第三步：配置nexus" class="headerlink" title="第三步：配置nexus"></a>第三步：配置nexus</h3><p>使用admin登录私服</p>
-<p>   <img src="/image/nexus2.jpg" alt="效果图预览"></p>
-<p>创建 3rdPart  Repositories<br>   <img src="/image/nexus3.jpg" alt="效果图预览"><br>   <img src="/image/nexus4.jpg" alt="效果图预览"> </p>
-<p>创建 alyun-proxy  Repositories<br>   <img src="/image/nexus5.jpg" alt="效果图预览"><br>   <img src="/image/nexus6.jpg" alt="效果图预览">  </p>
-<p>调整 Repositories 的位置<br>   <img src="/image/nexus7.jpg" alt="效果图预览"><br>   <img src="/image/nexus8.jpg" alt="效果图预览">  </p>
-<p>私服搭建完毕，效果如下<br>    <img src="/image/nexus9.jpg" alt="效果图预览">  </p>
+    Infrastructure层为基础实施层，向其他层提供通用的技术能力。</code></pre><h4 id="7-1接口层的组成"><a href="#7-1接口层的组成" class="headerlink" title="7.1接口层的组成"></a>7.1接口层的组成</h4><pre><code>   网络协议的转化：通常这个已经由各种框架给封装掉了，我们需要构建的类要么是被注解的bean，要么是继承了某个接口的bean。
 
+    统一鉴权：比如在一些需要AppKey+Secret的场景，需要针对某个租户做鉴权的，包括一些加密串的校验
+
+    Session管理：一般在面向用户的接口或者有登陆态的，通过Session或者RPC上下文可以拿到当前调用的用户，以便传递给下游服务。
+
+    限流配置：对接口做限流避免大流量打到下游服务
+
+    前置缓存：针对变更不是很频繁的只读场景，可以前置结果缓存到接口层
+
+    异常处理：通常在接口层要避免将异常直接暴露给调用端，所以需要在接口层做统一的异常捕获，转化为调用端可以理解的数据格式
+
+    日志：在接口层打调用日志，用来做统计和debug等。一般微服务框架可能都直接包含了这些功能。</code></pre><h4 id="7-2-应用层"><a href="#7-2-应用层" class="headerlink" title="7.2 应用层"></a>7.2 应用层</h4><pre><code>    ApplicationService应用服务：最核心的类，负责业务流程的编排，但本身不负责任何业务逻辑。
+
+    DTO Assembler：负责将内部领域模型转化为可对外的DTO。
+
+    Command、Query、Event对象：作为ApplicationService的入参。
+
+    返回的DTO：作为ApplicationService的出参。</code></pre>
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -593,20 +630,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/java/">
-                                    <span class="chip bg-color">java</span>
-                                </a>
-                            
-                                <a href="/tags/centos/">
-                                    <span class="chip bg-color">centos</span>
-                                </a>
-                            
-                                <a href="/tags/linux/">
-                                    <span class="chip bg-color">linux</span>
-                                </a>
-                            
-                                <a href="/tags/nexus/">
-                                    <span class="chip bg-color">nexus</span>
+                                <a href="/tags/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/">
+                                    <span class="chip bg-color">DDD领域驱动设计</span>
                                 </a>
                             
                         </div>
@@ -777,33 +802,31 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2017/06/15/%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8/">
+                <a href="/2023/12/20/neo4j%E5%9B%BE%E6%95%B0%E6%8D%AE/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="过滤器和拦截器">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="neo4j图数据">
                         
-                        <span class="card-title">过滤器和拦截器</span>
+                        <span class="card-title">neo4j图数据</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-过滤器 (Filter)过滤器的配置比较简单，直接实现Filter 接口即可，也可以通过@WebFilter注解实现对特定URL拦截，看到Filter 接口中定义了三个方法。
-init() ：该方法在容器启动初始化过滤器时被调用，它在 F
+                             Neo4j - Things，not string历史悠久且长期处于图数据库领域的主力地位，其功能强大，性能也不错，单节点的服务器可承载上亿级的节点和关系。社区版最多支持 320 亿个节点、320 亿个关系和 640亿个属性。优点：Neo
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2017-06-15
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-20
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%BF%87%E6%BB%A4%E5%99%A8%E3%80%81%E6%8B%A6%E6%88%AA%E5%99%A8/" class="post-category">
-                                    过滤器、拦截器
+                            <a href="/categories/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                    图数据库
                                 </a>
                             
                             
@@ -813,8 +836,8 @@ init() ：该方法在容器启动初始化过滤器时被调用，它在 F
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%BF%87%E6%BB%A4%E5%99%A8%E3%80%81%E6%8B%A6%E6%88%AA%E5%99%A8/">
-                        <span class="chip bg-color">过滤器、拦截器</span>
+                    <a href="/tags/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                        <span class="chip bg-color">图数据库</span>
                     </a>
                     
                 </div>
@@ -828,31 +851,32 @@ init() ：该方法在容器启动初始化过滤器时被调用，它在 F
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2017/02/17/%E7%B1%BB%E5%8A%A0%E8%BD%BD/">
+                <a href="/2023/07/18/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E6%9E%B6%E6%9E%84/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="类加载">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="DDD领域驱动设计架构">
                         
-                        <span class="card-title">类加载</span>
+                        <span class="card-title">DDD领域驱动设计架构</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            java基础知识整体的流程Java 中的所有类，必须被装载到 jvm 中才能运行，这个装载工作是由 jvm 中的类加载器完成的，类加载器所做的工作实质是把类文件从硬盘读取到内存中，JVM 在加载类的时候，都是通过 ClassLoader 的
+                            
+领域驱动设计（Domain-driven Design，DDD）是一种软件设计方法，该方法的核心思想是将业务领域作为设计和开发的中心，强调对业务领域的深入理解、业务语言的建模以及领域对象的设计和实现。翻译成大白话就是：是一种解决复杂软件的
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2017-02-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-18
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%B1%BB%E5%8A%A0%E8%BD%BD/" class="post-category">
-                                    类加载
+                            <a href="/categories/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/" class="post-category">
+                                    DDD领域驱动设计
                                 </a>
                             
                             
@@ -862,8 +886,8 @@ init() ：该方法在容器启动初始化过滤器时被调用，它在 F
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%B1%BB%E5%8A%A0%E8%BD%BD/">
-                        <span class="chip bg-color">类加载</span>
+                    <a href="/tags/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/">
+                        <span class="chip bg-color">DDD领域驱动设计</span>
                     </a>
                     
                 </div>
