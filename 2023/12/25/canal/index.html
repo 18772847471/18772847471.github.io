@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="canal, Hexo">
-    <meta name="description" content=" canal，译意为水道/管道/沟渠，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费">
+    <meta name="description" content=" canal，译意为水道/管道/沟渠，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费canal的工作原理把自己伪装成MySQL slave，模拟MySQL slave的交互协议向MySQL Mater发送 dump协">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -453,7 +453,7 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        38
+                        233
                     </div>
                     
 
@@ -471,7 +471,28 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="canal，译意为水道-管道-沟渠，主要用途是基于-MySQL-数据库增量日志解析，提供增量数据订阅和消费"><a href="#canal，译意为水道-管道-沟渠，主要用途是基于-MySQL-数据库增量日志解析，提供增量数据订阅和消费" class="headerlink" title=" canal，译意为水道/管道/沟渠，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费"></a> canal，译意为水道/管道/沟渠，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费</h2>
+                <h2 id="canal，译意为水道-管道-沟渠，主要用途是基于-MySQL-数据库增量日志解析，提供增量数据订阅和消费"><a href="#canal，译意为水道-管道-沟渠，主要用途是基于-MySQL-数据库增量日志解析，提供增量数据订阅和消费" class="headerlink" title=" canal，译意为水道/管道/沟渠，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费"></a> canal，译意为水道/管道/沟渠，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费</h2><h3 id="canal的工作原理"><a href="#canal的工作原理" class="headerlink" title="canal的工作原理"></a>canal的工作原理</h3><pre><code>把自己伪装成MySQL slave，模拟MySQL slave的交互协议向MySQL Mater发送 dump协议，MySQL mater收到canal发送过来的dump请求，开始推送binary log给canal，然后canal解析binary log，再发送到存储目的地。</code></pre><p>   <img src="/image/cannal%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="效果图预览"> </p>
+<h3 id="Canal安装"><a href="#Canal安装" class="headerlink" title="Canal安装"></a>Canal安装</h3><pre><code>1.从官网上下载Canal服务器，地址：https://github.com/alibaba/canal/releases
+
+2.创建一个canal文件夹，上传压缩包并解压
+修改canal配置文件
+    vi conf/example/instance.properties
+
+3.修改mysql配置
+
+vi /etc/my.cnf 
+
+    log-bin=mysql-bin             #添加这一行就ok 
+    binlog-format=ROW           #选择row模式 
+    server-id=1       #配置mysql replaction需要定义，不能和canal的slaveI重复
+    binlog-do-db=micromall
+
+4.执行mysql 创建canal用户
+    create user canal identified by &#39;canal&#39;;
+
+    GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO &#39;canal&#39;@&#39;%&#39;;
+
+    FLUSH PRIVILEGES;</code></pre>
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -886,7 +907,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">88.4k</span>&nbsp;字
+                class="white-color">91.5k</span>&nbsp;字
             
             
             
