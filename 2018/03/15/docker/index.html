@@ -5,14 +5,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="docker基础, Hexo">
-    <meta name="description" content="  记录学习docker过程.
+    <meta name="description" content="Docker是一种虚拟化技术，它可以将应用程序及其所依赖的库、框架等打包到一个称为Docker镜像的文件中，使得应用程序可以在任何地方都能够快速、可靠地运行，而无需担心环境配置的问题。
 
 
-第一步：安装docker1. yum包更新到最新
-sudo yum update
-
-2. 安装需要的软件包
-sudo yum install -y yum-utils device-mapper-pers">
+安装docker1. yum包更新到最新
+sudo">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -460,14 +457,14 @@ sudo yum install -y yum-utils device-mapper-pers">
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        89
+                        3.6k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        14 分
                     </div>
                     
                 
@@ -478,10 +475,10 @@ sudo yum install -y yum-utils device-mapper-pers">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>  记录学习docker过程.</p>
+                <p>Docker是一种虚拟化技术，它可以将应用程序及其所依赖的库、框架等打包到一个称为Docker镜像的文件中，使得应用程序可以在任何地方都能够快速、可靠地运行，而无需担心环境配置的问题。</p>
 <a id="more"></a>
 
-<h3 id="第一步：安装docker"><a href="#第一步：安装docker" class="headerlink" title="第一步：安装docker"></a>第一步：安装docker</h3><pre><code>1. yum包更新到最新
+<h3 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h3><pre><code>1. yum包更新到最新
 sudo yum update
 
 2. 安装需要的软件包
@@ -494,7 +491,208 @@ sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/cen
 sudo yum install docker-ce
 
 5.查看当前docker版本
-docker -v</code></pre>
+docker -v</code></pre><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><pre><code>在使用 Docker 时，应注意以下事项：
+  在部署 Docker 容器时，需要配置正确的端口映射等参数，以保证容器能够正常访问。
+  在使用 Docker 时，需要注意安全问题，通过配置合适的镜像源等方法提高安全性。
+  容器的版本需要和宿主机的版本匹配，否则可能会出现兼容性问题。
+  需要注意容器的网络连接，以确保容器内的应用程序能够正常访问外部资源。</code></pre><h3 id="安装常见文件处理解决"><a href="#安装常见文件处理解决" class="headerlink" title="安装常见文件处理解决"></a>安装常见文件处理解决</h3><pre><code>  1.Docker 无法启动
+      可能的原因：Docker 服务未启动或启动失败、内存不足等。
+      解决方案：
+      确认 Docker 服务已正确启动。
+      检查内存是否足够，可以尝试增加内存并重启 Docker。
+
+  2.Docker 容器无法访问外部网络
+      可能的原因：容器网络配置不正确、防火墙设置等。
+      解决方案：
+      确认容器网络配置是否正确，例如是否开启了端口映射等。
+      检查防火墙设置，确保容器能够正常连接外部网络。
+
+  3.无法使用 Docker 命令
+      可能的原因：未安装 Docker、未添加 Docker 用户等。
+      解决方案：
+      确认 Docker 是否正确安装，并检查 Docker 版本是否与当前系统版本兼容。
+      确认当前用户是否已被添加到 Docker 用户组中，若未添加，则使用以下命令将当前用户添加到 Docker 用户组中：
+      sudo usermod -aG docker &lt;your-user&gt;
+        注：&lt;your-user&gt;为当前登录的用户名。
+  5.镜像无法构建
+      可能的原因：Dockerfile 文件错误、网络问题等。
+      解决方案：
+      确认 Dockerfile 文件是否正确，可使用 docker build 命令进行构建并检查报错信息。
+      检查网络连接是否正常，尝试更换国内镜像源。</code></pre><h3 id="docker命令"><a href="#docker命令" class="headerlink" title="docker命令"></a>docker命令</h3><pre><code>启动容器：
+  docker start &lt;container-name&gt;
+停止容器：
+  docker stop &lt;container-name&gt;
+搜索镜像:
+  docker search &lt;image-name&gt;
+获取镜像:
+  docker pull &lt;image-name&gt;
+列出本地镜像:
+  docker images
+删除本地镜像:
+  docker rmi &lt;image-name&gt;
+构建镜像:
+  docker build -t &lt;image-name&gt; &lt;dockerfile-path&gt;
+  例如：docker build -t my-image:latest .
+推送镜像到远程仓库：
+  docker push &lt;image-name&gt;</code></pre><h3 id="Docker容器操作"><a href="#Docker容器操作" class="headerlink" title="Docker容器操作"></a>Docker容器操作</h3><pre><code>运行容器
+  docker run &lt;image-name&gt; [command]
+列出正在运行的容器
+  docker ps
+列出所有容器（包括已停止的）
+  docker ps -a
+停止容器
+  docker stop &lt;container-id&gt;
+启动已停止的容器
+  docker start &lt;container-id&gt;
+进入容器
+  docker exec -it &lt;container-id&gt; /bin/bash
+导出容器
+  docker export &lt;container-id&gt; &gt; &lt;file-name&gt;.tar
+删除容器
+  docker rm &lt;container-id&gt;</code></pre><h3 id="Docker仓库操作"><a href="#Docker仓库操作" class="headerlink" title="Docker仓库操作"></a>Docker仓库操作</h3><pre><code>登录到Docker Hub
+  docker login
+拉取镜像
+  docker pull &lt;image-name&gt;
+推送镜像
+  docker push &lt;image-name&gt;
+删除镜像
+  docker rmi &lt;image-name&gt;</code></pre><h3 id="Docker网络管理"><a href="#Docker网络管理" class="headerlink" title="Docker网络管理"></a>Docker网络管理</h3><h4 id="Docker容器网络模式"><a href="#Docker容器网络模式" class="headerlink" title="Docker容器网络模式"></a>Docker容器网络模式</h4><pre><code>Docker容器网络模式指的是容器与宿主机或其他容器之间相互通信的方式。Docker提供了多种不同的网络模式，包括以下几种：
+  bridge模式：默认的网络模式，所有容器共享一个网络命名空间。
+  host模式：容器使用宿主机网络命名空间，直接绑定宿主机的IP地址。
+  none模式：容器没有网络连接，只能通过管道等方式与宿主机通信。
+可以使用命令&quot;docker network ls&quot;列出当前系统中存在的网络列表。
+
+启动两个名为web1和web2的容器，并将它们加入到同一个自定义网络中：
+    docker network create my-net
+    docker run --name web1 --network my-net -d nginx
+    docker run --name web2 --network my-net -d nginx
+此时，在web1容器内部执行&quot;ping web2&quot;命令，就可以直接访问web2容器。这是因为Docker自带的DNS服务器已经自动将容器名称解析为对应的IP地址。
+
+在一个Docker Swarm集群中，创建一个名为my-overlay的overlay网络：
+    docker network create -d overlay my-overlay
+在该网络上启动两个服务，并设置它们的副本数为2：
+    docker service create --name my-web --network my-overlay --replicas 2 nginx
+    docker service create --name my-app --network my-overlay --replicas 2 my-app-image
+即可实现my-web容器和my-app容器之间的跨主机通信。
+
+除了自带的网络模式外，Docker还支持各种第三方网络插件，用于增强Docker容器网络功能。 以下是一些常见的网络插件：
+  Calico: 一个开源的、高性能的容器网络和安全性隔离网络插件，支持IP路由和BGP协议。
+  Flannel: 一个简单而轻量级的容器网络插件，以VXLAN或UDP方式实现容器之间的通信。
+  Weave Net: 一个面向容器的网络插件，通过虚拟网络的方式将Docker容器连接起来，支持自动发现和配置网络。
+  Cilium: 一个新一代的容器网络和安全性插件，可用于实现API层面的安全性和网络隔离。
+  Contiv: 一个企业级的网络插件，支持多个容器编排工具，并提供了网络控制和安全性管理的功能。
+  Canal: 一个基于Flannel和Calico的网络插件，用于构建Kubernetes集群。
+  Macvlan: 一种比较特殊的网络插件，可以使得容器直接绑定到宿主机的物理网络接口上，从而获得与宿主机相同的网络性能。
+  每种网络插件都有其各自的特点和优势，需要根据具体的场景和需求进行选择和配置。
+
+安装Calico：
+  curl -L https://docs.projectcalico.org/manifests/calico.yaml -o calico.yaml
+  kubectl apply -f calico.yaml
+
+将Docker容器绑定到Calico网络：
+  docker run --net=calico-net -d nginx</code></pre><h3 id="Docker存储管理"><a href="#Docker存储管理" class="headerlink" title="Docker存储管理"></a>Docker存储管理</h3><h4 id="Docker数据卷"><a href="#Docker数据卷" class="headerlink" title="Docker数据卷"></a>Docker数据卷</h4><pre><code>Docker数据卷是一种用于在Docker容器和主机之间共享文件和目录的机制，它使得容器中的数据持久化存储，并且可以在容器被删除后仍然保留下来。Docker数据卷有以下几个特点：
+  数据卷可以在容器创建时进行绑定，也可以在容器运行时动态创建。
+  在容器中使用数据卷时，数据卷对应的目录会被挂载到容器中，并且在容器内外部都可以访问。
+  可以为数据卷指定权限和用户组，以便实现更灵活的访问控制。
+  同一个数据卷可以被多个容器同时挂载，实现数据共享和协作。
+要对Docker数据卷进行管理，可以使用以下命令：
+  创建数据卷
+    使用&quot;-v&quot;参数指定宿主机目录映射到容器的目录：
+    docker run -d -v /path/to/hostdir:/path/to/containerdir image_name
+    使用&quot;docker volume create&quot;命令创建一个数据卷，并将其挂载到容器：
+    docker volume create myvolume
+    docker run -d -v myvolume:/path/to/containerdir image_name
+  查看数据卷
+    使用&quot;docker volume ls&quot;命令可以列出当前所有的数据卷。
+    $ docker volume ls
+    DRIVER              VOLUME NAME
+    local               myvolume
+    使用&quot;docker volume inspect&quot;命令可以查看指定数据卷的详细信息。
+     $ docker volume inspect myvolume
+      [
+          {
+              &quot;CreatedAt&quot;: &quot;2021-11-01T12:34:56+08:00&quot;,
+              &quot;Driver&quot;: &quot;local&quot;,
+              &quot;Labels&quot;: {},
+              &quot;Mountpoint&quot;: &quot;/var/lib/docker/volumes/myvolume/_data&quot;,
+              &quot;Name&quot;: &quot;myvolume&quot;,
+              &quot;Options&quot;: {},
+              &quot;Scope&quot;: &quot;local&quot;
+          }
+      ]
+  删除数据卷
+    使用&quot;docker volume rm&quot;命令可以删除指定的数据卷。
+    docker volume rm myvolume</code></pre><h4 id="Docker数据卷容器"><a href="#Docker数据卷容器" class="headerlink" title="Docker数据卷容器"></a>Docker数据卷容器</h4><pre><code>  创建数据卷容器
+    使用&quot;docker run&quot;命令创建一个数据卷容器，同时指定其挂载的数据卷：
+    docker run -d -v /data --name datavolume ubuntu:latest
+  查看数据卷容器
+    使用&quot;docker ps&quot;命令可以列出当前所有的容器，包括数据卷容器。
+    $ docker ps
+    CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS     NAMES
+    0123456789ab   ubuntu:latest   &quot;/bin/bash&quot;              10 minutes ago   Up 10 minutes             datavolume
+  删除数据卷容器
+    使用&quot;docker rm&quot;命令可以删除指定的容器。
+    docker rm datavolume</code></pre><h4 id="Docker存储驱动"><a href="#Docker存储驱动" class="headerlink" title="Docker存储驱动"></a>Docker存储驱动</h4><pre><code>  查看当前存储驱动
+    使用&quot;docker info&quot;命令可以查看当前Docker使用的存储驱动。
+    $ docker info | grep &#39;Storage Driver&#39;
+    Storage Driver: overlay2
+  更改存储驱动
+    停止Docker服务：
+    sudo systemctl stop docker
+     编辑Docker配置文件&quot;daemon.json&quot;：
+     sudo vi /etc/docker/daemon.json
+     在该文件中添加以下内容：
+        {
+            &quot;storage-driver&quot;: &quot;aufs&quot;
+        }
+  启动Docker服务：
+      sudo systemctl start docker</code></pre><h3 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h3><p>  Docker Compose是一个用于定义和运行多容器Docker应用程序的工具。通过使用Docker Compose，可以利用YAML文件定义各个容器之间的依赖关系、共享卷等信息，然后使用简单的命令启动、停止和管理这些容器。</p>
+<h4 id="Docker-Compose文件结构"><a href="#Docker-Compose文件结构" class="headerlink" title="Docker Compose文件结构"></a>Docker Compose文件结构</h4><pre><code>Docker Compose文件是一个YAML文件，包含了Docker Compose服务的配置信息，它通常包括以下几个主要部分：
+    version: 指定Compose文件格式的版本。
+    services: 定义每个服务的配置信息，包括映像名称、容器名称、端口映射、环境变量、共享卷等。
+    networks: 定义Docker网络的配置信息，包括网络名称、IP地址范围、子网掩码等。
+    volumes: 定义共享卷的配置信息，包括名称、驱动程序类型、选项等。
+
+  version: 指定Compose文件格式的版本。
+  services: 定义每个服务的配置信息，包括映像名称、容器名称、端口映射、环境变量、共享卷等。
+  networks: 定义Docker网络的配置信息，包括网络名称、IP地址范围、子网掩码等。
+  volumes: 定义共享卷的配置信息，包括名称、驱动程序类型、选项等。
+  build: 指定构建镜像时使用的Dockerfile路径。
+  image: 指定使用的镜像名称。</code></pre><h3 id="Docker-Swarm"><a href="#Docker-Swarm" class="headerlink" title="Docker Swarm"></a>Docker Swarm</h3><p>  Docker Swarm是Docker原生的集群管理工具，可以让我们轻松创建和管理跨越多个主机的Docker容器集群。它通过将多个Docker守护进程连接起来，形成一个虚拟的Docker引擎，从而允许用户在集群中启动、终止和管理应用程序。</p>
+<h4 id="Docker-Swarm集群搭建"><a href="#Docker-Swarm集群搭建" class="headerlink" title="Docker Swarm集群搭建"></a>Docker Swarm集群搭建</h4><p>   步骤1：安装Docker<br>    curl -fsSL <a href="https://get.docker.com" target="_blank" rel="noopener">https://get.docker.com</a> -o get-docker.sh<br>    sudo sh get-docker.sh<br>   步骤2：创建Swarm Manager节点<br>    docker swarm init –advertise-addr <MANAGER_IP><br>   步骤3：加入Worker节点<br>    docker swarm join –token <TOKEN> <MANAGER_IP>:2377<br>   步骤4：创建服务<br>    docker service create –replicas 3 –name web nginx:latest<br>   步骤5：扩展服务<br>    docker service update –replicas 5 web</p>
+<h3 id="Docker安全"><a href="#Docker安全" class="headerlink" title="Docker安全"></a>Docker安全</h3><h4 id="Docker安全策略"><a href="#Docker安全策略" class="headerlink" title="Docker安全策略"></a>Docker安全策略</h4><pre><code>Docker作为一种虚拟化技术，主要有以下几个安全隐患：
+    镜像安全：Docker镜像可能包含恶意代码或漏洞，导致安全问题。
+    进程间隔离：容器之间的进程隔离可能会被攻击者破坏，从而突破容器的安全隔离。
+    特权访问：容器中的特权访问可能遭到滥用，攻击者可以通过它来获得主机上的root权限。
+为了保护Docker环境的安全性，我们需要采取一些措施来加强Docker的安全性。这些措施包括：
+    安全镜像管理：使用安全的基础镜像、周期性地更新镜像并且验证镜像来源。
+    限制容器资源：控制容器对CPU、内存、网络等资源的访问，从而防止恶意容器消耗过多的系统资源。
+    限制特权访问：禁用容器中的特权模式，并限制容器的文件系统访问权限。
+    网络隔离：使用Docker的网络隔离功能，将容器与主机和其他容器隔离开来，限制容器之间的通信。</code></pre><h4 id="Docker权限管理"><a href="#Docker权限管理" class="headerlink" title="Docker权限管理"></a>Docker权限管理</h4><pre><code>Docker提供了一些权限控制机制，可以帮助我们限制用户对Docker的访问和操作。这些机制包括：
+    用户组：将用户添加到&quot;docker&quot;用户组中，可以允许他们在不使用sudo的情况下运行Docker命令。
+    访问控制列表（ACL）：使用ACL可以对Docker API进行细粒度的权限控制，从而限制用户对Docker的操作。
+    SELinux和AppArmor：这两种安全模块可以帮助我们进一步限制容器的文件系统和进程访问权限。</code></pre><h4 id="Docker网络安全"><a href="#Docker网络安全" class="headerlink" title="Docker网络安全"></a>Docker网络安全</h4><pre><code>Docker网络是Docker生态系统的重要组成部分，但它也存在着一些安全问题。以下是一些限制Docker网络安全的实践：
+    使用与主机不同的网络：默认情况下，Docker容器使用和主机相同的网络，在许多情况下，这可能会增加攻击面。因此，最好使用与主机不同的网络。
+    控制容器之间的通信：可以使用Docker的网络隔离功能，限制容器之间的通信。例如，我们可以使用&quot;docker network create&quot;命令创建一个自定义网络，并使用&quot;--internal&quot;选项禁用容器之间的外部通信。
+    限制端口映射：将容器内部端口映射到主机端口是非常方便的，但也会增加安全风险。最好只映射必要的端口，而不是将所有端口都映射到主机上。</code></pre><h3 id="Docker高级应用案例"><a href="#Docker高级应用案例" class="headerlink" title="Docker高级应用案例"></a>Docker高级应用案例</h3><h4 id="Docker化Web应用"><a href="#Docker化Web应用" class="headerlink" title="Docker化Web应用"></a>Docker化Web应用</h4><pre><code>创建Dockerfile
+    在项目根目录中创建一个名为Dockerfile的文件，其内容如下：
+    FROM node:latest
+    WORKDIR /app
+    COPY . .
+    RUN npm install
+    EXPOSE 3000
+    CMD [&quot;npm&quot;, &quot;start&quot;]
+  该Dockerfile使用Node.js作为基础镜像，并将应用程序复制到工作目录/app中，并运行npm install安装所有依赖项。然后它暴露3000端口并通过npm start命令启动应用程序。
+
+构建镜像
+  在项目根目录中运行以下命令构建镜像：
+  docker build -t my-web-app .
+
+运行容器
+  docker run -p 3000:3000 -d my-web-app
+ 该命令将启动一个名为&quot;my-web-app&quot;的容器，并将主机的3000端口映射到容器的3000端口上。
+
+在浏览器中通过localhost:3000访问您的Web应用程序。</code></pre>
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -923,7 +1121,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">91.5k</span>&nbsp;字
+                class="white-color">97.6k</span>&nbsp;字
             
             
             
