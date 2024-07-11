@@ -457,14 +457,14 @@ Zookeeper
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        142
+                        660
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        2 分
                     </div>
                     
                 
@@ -481,7 +481,39 @@ Zookeeper
 原子性：集体更新成功或失败，没有部分结果
 单一视图：客户端连接集群中的任一zk服务节点，它看到的数据都是相同的。
 可靠性：每次对zk的操作状态都会保存在服务端
-实时性：客户端可以读取到zk服务端的最新数据</code></pre>
+实时性：客户端可以读取到zk服务端的最新数据</code></pre><h3 id="3-zookeeper的安装"><a href="#3-zookeeper的安装" class="headerlink" title="3.zookeeper的安装"></a>3.zookeeper的安装</h3><pre><code>下载地址：https://zookeeper.apache.org/releases.html
+注意：需要JDK1.8_u211 以上本版
+将下载的 zookeeper 安装包上传到 linux 环境的 /usr/local 目录，进行tar -zxvf 解压缩
+配置 zookeeper 环境变量 
+    vim /etc/profile
+
+    export ZOOKEEPER_HOME=/usr/local/zookeeper-3.8.0
+    export PATH=$PATH:$ZOOKEEPER_HOME/bin:$JAVA_HOME/bin
+
+    source /etc/profile</code></pre><h3 id="4-zookeeper的目录结构介绍"><a href="#4-zookeeper的目录结构介绍" class="headerlink" title="4.zookeeper的目录结构介绍"></a>4.zookeeper的目录结构介绍</h3><pre><code>bin：zookeeper的操作命令目录
+conf：存放配置文件，其中我们需要修改zoo_sample.cfg文件
+docs：帮助文档目录
+lib：依赖jar包目录
+
+zookeeper配置文件zoo_sample.cfg
+  配置时请 copy 重命名为 zoo.cfg 文件
+
+    # 每一次滴答的毫秒数，滴答：zookeeper基本时间单元
+    tickTime=2000
+    # 初始同步阶段可以执行的滴答数，用于集群，配置主节点等待从节点启动并完成数据同步的时间，以 tickTime 的倍数来表示，默认是10 那么就是 10*tickTime
+    initLimit=10
+    # 在发送请求和获得确认之间可以经过的滴答数，用于集群，配置 主节点 与 从节点 之间心跳检测的最大时间长度，默认值是 5，也就是 5*tickTime
+    syncLimit=5
+    # zookeeper服务存储快照目录，必须配置，不能配置在/tmp目录下，该目录下的文件会被自动删除
+    dataDir=/usr/local/zookeeper-3.8.0/dataDir
+    # 日志目录，如果不配置会共用dataDir目录
+    dataLogDir=/usr/local/zookeeper-3.8.0/dataLogDir
+    # 客户端连接的端口，服务器对外暴露的端口，默认 2181
+    clientPort=2181</code></pre><h3 id="5-zookeeper启动"><a href="#5-zookeeper启动" class="headerlink" title="5.zookeeper启动"></a>5.zookeeper启动</h3><pre><code>进入 zk  的 bin 目录下，使用 ./zkServer.sh start 启动
+# 启动 zk，其他参数有 {start|start-foreground|stop|version|restart|status|print-cmd}
+./zkServer.sh start</code></pre><h3 id="6-zookeeper命令"><a href="#6-zookeeper命令" class="headerlink" title="6.zookeeper命令"></a>6.zookeeper命令</h3><p>   注意：zk的命令工具，在 zookeeper/bin 目录下<br>   启动 zk 服务端<br>    ./zkServer.sh start    # start：启动，stop：关闭，restart：重启，status：查看zk状态</p>
+<p>   客户端连接服务端<br>    ./zkCli.sh             # 连接到 localhost:2181 服务端<br>    ./zkCli.sh -server 192.168.189.77:2181        # 连接到远程 服务端，指定ip:端口<br>   ls 命令<br>    作用和 linux 的 ls 命令相似，用于查看指定目录下有哪些节点</p>
+
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -903,7 +935,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">97.6k</span>&nbsp;字
+                class="white-color">100.5k</span>&nbsp;字
             
             
             

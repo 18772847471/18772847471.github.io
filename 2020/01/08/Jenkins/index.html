@@ -5,7 +5,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Jenkins, Hexo">
-    <meta name="description" content=" https://blog.csdn.net/Linging_24/article/details/136921696Jenkins是什么Jenkins 是一款流行的开源持续集成（Continuous Integration）工具，广泛用于">
+    <meta name="description" content="
+Jenkins是什么Jenkins 是一款流行的开源持续集成（Continuous Integration）工具，广泛用于项目开发，具有自动化构建、测试和部署等功能。官网： http://jenkins-ci.org/。
+
+Jenkins">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -453,14 +456,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        257
+                        482
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        2 分
                     </div>
                     
                 
@@ -471,7 +474,8 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="https-blog-csdn-net-Linging-24-article-details-136921696"><a href="#https-blog-csdn-net-Linging-24-article-details-136921696" class="headerlink" title=" https://blog.csdn.net/Linging_24/article/details/136921696"></a> <a href="https://blog.csdn.net/Linging_24/article/details/136921696" target="_blank" rel="noopener">https://blog.csdn.net/Linging_24/article/details/136921696</a></h2><h3 id="Jenkins是什么"><a href="#Jenkins是什么" class="headerlink" title="Jenkins是什么"></a>Jenkins是什么</h3><pre><code>Jenkins 是一款流行的开源持续集成（Continuous Integration）工具，广泛用于项目开发，具有自动化构建、测试和部署等功能。官网： http://jenkins-ci.org/。
+                <hr>
+<h3 id="Jenkins是什么"><a href="#Jenkins是什么" class="headerlink" title="Jenkins是什么"></a>Jenkins是什么</h3><pre><code>Jenkins 是一款流行的开源持续集成（Continuous Integration）工具，广泛用于项目开发，具有自动化构建、测试和部署等功能。官网： http://jenkins-ci.org/。
 
 Jenkins的特征：
     开源的Java语言开发持续集成工具，支持持续集成，持续部署。
@@ -479,7 +483,35 @@ Jenkins的特征：
     消息通知及测试报告：集成RSS/E-mail通过RSS发布构建结果或当构建完成时通过e-mail通知，生成JUnit/TestNG测试报告。
     分布式构建：支持Jenkins能够让多台计算机一起构建/测试。
     文件识别：Jenkins能够跟踪哪次构建生成哪些jar，哪次构建使用哪个版本的jar等。
-    丰富的插件支持：支持扩展插件，你可以开发适合自己团队使用的工具，如git，svn，maven，docker等。</code></pre>
+    丰富的插件支持：支持扩展插件，你可以开发适合自己团队使用的工具，如git，svn，maven，docker等。</code></pre><h3 id="Gitlab安装"><a href="#Gitlab安装" class="headerlink" title="Gitlab安装"></a>Gitlab安装</h3><pre><code>1.安装相关依赖
+    yum -y install policycoreutils openssh-server openssh-clients postfix
+2.启动ssh服务&amp;设置为开机启动
+    systemctl enable sshd &amp;&amp; sudo systemctl start sshd
+3.设置postfix开机自启，并启动，postfix支持gitlab发信功能
+    systemctl enable postfix &amp;&amp; systemctl start postfix
+4.开放ssh以及http服务，然后重新加载防火墙列表
+    firewall-cmd --add-service=ssh --permanent
+    firewall-cmd --add-service=http --permanent
+    firewall-cmd --reload
+5. 下载gitlab包，并且安装
+    在线下载安装包：
+        wget https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7/gitlab-ce-12.4.2-ce.0.el7.x86_64.rpm
+    安装：
+        rpm -i gitlab-ce-12.4.2-ce.0.el7.x86_64.rpm
+6.修改gitlab配置
+    vi /etc/gitlab/gitlab.rb
+    修改gitlab访问地址和端口，默认为80，我们改为82
+
+    external_url &#39;http://192.168.159.100:82
+    nginx[&#39;listen_port&#39;] = 82
+
+7.重载配置及启动gitlab
+    gitlab-ctl reconfigure
+    gitlab-ctl restart
+
+8.把端口添加到防火墙
+   firewall-cmd --zone=public --add-port=82/tcp --permanent
+   firewall-cmd --reload</code></pre>
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -904,7 +936,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">97.6k</span>&nbsp;字
+                class="white-color">100.5k</span>&nbsp;字
             
             
             

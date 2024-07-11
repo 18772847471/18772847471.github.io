@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="elastic-job, Hexo">
-    <meta name="description" content="https://blog.csdn.net/m0_61338779/article/details/137438936elastic-jobElastic-Job 是当当开源的一款非常好用的分布式任务调度框架,由两个相互独立的子项目Elas">
+    <meta name="description" content="任务调度：是指系统为了自动完成特定任务，在约定的特定时刻去执行任务的过程。elastic-jobElastic-Job 是当当开源的一款非常好用的分布式任务调度框架,由两个相互独立的子项目Elastic-Job-lite和Elastic-J">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -453,14 +453,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        51
+                        2.2k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        8 分
                     </div>
                     
                 
@@ -471,7 +471,111 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="https-blog-csdn-net-m0-61338779-article-details-137438936"><a href="#https-blog-csdn-net-m0-61338779-article-details-137438936" class="headerlink" title="https://blog.csdn.net/m0_61338779/article/details/137438936"></a><a href="https://blog.csdn.net/m0_61338779/article/details/137438936" target="_blank" rel="noopener">https://blog.csdn.net/m0_61338779/article/details/137438936</a></h2><h3 id="elastic-job"><a href="#elastic-job" class="headerlink" title="elastic-job"></a>elastic-job</h3><pre><code>Elastic-Job 是当当开源的一款非常好用的分布式任务调度框架,由两个相互独立的子项目Elastic-Job-lite和Elastic-Job-cloud 组成。</code></pre>
+                <h2 id="任务调度：是指系统为了自动完成特定任务，在约定的特定时刻去执行任务的过程。"><a href="#任务调度：是指系统为了自动完成特定任务，在约定的特定时刻去执行任务的过程。" class="headerlink" title="任务调度：是指系统为了自动完成特定任务，在约定的特定时刻去执行任务的过程。"></a>任务调度：是指系统为了自动完成特定任务，在约定的特定时刻去执行任务的过程。</h2><h3 id="elastic-job"><a href="#elastic-job" class="headerlink" title="elastic-job"></a>elastic-job</h3><pre><code>Elastic-Job 是当当开源的一款非常好用的分布式任务调度框架,由两个相互独立的子项目Elastic-Job-lite和Elastic-Job-cloud 组成。</code></pre><h3 id="调度方案"><a href="#调度方案" class="headerlink" title="调度方案"></a>调度方案</h3><pre><code>    非中心化调度方案（ElasticJob）：
+        ElasticJob 的非中心化调度方案是指每个作业实例都有独立的调度能力，作业的调度逻辑分散在各个作业实例中。
+        每个作业实例都有能力自主决定何时执行作业，不依赖于中心化的调度中心。
+        这种方式可以更好地支持作业的分布式部署和水平扩展，减少单点故障的风险。
+    中心化调度方案（xxl-job）：
+        xxl-job 的中心化调度方案是指作业的调度逻辑集中在一个中心化的调度中心，作业实例只负责执行任务，而不负责调度逻辑。
+        调度中心负责统一管理作业的调度策略、执行情况等，作业实例按照调度中心的指令执行任务。
+        这种方式集中管理调度逻辑，能够更好地监控和管理作业的执行情况，但也存在单点故障和性能瓶颈的风险。
+    总的来说，非中心化调度方案更适合分布式、高可用的场景，而中心化调度方案更适合需要集中管理和监控的场景。ElasticJob 和 xxl-job 分别采用了不同的调度方案，以满足不同的需求和场景。</code></pre><h3 id="组件概念讲解"><a href="#组件概念讲解" class="headerlink" title="组件概念讲解"></a>组件概念讲解</h3><h4 id="注册中心（zookeeper）"><a href="#注册中心（zookeeper）" class="headerlink" title="注册中心（zookeeper）"></a>注册中心（zookeeper）</h4><pre><code>1.作用
+    1.执行任务信息的存储：如任务名称、任务参与实例、任务执行策略等;
+    2.实现选举机制：在任务执行实例数量变化时(如在快速上手中的启动新实例或停止实例)，会触发选举机制来决定让哪个实例去执行该任务。
+2.zookeeper目录结构</code></pre><p> <img src="/image/zookeeper%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png" alt="效果图预览"><br>            config节点：<br>                记录了任务的配置信息，包含执行类，cron表达式，分片算法类，分片数量，分片参数。默认状态下如果你修改了job的配置比如cron表达式，分片数量等是不会更新到zookeeper上去的,需要把LiteJobConfiguration的参数overwrite修改成true,或者删除zk的结点再启动作业重新创建。<br>            instances节点:<br>                同一个ob下的elastic-job的部署实例。一台机器上可以启动多个ob实例，也就是jar包。instances的命名是IP+@-@+PID.<br>            leader节点:<br>            任务实例的主节点信息，通过zookeeper的主节点选举,选出来的主节点信息。下面的子节点分为electionsharding和failover三个子节点。分别用于生节点选举,分片和失效转移处理。election下面的instance节点显式了当前主节点的实例ID:jobInstanceld。latch节点也是一个永久节点用于选举时候的实现分布式锁。sharding节点下面有一个临时节点necessary，是否需要重新分片的标记,如果分片总数变化或任务实例节点上下线，以及主节点选举，都会触发设置重分片标记，主节点会进行分片计算。<br>            sharding节点:<br>                任务的分片信息，子节点是分片项序号，从零开始，至分片总数减一。从这个节点可以看出哪个分片在哪个实例运行</p>
+<h3 id="SpringBoot配置"><a href="#SpringBoot配置" class="headerlink" title="SpringBoot配置"></a>SpringBoot配置</h3><pre><code>    //zoopkeeper端口
+    private static final int  ZOOKEEPER_PORT = 2181;
+    //zookeeper链接字符串
+    private static final String ZOOKEEPER_CONNECTION_STRING=&quot;localhost:&quot;+ZOOKEEPER_PORT;
+    //定时任务命名空间
+    private static  final  String JOB_NAMESPACE = &quot;elastic-job-example-java&quot;;
+
+    @Bean(initMethod = &quot;init&quot;)
+    private static CoordinatorRegistryCenter  setUpRegestryCenter(){
+        //zk配置
+        ZookeeperConfiguration zookeeperConfiguration = new ZookeeperConfiguration(ZOOKEEPER_CONNECTION_STRING, JOB_NAMESPACE);
+        //减少ZK超时时间
+        zookeeperConfiguration.setSessionTimeoutMilliseconds(100);
+        //创建注册中心
+        CoordinatorRegistryCenter zookeeperRegistryCenter = new ZookeeperRegistryCenter(zookeeperConfiguration);
+        return zookeeperRegistryCenter;
+    }</code></pre><h3 id="作业及分片"><a href="#作业及分片" class="headerlink" title="作业及分片"></a>作业及分片</h3><pre><code> 作业即调度任务的处理逻辑，Elastic-Job 提供 simple、Dataflow和 script 3 种作业类型。 方法参数 shardingcontext包含作业配置、分片和运行时信息。可通过 getshamingrotalcount()，getshardingItem()等方法分别获职分片总数，运行在本作业服务器的分片序列号等。
+
+  1.作业类型
+        Simple 类型作业：意为简单实现，未经任何封装的类型。需实现 simpleJob 接口。该接口仅提供单一方法用于实现，此方法将定时执行。与 cuartz原生接口相似，但提供了弹性扩缩容和分片等功能。采用简单的任务执行模式，不涉及动态获取数据和处理流程
+        Dataflow类型作业：Dataflow 类型用于处理数据流，需实现 DataflowJob 接口。该接口提供2个方法可供实现，分别用于抓取(fetchpata)和处理(processData)数据。
+        流式处理数据：不停的抓取数据直至返回值为null或返回的集合长度为0，然后会等待 10 秒后再次尝试抓取数据
+        非流式处理数据：等待调度逻辑来抓取和处理数据
+        在 ElasticJob 的 dataflow 模式中，非流式处理数据意味着在每次作业执行过程中会执行一次 fetchData 方法和 processData 方法。&quot;每次作业执行过程&quot;指的是作业调度框架根据配置的调度策略，定期触发作业执行的过程。
+
+        在 ElasticJob 中，可以通过配置作业的调度策略来控制作业的执行时间间隔。这个时间间隔可以根据具体的需求进行配置，例如可以配置为每隔一小时执行一次作业。
+
+        在 ElasticJob 的 dataflow 模式中，如果设置了流式处理数据，即数据是动态流入的，那么设置调度策略来定期触发作业执行的过程可能会失去意义。因为在流式处理数据的情况下，作业会根据数据的动态流入情况来触发执行，而不是根据固定的调度策略来执行。
+
+        如果在 dataflow 模式中抓取不到数据，ElasticJob 默认会等待一段时间后再次尝试抓取数据。默认情况下，如果抓取不到数据，会等待 10 秒后再次尝试抓取数据。这个等待时间可以通过配置来进行调整，以适应不同的业务需求。
+
+        Script 类型作业：意为脚本类型作业，支持 ghel1，python，per1 等所有类型脚本。只需通过控制台或代码配置 seriptcommandzine 即可，无需编码。执行脚本路径可包含参数，参数传递完毕后，作业框架会自动追加最后一个参数为作业运行时信息。</code></pre><h3 id="作业分片策略"><a href="#作业分片策略" class="headerlink" title="作业分片策略"></a>作业分片策略</h3><pre><code>AverageAllocationjobshardingstrategy：
+全路径:
+    com.dangdang.ddframe.job.lite.api.strategy.impl.AverageAllocationobShardingStrategy策略说明:
+
+基于平均分配算法的分片策略，也是默认的分片策略。如果分片不能整除，则不能整除的多余分片将依次追加到序号小的服务器。如:如果有3台服务器，分成9片，则每台服务器分到的分片是:1=0,1,2,2=3,4,5,3=6,7,8如果有3台服务器，分成8片，则每台服务器分到的分片是:1=0,1,6,2=2,3,7,3=14,5]如果有3台服务器，分成10片，则每台服务器分到的分片是:1=0,1,2,9,2=3,4,5,3=6,7,8
+
+OdevitysortByNamejobshardingstrategy：
+全路径:
+    com.dangdang.ddframe.job.ite.api.strategy.impl.0devitySortByNamejobShardingStrategy策略说明:
+
+根据作业名的哈希值奇偶数决定IP升降序算法的分片策略
+作业名的哈希值为奇数则IP升序。
+作业名的哈希值为偶数则IP降序。
+用于不同的作业平均分配负载至不同的服务器。
+
+RotateServerByNamelobshardingstrategy：
+全路径:
+    com.dangdang.ddframe.job.ite.api.strategy.impl.RotateServerByNamejobShardingStrategy
+策略说明:
+根据作业名的哈希值对服务器列表进行轮转的分片策略。
+配置分片策略：
+与配置通常的作业属性相同，在spring命名空间或者lobConfiguration中配置jobshardingStrategyClass属性，居性值是作业分片策略类的全路径。</code></pre><h3 id="SpringBoot配置-1"><a href="#SpringBoot配置-1" class="headerlink" title="SpringBoot配置"></a>SpringBoot配置</h3><pre><code>    @Configuration
+    public class ElasticJobConfig {
+
+        @Resource
+        FileBackupJob fileBackupJob;
+        @Resource
+        CoordinatorRegistryCenter elasticJpbRegistryConfig;
+
+        @Bean(initMethod = &quot;init&quot;)
+        public SpringJobScheduler initJobScheduler(){
+
+            SpringJobScheduler springJobScheduler = new SpringJobScheduler(fileBackupJob, elasticJpbRegistryConfig,
+                    createJobConfiguration(fileBackupJob.getClass(), &quot;0/3 * * * * ?&quot;, 4, &quot;0=text,1=image,2=radio,4=vedio&quot;));
+            return springJobScheduler;
+        }
+
+        /**
+        * 配置任务详细信息
+        * @param jobClass 任务执行类
+        * @param cron  执行策略
+        * @param shardingTotalcount 分片数量
+        * @param shardingItemParameters 分片个性化参数
+        * @return
+        */
+        private LiteJobConfiguration createJobConfiguration(final Class&lt;?extends SimpleJob&gt; jobClass,
+                                                            final String cron,
+                                                            final int shardingTotalcount,
+                                                            final String shardingItemParameters){
+            //定义作业核心配置
+            JobCoreConfiguration.Builder builder = JobCoreConfiguration.newBuilder(jobClass.getCanonicalName(), cron, shardingTotalcount);
+            if (StringUtils.isEmpty(shardingItemParameters)){
+                builder.jobParameter(shardingItemParameters);
+            }
+            JobCoreConfiguration build = builder.build();
+            //定义SIMPLE类配置
+            SimpleJobConfiguration simpleJobConfiguration = new SimpleJobConfiguration(build, jobClass.getCanonicalName());
+            //定义Lite作业根配置
+            LiteJobConfiguration liteJobConfiguration = LiteJobConfiguration.newBuilder(simpleJobConfiguration).overwrite(true).build();
+            return liteJobConfiguration;
+        }
+    }</code></pre>
             </div>
             <hr/>
             <div class="tag_share" style="display: block;">
@@ -891,7 +995,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">97.6k</span>&nbsp;字
+                class="white-color">100.5k</span>&nbsp;字
             
             
             
