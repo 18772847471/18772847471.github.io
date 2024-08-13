@@ -458,7 +458,7 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        3.8k
+                        3.9k
                     </div>
                     
 
@@ -470,6 +470,11 @@
                     
                 
 				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
 				
             </div>
         </div>
@@ -585,7 +590,13 @@ redis的定期删除是通过定时任务实现的，也就是定时任务会循
    2、Binlog实现异步重试删除</code></pre><h3 id="十-Redis-为什么是单线程"><a href="#十-Redis-为什么是单线程" class="headerlink" title="十.Redis 为什么是单线程"></a>十.Redis 为什么是单线程</h3><pre><code>  Redis操作基于内存，绝大多数操作的性能瓶颈不在CPU
   单线程模型，避免了线程间切换带来的性能开销
   使用单线程模型也能并发的处理客户端的请求（多路复用I/O）
-  使用单线程模型，可维护性更高，开发，调试和维护的成本更低</code></pre><h3 id="十一-Redis-的Hash-冲突"><a href="#十一-Redis-的Hash-冲突" class="headerlink" title="十一.Redis 的Hash 冲突"></a>十一.Redis 的Hash 冲突</h3><pre><code> Redis通过链式哈希解决冲突，也就是同一个桶里面的元素使用链表保存。但是当链表过长就会导致查找性能变差可能。所以redis为了追求块，使用了两个全局哈希表。用于rehash操作，增加现有的哈希桶数量，减少哈希冲突。</code></pre><h3 id="十二-redis高可用"><a href="#十二-redis高可用" class="headerlink" title="十二.redis高可用"></a>十二.redis高可用</h3><pre><code> Redis 实现高可用有三种部署模式：主从模式，哨兵模式，集群模式</code></pre><h3 id="十三-Redis-的内存用完了会发生什么"><a href="#十三-Redis-的内存用完了会发生什么" class="headerlink" title="十三.Redis 的内存用完了会发生什么"></a>十三.Redis 的内存用完了会发生什么</h3><p>   写操作失败：当 Redis 内存用尽时，无法再接受新的写入操作。此时，任何尝试写入数据的操作（如 SET、INCRBY、LPUSH 等）都会失败，并返回错误消息。</p>
+  使用单线程模型，可维护性更高，开发，调试和维护的成本更低</code></pre><h3 id="十一-Redis-的Hash-冲突"><a href="#十一-Redis-的Hash-冲突" class="headerlink" title="十一.Redis 的Hash 冲突"></a>十一.Redis 的Hash 冲突</h3><pre><code> Redis通过链式哈希解决冲突，也就是同一个桶里面的元素使用链表保存。但是当链表过长就会导致查找性能变差可能。所以redis为了追求块，使用了两个全局哈希表。用于rehash操作，增加现有的哈希桶数量，减少哈希冲突。</code></pre><h3 id="十二-redis高可用"><a href="#十二-redis高可用" class="headerlink" title="十二.redis高可用"></a>十二.redis高可用</h3><pre><code> Redis 实现高可用有三种部署模式：
+  主从模式：
+     主从模式是Redis提供的一种数据复制方式。一个主节点（Master）可以有一个或多个从节点（Slave）与之复制。
+  哨兵模式：
+     哨兵模式是主从模式的升级版，可以实现自动故障转移。哨兵是一个独立的进程，它会监控主节点和从节点，并在主节点出现故障时自动进行故障转移。
+  集群模式:
+     集群模式是Redis提供的一种处理数据分片和提高并发能力的解决方案。在集群模式下，数据会被分布在不同的节点上，并且节点会有自动的故障转移功能。</code></pre><h3 id="十三-Redis-的内存用完了会发生什么"><a href="#十三-Redis-的内存用完了会发生什么" class="headerlink" title="十三.Redis 的内存用完了会发生什么"></a>十三.Redis 的内存用完了会发生什么</h3><p>   写操作失败：当 Redis 内存用尽时，无法再接受新的写入操作。此时，任何尝试写入数据的操作（如 SET、INCRBY、LPUSH 等）都会失败，并返回错误消息。</p>
 <p>   读操作仍可继续：尽管 Redis 的内存用完，但仍然可以执行读取操作（如 GET、HGET、LINDEX 等）。这是因为 Redis 的数据仍然保存在磁盘上的持久化文件中，而不是完全依赖于内存。但是，需要注意的是，读操作的性能可能会受到影响，因为 Redis 需要频繁地从磁盘加载数据到内存中。</p>
 <p>   内存淘汰策略：Redis 提供了多种内存淘汰策略来处理内存耗尽的情况。当内存用完时，根据配置的淘汰策略，Redis 会尝试清理一些数据以腾出空间给新的写入操作。常见的淘汰策略包括：</p>
 <p>   LRU（Least Recently Used）：选择最近最少使用的键进行淘汰。<br>   LFU（Least Frequently Used）：选择最不经常使用的键进行淘汰。<br>   Random（随机）：随机选择键进行淘汰。</p>
@@ -1018,18 +1029,30 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">100.5k</span>&nbsp;字
+                class="white-color">103.6k</span>&nbsp;字
             
             
             
             
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
             
             <br>
             
             <br>
             
         </div>
-        <div class="col s12 m4 l4 social-link ">
+        <div class="col s12 m4 l4 social-link social-statis">
     <a href="https://github.com/18772847471" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
@@ -1128,6 +1151,8 @@ $(function () {
     
     <script src="/libs/others/clicklove.js" async="async"></script>
     
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
