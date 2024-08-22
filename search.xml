@@ -4,11 +4,86 @@
   
     
     <entry>
+      <title>ELK</title>
+      <link href="/2024/05/20/ELK/"/>
+      <url>/2024/05/20/ELK/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h3 id="一、ELK-简介"><a href="#一、ELK-简介" class="headerlink" title="一、ELK 简介"></a>一、ELK 简介</h3><p> ELK指的是elasticsearch、logstash和Kibana。</p><pre><code>Elasticsearch: 是一个基于 Apache Lucene(TM) 的开源搜索引擎,简单点说就是用于建立索引并存储日志的工具。Logstash: 是一个应用程序,它可以对日志的传输、过滤、管理和搜索提供支持。我们一般用它来统一对应用程序日志进行收集管理，提供Web接口用于查询和统计Kibana: 用于更友好的展示分析日志的web平台,简单点说就是有图有真相,可以在上面生成各种各样的图表更直观的显示日志分析的成果。</code></pre><h3 id="二、logstash的基本原理"><a href="#二、logstash的基本原理" class="headerlink" title="二、logstash的基本原理"></a>二、logstash的基本原理</h3><pre><code>logstash分为三个步骤：inputs（必须的）→ filters（可选的）→ outputs（必须的），inputs生成时间，filters对其事件进行过滤和处理，outputs输出到输出端或者决定其存储在哪些组件里。inputs和outputs支持编码和解码。</code></pre><p><img src="/image/Logstash%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86.png" alt="效果图预览"></p><h3 id="三、logstash安装"><a href="#三、logstash安装" class="headerlink" title="三、logstash安装"></a>三、logstash安装</h3><p>   下载地址：<a href="https://www.elastic.co/cn/downloads/logstash" target="_blank" rel="noopener">https://www.elastic.co/cn/downloads/logstash</a><br>   解压即安装：<br>        tar -zxvf logstash-7.7.0.tar.gz<br>    logstash版本的HelloWorld：<br>        ./bin/logstash -e ‘input { stdin { } } output { stdout {} }’</p><h3 id="四、logstash配置文件"><a href="#四、logstash配置文件" class="headerlink" title="四、logstash配置文件"></a>四、logstash配置文件</h3><pre><code>logstash.yml：包含Logstash配置标志。您可以在此文件中设置标志，而不是在命令行中传递标志。在命令行上设置的任何标志都会覆盖logstash中的相应设置pipelines.yml：包含在单个Logstash实例中运行多个管道的框架和指令。jvm.options：包含JVM配置标志。使用此文件设置总堆空间的初始值和最大值。您还可以使用此文件为Logsta设置语言环境log4j2.properties：包含log4j 2库的默认设置start.options (Linux)：用于配置启动服务脚本logstash.yml文件详解：    node.name  #默认主机名，该节点的描述名字    path.data  #LOGSTASH_HOME/data ，Logstash及其插件用于任何持久需求的目录    pipeline.id #默认main，pipeline的id    pipeline.java_execution #默认true，使用java执行引擎    pipeline.workers #默认为主机cpu的个数，表示并行执行管道的过滤和输出阶段的worker的数量    pipeline.batch.size #默认125 表示单个工作线程在尝试执行过滤器和输出之前从输入中收集的最大事件数    pipeline.batch.delay #默认50 在创建管道事件时，在将一个小批分派给管道工作者之前，每个事件需要等待多长时间(毫秒)    pipeline.unsafe_shutdown  #默认false，当设置为true时，即使内存中仍有运行的事件，强制Logstash在关闭期间将会退出。默认情况下，Logstash将拒绝退出，直到所有接收到的事件都被推入输出。启用此选项可能导致关机期间数据丢失    pipeline.ordered #默认auto，设置管道事件顺序。true将强制对管道进行排序，如果有多个worker，则阻止logstash启动。如果为false，将禁用维持秩序所需的处理。订单顺序不会得到保证，但可以节省维护订单的处理成本    path.config #默认LOGSTASH_HOME/config  管道的Logstash配置的路径    config.test_and_exit #默认false，设置为true时，检查配置是否有效，然后退出。请注意，使用此设置不会检查grok模式的正确性    config.reload.automatic #默认false，当设置为true时，定期检查配置是否已更改，并在更改时重新加载配置。这也可以通过SIGHUP信号手动触发    config.reload.interval  #默认3s ，检查配置文件频率    config.debug #默认false 当设置为true时，将完全编译的配置显示为调试日志消息    queue.type #默认memory ，用于事件缓冲的内部排队模型。为基于内存中的遗留队列指定内存，或为基于磁盘的脱机队列(持久队列)指定持久内存    path.queue #默认path.data/queue  ,在启用持久队列时存储数据文件的目录路径    queue.page_capacity #默认64mb ，启用持久队列时(队列)，使用的页面数据文件的大小。队列数据由分隔为页面的仅追加数据文件组成    queue.max_events #默认0，表示无限。启用持久队列时，队列中未读事件的最大数量    queue.max_bytes  #默认1024mb，队列的总容量，以字节为单位。确保磁盘驱动器的容量大于这里指定的值    queue.checkpoint.acks #默认1024，当启用持久队列(队列)时，在强制执行检查点之前被隔离的事件的最大数量    queue.checkpoint.writes #默认1024，当启用持久队列(队列)时，强制执行检查点之前的最大写入事件数    queue.checkpoint.retry #默认false，启用后，对于任何失败的检查点写，Logstash将对每个尝试的检查点写重试一次。任何后续错误都不会重试。并且不推荐使用，除非是在那些特定的环境中    queue.drain #默认false，启用后，Logstash将等待，直到持久队列耗尽，然后关闭    path.dead_letter_queue#默认path.data/dead_letter_queue，存储dead-letter队列的目录    http.host #默认&quot;127.0.0.1&quot; 表示endpoint REST端点的绑定地址。    http.port #默认9600 表示endpoint REST端点的绑定端口。    log.level #默认info，日志级别fatal，error，warn，info，debug，trace，    log.format #默认plain 日志格式    path.logs  #默认LOGSTASH_HOME/logs 日志目录</code></pre><h3 id="五、logstash配置文件的格式"><a href="#五、logstash配置文件的格式" class="headerlink" title="五、logstash配置文件的格式"></a>五、logstash配置文件的格式</h3><pre><code>input {    ...    }filter {    ...    }output {    ...    }</code></pre><h3 id="六、配置的重新加载"><a href="#六、配置的重新加载" class="headerlink" title="六、配置的重新加载"></a>六、配置的重新加载</h3><pre><code>方法一：在启动的时候指定参数    bin/logstash -f apache.config --config.reload.automatic    Logstash每3秒检查一次配置更改。要更改此间隔，请使用--config.reload.interval &lt;interval&gt;选项，其中interval指定Logstash检查配置文件更改的频率（以秒为单位）,请注意，必须使用单位限定符（s）方法二：强制加载配置文件   kill -SIGHUP pid  #pid为logstash的pid    自动配置重新加载配置注意点：    当Logstash检测到配置文件中的更改时，它将通过停止所有输入来停止当前管道，并尝试创建使用更新后的配置的新管道。验证新配置的语法后，Logstash验证所有输入和输出都可以初始化（例如，所有必需的端口都已打开）。如果检查成功，则Logstash会将现有管道与新管道交换。如果检查失败，旧管道将继续运行，并且错误将传播到控制台。    在自动重新加载配置期间，不会重新启动JVM。管道的创建和交换都在同一过程中进行。    对grok模式文件的更改也将重新加载，但仅在配置文件中的更改触发重新加载（或重新启动管道）时。</code></pre><h3 id="七、实际配置"><a href="#七、实际配置" class="headerlink" title="七、实际配置"></a>七、实际配置</h3><pre><code>input {    file {        path =&gt; &quot;.../logs/log/demoLog.log&quot;        start_position =&gt; &quot;beginning&quot;        stat_interval =&gt; &quot;3&quot;        type =&gt; &quot;demo_log&quot;    }    }    output {    if [type] == &quot;demo_log&quot; {        elasticsearch {        hosts =&gt; [&quot;http://127.0.0.1:9200&quot;]        index =&gt; &quot;demo_log-%{+YYYY.MM.dd}&quot;        }    }}属性说明：    input：指定Logstash接收数据的输入插件，使用file插件作为输入。file插件用于读取并处理文件中的数据。    file：指定使用的输入插件是file插件。    path：指定要读取的文件路径。    start_position：指定从文件的哪个位置开始读取数据。设置为&quot;beginning&quot;表示从文件的开始位置开始读取数据    stat_interval：指定文件的状态检查间隔（以秒为单位）。设置为&quot;3&quot;表示每隔3秒检查一次文件状态，以判断是否有新数据。    type：指定数据的类型名称。设置为&quot;nginx-access-log&quot;表示数据的类型是Nginx访问日志。    output：指定Logstash处理完数据后的输出插件。使用elasticsearch插件将处理后的日志数据发送到Elasticsearch。    type：指定数据的类型名称。    elasticsearch：指定使用的输出插件是elasticsearch插件。    hosts：指定Elasticsearch集群的主机地址。Logstash将处理后的数据发送到位于&quot;192.168.140.100&quot;主机上，HTTP端口9200的ES节点    index：指定数据在Elasticsearch中的索引名称，比如【 filebeat-8.4.1-2023.07.02 】使用[@metadata][version]字段和当前日期来构建索引名称 可以根据采集数据的来源和版本动态创建索引。</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> ELK </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 大数据 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Spark</title>
+      <link href="/2024/05/07/Spark/"/>
+      <url>/2024/05/07/Spark/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h3 id="一、Spark-简介"><a href="#一、Spark-简介" class="headerlink" title="一、Spark 简介"></a>一、Spark 简介</h3><p>Spark是一个快速、灵活的大数据处理框架。它基于内存计算，可以处理实时数据流和批量数据。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Spark </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 大数据 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>FLink</title>
+      <link href="/2024/05/01/FLink/"/>
+      <url>/2024/05/01/FLink/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h3 id="一、Flink-简介"><a href="#一、Flink-简介" class="headerlink" title="一、Flink 简介"></a>一、Flink 简介</h3><p>Apache Flink是一个框架和分布式处理引擎，用于对无界和有界数据流进行有状态计算。Flink被设计在所有常见的集群环境中运行，以内存执行速度和任意规模来执行计算。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> FLink </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 大数据 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hive</title>
       <link href="/2024/04/25/Hive/"/>
       <url>/2024/04/25/Hive/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>Hive是一个在Hadoop中用来处理结构化数据的数据仓库基础工具。它架构在Hadoop之上，用来进行数据提取、转化、加载，这是一种可以存储、查询和分析存储在Hadoop中的大规模数据的机制。hive数据仓库工具能将结构化的数据文件映射为一张数据库表，并提供SQL查询功能，能将SQL语句转变成MapReduce任务来执行。</p><h3 id="一、Hive-简介"><a href="#一、Hive-简介" class="headerlink" title="一、Hive 简介"></a>一、Hive 简介</h3><p><img src="/image/Hive%E6%9E%B6%E6%9E%84.jpg" alt="效果图预览"></p><p><img src="/image/Hive%E5%8D%95%E5%85%83%E4%BB%8B%E7%BB%8D.png" alt="效果图预览"></p><pre><code>Hive特点    它存储架构在一个数据库中并处理数据到HDFS。    它是专为OLAP设计。    它提供SQL类型语言查询叫HiveQL或HQL。    它是低学习成本，快速和可扩展的。</code></pre>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h3 id="一、Hive-简介"><a href="#一、Hive-简介" class="headerlink" title="一、Hive 简介"></a>一、Hive 简介</h3><p>Hive是一个在Hadoop中用来处理结构化数据的数据仓库基础工具。它架构在Hadoop之上，用来进行数据提取、转化、加载，这是一种可以存储、查询和分析存储在Hadoop中的大规模数据的机制。hive数据仓库工具能将结构化的数据文件映射为一张数据库表，并提供SQL查询功能，能将SQL语句转变成MapReduce任务来执行。<br><img src="/image/Hive%E6%9E%B6%E6%9E%84.jpg" alt="效果图预览"></p><p><img src="/image/Hive%E5%8D%95%E5%85%83%E4%BB%8B%E7%BB%8D.png" alt="效果图预览"></p><pre><code>Hive特点    它存储架构在一个数据库中并处理数据到HDFS。    它是专为OLAP设计。    它提供SQL类型语言查询叫HiveQL或HQL。    它是低学习成本，快速和可扩展的。</code></pre>]]></content>
       
       
       <categories>
@@ -33,12 +108,37 @@
       <link href="/2024/04/18/Hadoop/"/>
       <url>/2024/04/18/Hadoop/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>Hadoop是一个开源框架，允许使用简单的编程模型在跨计算机集群的分布式环境中存储和处理大数据。它的设计是从单个服务器扩展到数千个机器，每个都提供本地计算和存储。</p><h3 id="一、Hadoop-简介"><a href="#一、Hadoop-简介" class="headerlink" title="一、Hadoop 简介"></a>一、Hadoop 简介</h3><p> <img src="/image/Hadoop%E6%9E%B6%E6%9E%84.png" alt="效果图预览"></p><pre><code>HDFS: 分布式文件存储YARN: 分布式资源管理MapReduce: 分布式计算Others: 利用YARN的资源管理功能实现其他的数据处理方式内部各个节点基本都是采用Master-Woker架构适合    大规模数据    流式数据（写一次，读多次）    商用硬件（一般硬件）不适合    低延时的数据访问    大量的小文件    频繁修改文件（基本就是写1次）</code></pre><h3 id="二、Hadoop-模块"><a href="#二、Hadoop-模块" class="headerlink" title="二、Hadoop 模块"></a>二、Hadoop 模块</h3><pre><code>Hadoop是一个在分布式环境中存储和处理大型数据的开源框架。它包含两个模块，一个是MapReduce，另外一个是Hadoop分布式文件系统（HDFS）。MapReduce：它是一种在大型集群上的并行编程模型，普通硬件可用于处理大型结构化，半结构化和非结构化数据。HDFS：Hadoop分布式文件系统是Hadoop的框架的一部分，用于存储和处理数据集。它提供了一个在普通硬件上运行的容错文件系统。Hadoop生态系统包含了用于协助Hadoop的不同的子项目（工具）模块，如Sqoop, Pig 和 Hive。    Sqoop: 它用来在HDFS和RDBMS之间导入和导出数据。    Pig: 它用来开发MapReduce操作的脚本程序语言的平台。    Hive: 它用来开发SQL类型脚本，用于做MapReduce操作的平台。注：有多种方法来执行MapReduce作业：    传统的方法是使用Java MapReduce程序结构化，半结构化和非结构化数据。    针对MapReduce的脚本的方式，使用Pig来处理结构化和半结构化数据。    Hive查询语言（HiveQL或HQL）采用Hive为MapReduce的处理结构化数据。</code></pre>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h3 id="一、Hadoop-简介"><a href="#一、Hadoop-简介" class="headerlink" title="一、Hadoop 简介"></a>一、Hadoop 简介</h3><pre><code>Hadoop是一个开源框架，允许使用简单的编程模型在跨计算机集群的分布式环境中存储和处理大数据。它的设计是从单个服务器扩展到数千个机器，每个都提供本地计算和存储。</code></pre><p> <img src="/image/Hadoop%E6%9E%B6%E6%9E%84.png" alt="效果图预览"></p><pre><code>HDFS: 分布式文件存储YARN: 分布式资源管理MapReduce: 分布式计算Others: 利用YARN的资源管理功能实现其他的数据处理方式内部各个节点基本都是采用Master-Woker架构适合    大规模数据    流式数据（写一次，读多次）    商用硬件（一般硬件）不适合    低延时的数据访问    大量的小文件    频繁修改文件（基本就是写1次）</code></pre><h3 id="二、Hadoop-模块"><a href="#二、Hadoop-模块" class="headerlink" title="二、Hadoop 模块"></a>二、Hadoop 模块</h3><pre><code>Hadoop是一个在分布式环境中存储和处理大型数据的开源框架。它包含两个模块，一个是MapReduce，另外一个是Hadoop分布式文件系统（HDFS）。MapReduce：它是一种在大型集群上的并行编程模型，普通硬件可用于处理大型结构化，半结构化和非结构化数据。HDFS：Hadoop分布式文件系统是Hadoop的框架的一部分，用于存储和处理数据集。它提供了一个在普通硬件上运行的容错文件系统。Hadoop生态系统包含了用于协助Hadoop的不同的子项目（工具）模块，如Sqoop, Pig 和 Hive。    Sqoop: 它用来在HDFS和RDBMS之间导入和导出数据。    Pig: 它用来开发MapReduce操作的脚本程序语言的平台。    Hive: 它用来开发SQL类型脚本，用于做MapReduce操作的平台。注：有多种方法来执行MapReduce作业：    传统的方法是使用Java MapReduce程序结构化，半结构化和非结构化数据。    针对MapReduce的脚本的方式，使用Pig来处理结构化和半结构化数据。    Hive查询语言（HiveQL或HQL）采用Hive为MapReduce的处理结构化数据。</code></pre>]]></content>
       
       
       <categories>
           
           <category> Hadoop </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 大数据 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>大数据</title>
+      <link href="/2024/03/15/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+      <url>/2024/03/15/%E5%A4%A7%E6%95%B0%E6%8D%AE/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h3 id="一、大数据生态"><a href="#一、大数据生态" class="headerlink" title="一、大数据生态"></a>一、大数据生态</h3><p><img src="/image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F.png" alt="效果图预览"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 大数据 </category>
           
       </categories>
       
