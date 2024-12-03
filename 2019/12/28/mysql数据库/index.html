@@ -423,12 +423,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/mysql/">
-                                <span class="chip bg-color">mysql</span>
-                            </a>
-                        
                             <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
                                 <span class="chip bg-color">数据库</span>
+                            </a>
+                        
+                            <a href="/tags/mysql/">
+                                <span class="chip bg-color">mysql</span>
                             </a>
                         
                     </div>
@@ -532,8 +532,17 @@
   b树：B树更适用于实现数据库索引等需要频繁插入和删除操作的场景。
 维护平衡性手段不同：
   红黑树：红黑树通过每个节点要么是红色要么是黑色，并且满足一定的红黑规则来保持平衡。
-  b树：B树则是维护节点的高度平衡，通过节点的平衡因子来判断平衡状态。</code></pre><h3 id="11-MySQL-性能优化"><a href="#11-MySQL-性能优化" class="headerlink" title="11.MySQL 性能优化"></a>11.MySQL 性能优化</h3><p>  11.1 硬件优化<br>      11.1.1. 增加内存<br>        确保有足够的内存来缓存索引和数据，以减少磁盘I/O。<br>        设置innodb_buffer_pool_size，通常应设置为物理内存的70%-80%。<br>      11.1.2. 使用快速存储设备<br>        使用SSD代替HDD，以提高读取和写入速度。<br>        确保存储设备的I/O能力能够满足数据库的需求。</p>
-<p>  11.2配置优化<br>       11.2.1. MySQL配置<br>        调整innodb_buffer_pool_size，增加InnoDB缓冲池大小。<br>        设置query_cache_size和query_cache_type以利用查询缓存。<br>        配置thread_cache_size，减少线程创建和销毁的开销。<br>        调整table_open_cache和table_definition_cache以适应更多的表打开需求。<br>      11.2.2. 连接管理<br>        使用连接池（如HikariCP、C3P0）来管理数据库连接，减少连接创建和关闭的开销。<br> 11.3架构优化<br>      11.3.1. 数据库分片<br>        将数据库分片，将数据分布到多个服务器上，以减少单个服务器的负载。<br>      11.3.2. 主从复制<br>        使用主从复制（Master-Slave Replication）来分担读负载，提高读性能。<br>      11.3.3. 读写分离<br>        通过读写分离，将写操作发送到主库，读操作发送到从库，平衡负载。<br> 11.4查询优化<br>      11.4.1. 使用索引<br>        创建适当的索引来加速查询，特别是针对WHERE、JOIN、ORDER BY、GROUP BY等操作。<br>        使用覆盖索引（covering index），以减少回表操作。<br>        避免在索引列上使用函数和操作符，这会使索引失效。<br>      11.4.2. 优化查询语句<br>        避免使用SELECT *，只查询需要的列。<br>        使用EXPLAIN分析查询计划，优化查询路径。<br>        避免子查询（Subquery），尽量使用JOIN替代。<br>        使用批量插入（Batch Insert）和更新，以减少单次操作的开销。<br>      11.4.3. 拆分复杂查询<br>        将复杂查询拆分为多个简单查询，减少锁定时间和资源消耗。<br> 11.5索引优化<br>      11.5.1. 合理使用索引<br>        对频繁查询的列创建索引，如主键、外键、JOIN列和过滤条件列。<br>        避免过多索引，因为索引也会占用存储空间和影响写性能。<br>      11.5.2. 定期维护索引<br>        使用ANALYZE TABLE和OPTIMIZE TABLE定期维护表和索引，确保索引统计信息的准确性。</p>
+  b树：B树则是维护节点的高度平衡，通过节点的平衡因子来判断平衡状态。</code></pre><h3 id="11-MySQL-性能优化"><a href="#11-MySQL-性能优化" class="headerlink" title="11.MySQL 性能优化"></a>11.MySQL 性能优化</h3><p>  11.1 硬件优化<br>      11.1.1. 增加内存</p>
+<pre><code>    SHOW VARIABLES LIKE &#39;innodb_buffer_pool_size&#39;;
+
+    SET GLOBAL max_connections = 10000;
+    SET GLOBAL innodb_buffer_pool_size = 23622320128;
+
+    确保有足够的内存来缓存索引和数据，以减少磁盘I/O。
+    设置innodb_buffer_pool_size，通常应设置为物理内存的70%-80%。
+  11.1.2. 使用快速存储设备
+    使用SSD代替HDD，以提高读取和写入速度。
+    确保存储设备的I/O能力能够满足数据库的需求。</code></pre><p>  11.2配置优化<br>       11.2.1. MySQL配置<br>        调整innodb_buffer_pool_size，增加InnoDB缓冲池大小。<br>        设置query_cache_size和query_cache_type以利用查询缓存。<br>        配置thread_cache_size，减少线程创建和销毁的开销。<br>        调整table_open_cache和table_definition_cache以适应更多的表打开需求。<br>      11.2.2. 连接管理<br>        使用连接池（如HikariCP、C3P0）来管理数据库连接，减少连接创建和关闭的开销。<br> 11.3架构优化<br>      11.3.1. 数据库分片<br>        将数据库分片，将数据分布到多个服务器上，以减少单个服务器的负载。<br>      11.3.2. 主从复制<br>        使用主从复制（Master-Slave Replication）来分担读负载，提高读性能。<br>      11.3.3. 读写分离<br>        通过读写分离，将写操作发送到主库，读操作发送到从库，平衡负载。<br> 11.4查询优化<br>      11.4.1. 使用索引<br>        创建适当的索引来加速查询，特别是针对WHERE、JOIN、ORDER BY、GROUP BY等操作。<br>        使用覆盖索引（covering index），以减少回表操作。<br>        避免在索引列上使用函数和操作符，这会使索引失效。<br>      11.4.2. 优化查询语句<br>        避免使用SELECT *，只查询需要的列。<br>        使用EXPLAIN分析查询计划，优化查询路径。<br>        避免子查询（Subquery），尽量使用JOIN替代。<br>        使用批量插入（Batch Insert）和更新，以减少单次操作的开销。<br>      11.4.3. 拆分复杂查询<br>        将复杂查询拆分为多个简单查询，减少锁定时间和资源消耗。<br> 11.5索引优化<br>      11.5.1. 合理使用索引<br>        对频繁查询的列创建索引，如主键、外键、JOIN列和过滤条件列。<br>        避免过多索引，因为索引也会占用存储空间和影响写性能。<br>      11.5.2. 定期维护索引<br>        使用ANALYZE TABLE和OPTIMIZE TABLE定期维护表和索引，确保索引统计信息的准确性。</p>
 <p>  11.6表设计优化<br>      11.6.1. 正规化与反规范化<br>        根据实际情况进行表的正规化和反规范化，平衡存储和查询性能。<br>      11.6.2. 数据类型选择<br>        使用合适的数据类型，尽量使用定长数据类型，以节省存储空间和提高查询速度。<br>        避免使用TEXT和BLOB类型，尽量使用VARCHAR或其他更小的数据类型。<br>      11.6.3. 分区表<br>        对大表进行分区（Partitioning），提高查询性能和管理效率。</p>
 <p>  11.7缓存优化<br>      11.7.1. 查询缓存<br>        使用MySQL的查询缓存（Query Cache）来缓存查询结果，提高相同查询的响应速度。<br>      11.7.2. 应用级缓存<br>        在应用层使用缓存（如Redis、Memcached）来缓存频繁访问的数据，减轻数据库负载。</p>
 <p>  11.8监控与调优<br>     11.8.1. 监控工具<br>        使用监控工具（如Percona Monitoring and Management、New Relic、Zabbix）来监控数据库性能，发现瓶颈。<br>     11.8.2. 定期调优<br>        定期检查和优化数据库配置、查询和索引，确保数据库保持最佳性能。</p>
@@ -666,12 +675,12 @@ Command 的值：
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/mysql/">
-                                    <span class="chip bg-color">mysql</span>
-                                </a>
-                            
                                 <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
                                     <span class="chip bg-color">数据库</span>
+                                </a>
+                            
+                                <a href="/tags/mysql/">
+                                    <span class="chip bg-color">mysql</span>
                                 </a>
                             
                         </div>
@@ -1084,7 +1093,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">110.5k</span>&nbsp;字
+                class="white-color">110.6k</span>&nbsp;字
             
             
             
