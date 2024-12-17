@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>mybatis-plus</title>
+      <link href="/2024/12/17/Mybatisplus%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/"/>
+      <url>/2024/12/17/Mybatisplus%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><a id="more"></a><p>mybatis-plus</p><h3 id="1、mybatis-plus配置控制台打印sql-执行结果"><a href="#1、mybatis-plus配置控制台打印sql-执行结果" class="headerlink" title="1、mybatis-plus配置控制台打印sql 执行结果"></a>1、mybatis-plus配置控制台打印sql 执行结果</h3><pre><code>    mybatis-plus:        configuration:            log-impl: org.apache.ibatis.logging.stdout.StdOutImpl</code></pre><h3 id="2、mybatis-plus配置控制台打印sql-返回总数"><a href="#2、mybatis-plus配置控制台打印sql-返回总数" class="headerlink" title="2、mybatis-plus配置控制台打印sql 返回总数"></a>2、mybatis-plus配置控制台打印sql 返回总数</h3><pre><code>    logging:        level:            com.potion.sorting.testdemo.dao.mapper: debug</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> mybatis-plus </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mybatis-plus </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>XXL-Job</title>
       <link href="/2024/09/11/XXL-Job/"/>
       <url>/2024/09/11/XXL-Job/</url>
@@ -978,9 +1003,9 @@
       
         <tags>
             
-            <tag> 数据库 </tag>
-            
             <tag> mysql </tag>
+            
+            <tag> 数据库 </tag>
             
         </tags>
       
@@ -1690,9 +1715,9 @@
       
         <tags>
             
-            <tag> Oracle </tag>
-            
             <tag> 数据库 </tag>
+            
+            <tag> Oracle </tag>
             
         </tags>
       
