@@ -1,0 +1,1195 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Redis, Hexo">
+    <meta name="description" content="  Redis是一个开源的，内存中的数据结构存储系统，它可以用作数据库、缓存和消息中间件
+
+
+第一步：Redis支持的数据类型  String字符串：
+  格式: set key value
+  string类型是二进制安全的。意思是red">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Redis | Hexo</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Hexo</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Hexo</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/18772847471" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/18772847471" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        Redis
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Redis/">
+                                <span class="chip bg-color">Redis</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Redis/" class="post-category">
+                                Redis
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-03-15
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.9k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        13 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>  Redis是一个开源的，内存中的数据结构存储系统，它可以用作数据库、缓存和消息中间件</p>
+<a id="more"></a>
+
+<h3 id="第一步：Redis支持的数据类型"><a href="#第一步：Redis支持的数据类型" class="headerlink" title="第一步：Redis支持的数据类型"></a>第一步：Redis支持的数据类型</h3><pre><code>  String字符串：
+  格式: set key value
+  string类型是二进制安全的。意思是redis的string可以包含任何数据。比如jpg图片或者序列化的对象 。
+  string类型是Redis最基本的数据类型，一个键最大能存储512MB。
+
+  Hash（哈希）：
+  格式: hmset name  key1 value1 key2 value2
+  Redis hash 是一个键值(key=&gt;value)对集合。
+  Redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。
+
+  List（列表）：
+  Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）
+  格式: lpush  name  value
+  在 key 对应 list 的头部添加字符串元素
+  格式: rpush  name  value
+  在 key 对应 list 的尾部添加字符串元素
+  格式: lrem name  index
+  key 对应 list 中删除 count 个和 value 相同的元素
+  格式: llen name  
+  返回 key 对应 list 的长度
+
+
+  Set（集合）：
+  格式: sadd  name  value
+  Redis的Set是string类型的无序集合。
+  集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。
+
+
+  zset(sorted set：有序集合)：
+  格式: zadd  name score value
+  Redis zset 和 set 一样也是string类型元素的集合,且不允许重复的成员。
+  不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。
+  zset的成员是唯一的,但分数(score)却可以重复。</code></pre><h3 id="二：Redis分布式锁基础指令"><a href="#二：Redis分布式锁基础指令" class="headerlink" title="二：Redis分布式锁基础指令"></a>二：Redis分布式锁基础指令</h3><pre><code> SETNX key value
+    将key设置值为value，如果key不存在，这种情况下等同SET命令。 当key存在时，什么也不做。SETNX是”SET if Not eXists”的简写。
+
+ 返回值：
+    1 如果key被设置了
+    0 如果key没有被设置
+
+ 用途：可以用来枷锁。比如给商品id加锁。
+
+ GETSET  key value
+    自动将key对应到value并且返回原来key对应的value。如果key存在但是对应的value不是字符串，就返回错误。</code></pre><h3 id="三-redis持久化方式和原理"><a href="#三-redis持久化方式和原理" class="headerlink" title="三.redis持久化方式和原理"></a>三.redis持久化方式和原理</h3><pre><code>RDB方式原理：当redis需要做持久化时（执行SAVA或者BGSAVA命令，或者是达到配置条件时执行），redis会fork一个子进程，子进程将数据写到磁盘上一个临时RDB文件中，当子进程完成写临时文件后，将原来的RDB替换掉（默认文件名为dump.rdb）
+
+AOF方式原理：AOF就可以做到全程持久化，Redis每执行一个修改数据的命令，都会把这个命令添加到AOF文件中，当Redis重启时，将会读取AOF文件进行“重放”以恢复到 Redis关闭前的最后时刻。由于os会在内核中缓存 write做的修改，所以可能不是立即写到磁盘上。这样aof方式的持久化也还是有可能会丢失部分修改。不过我们可以通过配置文件告诉redis我们想要 通过fsync函数强制os写入到磁盘的时机。有三种方式如下（默认是：每秒fsync一次） 
+
+ Redis内建支持两种持久化方案，snapshot快照和AOF 增量Log方式。快照顾名思义就是隔一段时间将完整的数据Dump下来存储在文件中。AOF增量Log则是记录对数据的修改操作（实际上记录的就是每个对数据产生修改的命令本身），两种方案可以并存，也各有优缺点，具体参见</code></pre><h3 id="四-过期数据删除策略"><a href="#四-过期数据删除策略" class="headerlink" title="四.过期数据删除策略"></a>四.过期数据删除策略</h3><pre><code>惰性删除发生在redis处理读写请求的过程，如get/set等命令。
+定期删除发生在redis内部定时任务执行过程中，限制占用cpu的时间。
+
+redis的定期删除是通过定时任务实现的，也就是定时任务会循环调用serverCron方法。然后定时检查过期数据的方法是databasesCron。</code></pre><p>    定期删除的一大特点就是考虑了定时删除过期数据会占用cpu时间，所以每次执行databasesCron的时候会限制cpu的占用不超过25%。</p>
+<h3 id="五-Redis为什么这么快"><a href="#五-Redis为什么这么快" class="headerlink" title="五.Redis为什么这么快"></a>五.Redis为什么这么快</h3><pre><code> 1. 内存存储：Redis将数据存储在内存中，而不是磁盘上。由于内存的读写速度远远快于磁盘，这使得Redis能够实现非常低延迟的数据访问。
+
+ 2. 单线程模型：Redis采用单线程模型来处理客户端请求。这意味着所有的请求都是按顺序依次执行的，避免了多线程之间的竞争和同步开销。虽然单线程看起来效率较低，但由于Redis主要进行内存操作，而不是计算密集型任务，因此单线程足以应对大多数场景。
+
+ 3. IO多路复用模型-非阻塞I/O：Redis使用了非阻塞I/O模型来处理网络请求。它通过使用事件轮询机制（如epoll、kqueue等）来监听客户端连接和数据到达事件，并立即响应这些事件。这种方式避免了传统阻塞I/O模型中的等待时间，提高了系统的并发性能。
+
+ 4. 基于异步方式持久化数据：Redis支持多种持久化方式，包括RDB（快照）和AOF（日志）。其中AOF采用了异步方式将写入操作追加到文件中，而不是每次写入都同步到磁盘上。这种异步方式可以大大提高写入性能。
+
+ 5. 数据结构优化：Redis提供了丰富的数据结构（如字符串、哈希表、列表、集合等），并对每种数据结构进行了优化。例如，在哈希表中使用了散列表来实现O(1)时间复杂度的查找和插入操作，在列表中使用了双向链表来支持快速插入和删除操作等。</code></pre><h3 id="六-缓存击穿、缓存穿透、缓存雪崩"><a href="#六-缓存击穿、缓存穿透、缓存雪崩" class="headerlink" title="六.缓存击穿、缓存穿透、缓存雪崩"></a>六.缓存击穿、缓存穿透、缓存雪崩</h3><pre><code> 缓存击穿：
+     定义：某个热点key在某个时间点过期的时候，恰好在这个时间点对这个Key的查询请求特别多，这些请求发现缓存中没有这个key的数据，于是都去请求数据库，导致数据库压力瞬间增大。
+     解决方案：可以设置热点数据永不过期。
+
+  缓存穿透：
+     定义：用户查询数据，在数据库没有，自然在缓存中也不会有。这样就导致用户查询的时候，在缓存中找不到，每次都要去数据库再查询一遍，然后返回空（相当于进行了两次无用的查询）。
+     解决方案：可以将空对象也缓存起来，或者采用布隆过滤器，将所有可能存在的数据哈希到一个足够大的bitmap中，一个一定不存在的数据会被这个bitmap拦截掉，从而避免了对底层存储系统的查询压力。
+
+  缓存雪崩：
+     定义：由于原有缓存失效，新缓存未到时间，所有原本应该访问缓存的请求都去查询数据库了，而对数据库CPU和内存造成巨大压力，严重的会造成数据库宕机。从而形成一系列连锁反应，造成整个系统崩溃。
+     解决方案：尽量让失效的时间点不分布在同一个时间点，避免缓存集体失效。</code></pre><h3 id="七-RDB快照和AOF日志"><a href="#七-RDB快照和AOF日志" class="headerlink" title="七.RDB快照和AOF日志"></a>七.RDB快照和AOF日志</h3><pre><code> RDB快照是一种全量持久化方式，它会周期性地将内存中的数据以二进制格式保存到磁盘上的RDB文件。RDB文件是一个经过压缩的二进制文件，包含了数据库在某个时间点的数据快照。RDB快照有助于实现紧凑的数据存储，适合用于备份和恢复。
+
+  优点：
+     紧凑的数据格式： RDB文件是一个二进制文件，采用了紧凑的编码格式，因此在磁盘上占用的空间相对较小。
+     快速恢复： 在恢复数据时，通过加载RDB文件，可以快速地将数据恢复到指定时间点的状态。
+     适用于备份和恢复： RDB文件适用于进行数据备份、迁移和灾难恢复，可以方便地复制到其他服务器上。
+  缺点：
+     数据丢失： 由于RDB是周期性的全量持久化，可能会导致某个时间点之后的数据丢失。
+     IO开销： RDB持久化时，需要将整个数据集写入磁盘，可能在大数据集上引起IO开销，影响性能。
+     耗时： 在生成RDB快照的过程中，如果数据集很大，可能会占用较多的CPU资源，导致短时间内的性能下降。
+
+ AOF日志是一种追加式持久化方式，它记录了每个写操作命令，以追加的方式将命令写入AOF文件。通过重新执行AOF文件中的命令，可以重建出数据在内存中的状态。AOF日志提供了更精确的持久化，适用于需要更高数据安全性和实时性的场景。
+
+优点：
+  AOF日志可以实现更精确的数据持久化，每个写操作都会被记录。
+  在AOF文件中，数据可以更好地恢复，因为它保存了所有的写操作历史。
+  AOF日志适用于需要实时恢复数据的场景，如秒级数据恢复要求。
+缺点：
+  AOF日志相对于RDB快照来说，可能会占用更多的磁盘空间，因为它是记录每个写操作的文本文件。
+  AOF日志在恢复大数据集时可能会比RDB快照慢，因为需要逐条执行写操作。
+
+ 生成RDB文件方式：
+     手动触发 SAVE命令，
+     后台触发 GSAVE命令，
+     自动触发 配置文件（redis.conf）中可以设置save参数
+
+ AOF日志三种写回策略：
+     (1). always（始终同步）、
+     (2). everysec（每秒同步）
+     (3). no（不同步）</code></pre><h3 id="八-跳跃表"><a href="#八-跳跃表" class="headerlink" title="八.跳跃表"></a>八.跳跃表</h3><pre><code>Redis 有一个叫做 有序列表 zset 的数据结构，它类似于 Java 中的 SortedSet 和 HashMap 的结合体，一方面它是一个 set 保证了内部 value 的唯一性，另一方面又可以给每个 value 赋予一个排序的权重值 score，来达到 排序 的目的。
+
+跳跃表（Skip List）是一种基于链表的数据结构，它可以实现诸如有序集合（Sorted Set）等数据结构，能够提供平均 O(log n) 的查找效率。Redis中就使用跳跃表来实现有序集合。</code></pre><p>   跳跃表（skiplist）是一种有序数据结构，它通过在每个节点中维持多个指向其它节点的指针，从而达到快速访问节点的目的。和链表、字典等数据结构被广泛地应用在 Redis 内部不同，Redis 只在两个地方用到了跳跃表，一个是实现有序集合健，另一个是在集群节点中用做内部数据结构，除此之外，跳跃表在 Redis 里没有其它用途。</p>
+<h3 id="九-Redis-与-MySQL如何保证双写一致性"><a href="#九-Redis-与-MySQL如何保证双写一致性" class="headerlink" title="九.Redis 与 MySQL如何保证双写一致性"></a>九.Redis 与 MySQL如何保证双写一致性</h3><p>   1.选择合适的数据同步方式：根据应用的需求和数据访问模式，选择合适的数据同步方式。同步方式包括单向同步、双向同步和不同步等。<br>   2.使用事务：在 MySQL 中使用事务来确保数据的原子性。在 Redis 中，可以使用 MULTI/EXEC 命令组来执行事务操作。<br>   3.避免长时间的事务：MySQL 中的长时间事务可能会导致 Redis 中的数据不同步。因此，在设计数据库操作时，应尽量避免长时间的事务。<br>   4.主从复制：使用 MySQL 的主从复制功能，将数据变更同步到从数据库。然后，使用 Redis 的订阅/发布功能，将从数据库中的数据变更同步到 Redis。这种方式可以实现 MySQL 和 Redis 的双向同步。<br>   5.分布式事务：使用分布式事务协议，如两阶段提交或三阶段提交，来确保 Redis 和 MySQL 之间的数据一致性。分布式事务可以保证多个数据库之间的数据一致性。<br>   6.定时同步：对于一些不需要实时同步的数据，可以使用定时同步的方式。例如，每天定时将 MySQL 中的数据同步到 Redis 中。<br>   7.数据校验：定期进行数据校验，以确保 Redis 和 MySQL 中的数据一致。如果数据不一致，及时进行修复。</p>
+<pre><code>具体解决方案：
+   1、延时双删
+   2、Binlog实现异步重试删除</code></pre><h3 id="十-Redis-为什么是单线程"><a href="#十-Redis-为什么是单线程" class="headerlink" title="十.Redis 为什么是单线程"></a>十.Redis 为什么是单线程</h3><pre><code>  Redis操作基于内存，绝大多数操作的性能瓶颈不在CPU
+  单线程模型，避免了线程间切换带来的性能开销
+  使用单线程模型也能并发的处理客户端的请求（多路复用I/O）
+  使用单线程模型，可维护性更高，开发，调试和维护的成本更低</code></pre><h3 id="十一-Redis-的Hash-冲突"><a href="#十一-Redis-的Hash-冲突" class="headerlink" title="十一.Redis 的Hash 冲突"></a>十一.Redis 的Hash 冲突</h3><pre><code> Redis通过链式哈希解决冲突，也就是同一个桶里面的元素使用链表保存。但是当链表过长就会导致查找性能变差可能。所以redis为了追求块，使用了两个全局哈希表。用于rehash操作，增加现有的哈希桶数量，减少哈希冲突。</code></pre><h3 id="十二-redis高可用"><a href="#十二-redis高可用" class="headerlink" title="十二.redis高可用"></a>十二.redis高可用</h3><pre><code> Redis 实现高可用有三种部署模式：
+  主从模式：
+     主从模式是Redis提供的一种数据复制方式。一个主节点（Master）可以有一个或多个从节点（Slave）与之复制。
+  哨兵模式：
+     哨兵模式是主从模式的升级版，可以实现自动故障转移。哨兵是一个独立的进程，它会监控主节点和从节点，并在主节点出现故障时自动进行故障转移。
+  集群模式:
+     集群模式是Redis提供的一种处理数据分片和提高并发能力的解决方案。在集群模式下，数据会被分布在不同的节点上，并且节点会有自动的故障转移功能。</code></pre><h3 id="十三-Redis-的内存用完了会发生什么"><a href="#十三-Redis-的内存用完了会发生什么" class="headerlink" title="十三.Redis 的内存用完了会发生什么"></a>十三.Redis 的内存用完了会发生什么</h3><p>   写操作失败：当 Redis 内存用尽时，无法再接受新的写入操作。此时，任何尝试写入数据的操作（如 SET、INCRBY、LPUSH 等）都会失败，并返回错误消息。</p>
+<p>   读操作仍可继续：尽管 Redis 的内存用完，但仍然可以执行读取操作（如 GET、HGET、LINDEX 等）。这是因为 Redis 的数据仍然保存在磁盘上的持久化文件中，而不是完全依赖于内存。但是，需要注意的是，读操作的性能可能会受到影响，因为 Redis 需要频繁地从磁盘加载数据到内存中。</p>
+<p>   内存淘汰策略：Redis 提供了多种内存淘汰策略来处理内存耗尽的情况。当内存用完时，根据配置的淘汰策略，Redis 会尝试清理一些数据以腾出空间给新的写入操作。常见的淘汰策略包括：</p>
+<p>   LRU（Least Recently Used）：选择最近最少使用的键进行淘汰。<br>   LFU（Least Frequently Used）：选择最不经常使用的键进行淘汰。<br>   Random（随机）：随机选择键进行淘汰。</p>
+
+            </div>
+            <hr/>
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Redis/">
+                                    <span class="chip bg-color">Redis</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/03/16/spring/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="spring">
+                        
+                        <span class="card-title">spring</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                              https://spring.io/
+
+
+一：Spring 包括哪些东西核心技术 IoC 和 AOP
+数据访问 （持久层解决方案）
+Web层解决方案 SpringMVC
+集成 （整合其他开源框架）二：IoC控制反转和DI依赖注入 IoC
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-03-16
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/spring/" class="post-category">
+                                    spring
+                                </a>
+                            
+                            <a href="/categories/spring/%E6%A1%86%E6%9E%B6/" class="post-category">
+                                    框架
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/spring/">
+                        <span class="chip bg-color">spring</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%A1%86%E6%9E%B6/">
+                        <span class="chip bg-color">框架</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/01/30/elastic-job/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="elastic-job">
+                        
+                        <span class="card-title">elastic-job</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            任务调度：是指系统为了自动完成特定任务，在约定的特定时刻去执行任务的过程。elastic-jobElastic-Job 是当当开源的一款非常好用的分布式任务调度框架,由两个相互独立的子项目Elastic-Job-lite和Elastic-J
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-01-30
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/elastic-job/" class="post-category">
+                                    elastic-job
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/elastic-job/">
+                        <span class="chip bg-color">elastic-job</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">年份</span>
+            <a href="https://github.com/18772847471/18772847471.github.io" target="_blank">boyup</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">111k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/18772847471" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1104583639@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1104583639" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1104583639" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="/medias/reward/weixin.jpg" class="tooltipped" target="_blank" data-tooltip="加我微信" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: ""
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

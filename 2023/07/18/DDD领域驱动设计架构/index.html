@@ -1,0 +1,1212 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="DDD领域驱动设计架构, Hexo">
+    <meta name="description" content="
+领域驱动设计（Domain-driven Design，DDD）是一种软件设计方法，该方法的核心思想是将业务领域作为设计和开发的中心，强调对业务领域的深入理解、业务语言的建模以及领域对象的设计和实现。翻译成大白话就是：是一种解决复杂软件的">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>DDD领域驱动设计架构 | Hexo</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Hexo</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Hexo</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/18772847471" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/18772847471" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        DDD领域驱动设计架构
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/">
+                                <span class="chip bg-color">DDD领域驱动设计</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/" class="post-category">
+                                DDD领域驱动设计
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-07-18
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        7.3k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        24 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <hr>
+<p>领域驱动设计（Domain-driven Design，DDD）是一种软件设计方法，该方法的核心思想是将业务领域作为设计和开发的中心，强调对业务领域的深入理解、业务语言的建模以及领域对象的设计和实现。翻译成大白话就是：是一种解决复杂软件的思维方式，是一种思想；以业务为主导，自顶向下的进行业务领域划分,业务模型驱动架构设计。</p>
+<a id="more"></a>
+<h3 id="一、基础概念"><a href="#一、基础概念" class="headerlink" title="一、基础概念"></a>一、基础概念</h3><h4 id="1-1领域"><a href="#1-1领域" class="headerlink" title="1.1领域"></a>1.1领域</h4><pre><code>  领域就是用来确定范围的，范围即边界，这也是 DDD 在设计中不断强调边界的原因。
+  简言之，DDD 的领域就是这个边界内要解决的业务问题域。
+
+  领域可以进一步划分为子领域。我们把划分出来的多个子领域称为子域，每个子域对应一个更小的问题域或更小的业务范围。领域可以拆分为多个子领域。一个领域相当于一个问题域，领域拆分为子域的过程就是大问题拆分为小问题的过程。
+
+  领域不断划分的过程中，领域会细分为不同的子域，子域可以根据自身重要性和功能属性划分为三类子域，它们分别是：核心域、通用域和支撑域。
+
+  核心域，它是业务成功的主要因素和公司的核心竞争力。没有太多个性化的诉求，同时被多个子域使用的通用功能子域是通用域。还有一种功能子域是必需的，但既不包含决定产品和公司核心竞争力的功能，也不包含通用功能的子域，它就是支撑域。</code></pre><h4 id="1-2限界上下文"><a href="#1-2限界上下文" class="headerlink" title="1.2限界上下文"></a>1.2限界上下文</h4><pre><code> 限界就是领域的边界，而上下文则是语义环境。通过领域的限界上下文，我们就可以在统一的领域边界内用统一的语言进行交流，简单来说限界上下文可以理解为语义环境。
+ 限界上下文的定义就是：用来封装通用语言和领域对象，提供上下文环境，保证在领域之内的一些术语、业务相关对象等（通用语言）有一个确切的含义，没有二义性。
+
+ 理论上限界上下文就是微服务的边界。我们将限界上下文内的领域模型映射到微服务，就完成了从问题域到软件的解决方案。
+
+  遵守以下规范：
+     同限界上下文内的聚合之间的领域服务可直接调用。
+     两个限界上下文的交互必须通过应用服务层抽离 接口-&gt;适配层 适配。
+
+  限界上下文之间的映射关系：
+     合作关系（Partnership）：两个上下文紧密合作的关系，一荣俱荣，一损俱损。
+     共享内核（Shared Kernel）：两个上下文依赖部分共享的模型。
+     客户方-供应方开发（Customer-Supplier Development）：上下文之间有组织的上下游依赖。
+     遵奉者（Conformist）：下游上下文只能盲目依赖上游上下文。
+     防腐层（Anticorruption Layer）：一个上下文通过一些适配和转换与另一个上下文交互。
+     开放主机服务（Open Host Service）：定义一种协议来让其他上下文来对本上下文进行访问。
+     发布语言（Published Language）：通常与OHS一起使用，用于定义开放主机的协议。
+     大泥球（Big Ball of Mud）：混杂在一起的上下文关系，边界不清晰。
+     另谋他路（SeparateWay）：两个完全没有任何联系的上下文。</code></pre><h3 id="二、贫血模型和充血模型"><a href="#二、贫血模型和充血模型" class="headerlink" title="二、贫血模型和充血模型"></a>二、贫血模型和充血模型</h3><h4 id="2-1贫血模型"><a href="#2-1贫血模型" class="headerlink" title="2.1贫血模型"></a>2.1贫血模型</h4><pre><code>  贫血模型具有一堆属性和set get方法，存在的问题就是通过 pojo 这个对象上看不出业务有哪些逻辑，一个 pojo 可能被多个模块调用，只能去上层各种各样的service 来调用，这样以后当梳理这个实体有什么业务，只能一层一层去搜 service，也就是贫血失忆症，不够面向对象。</code></pre><h4 id="2-2充血模型"><a href="#2-2充血模型" class="headerlink" title="2.2充血模型"></a>2.2充血模型</h4><pre><code>  如 user 用户有改密码，改手机号，修改登录失败次数等操作，都内聚在这个 user 实体中，每个实体的业务都是清晰的，就是充血模型，充血模型的内存计算会多一些，内聚核心业务逻辑处理。
+
+  说白了就是，不只是有贫血模型中的setter getter方法，还有其他的一些业务方法，这才是面向对象的本质，通过 user 实体就能看出有哪些业务存在。</code></pre><h3 id="三、实体和值对象"><a href="#三、实体和值对象" class="headerlink" title="三、实体和值对象"></a>三、实体和值对象</h3><p>   实体和值对象这两个概念都是领域模型中的领域对象。实体和值对象是组成领域模型的基础单元。</p>
+<h4 id="3-1实体"><a href="#3-1实体" class="headerlink" title="3.1实体"></a>3.1实体</h4><p>   在代码模型中，实体的表现形式是实体类，这个类包含了实体的属性和方法，通过这些方法实现实体自身的业务逻辑。<br>   在 DDD 里，这些实体类通常采用充血模型，与这个实体相关的所有业务逻辑都在实体类的方法中实现，跨多个实体的领域逻辑则在领域服务中实现。<br>   实体以 DO（领域对象）的形式存在，每个实体对象都有唯一的 ID。<br>   在领域模型映射到数据模型时，一个实体可能对应 0 个、1 个或者多个数据库持久化对象。</p>
+<p>   实体特性：<br>      具有唯一标识<br>      持久化<br>      可变</p>
+<h4 id="3-2值对象"><a href="#3-2值对象" class="headerlink" title="3.2值对象"></a>3.2值对象</h4><pre><code>简单来说，值对象本质上就是一个集。</code></pre><p>   人员实体原本包括：姓名、年龄、性别以及人员所在的省、市、县等属性。这样显示地址相关的属性就很零碎了，可以将“省、市、县等属性”拿出来构成一个“地址属性集合”，这个集合就是值对象了。</p>
+<p>   值对象拥有以下特征：<br>      它度量或者描述了领城中的一件东西。<br>      它可以作为不变量。<br>      度量和描述改变时，可以用另一个值对象予以替换。<br>      它可以和其他值对象进行相等性比较。<br>      它不会对协作对象造成副作用。</p>
+<p>   值对象与实体一起构成聚合。值对象逻辑上是实体属性的一部分，用于描述实体的特征。值对象创建后就不允许修改了，只能用另外一个值对象来整体替换。</p>
+<h4 id="3-3聚合"><a href="#3-3聚合" class="headerlink" title="3.3聚合"></a>3.3聚合</h4><p>   实体和值对象是很基础的领域对象。实体一般对应业务对象，它具有业务属性和业务行为；而值对象主要是属性集合，对实体的状态和特征进行描述。但实体和值对象都只是个体化的对象，它们的行为表现出来的是个体的能力。</p>
+<p>   聚合就是由业务和逻辑紧密关联的实体和值对象组合而成的，聚合是数据修改和持久化的基本单元，每一个聚合对应一个仓储，实现数据的持久化。</p>
+<p>   聚合在 DDD 分层架构里属于领域层，领域层包含了多个聚合，共同实现核心业务逻辑。</p>
+<h4 id="3-4聚合根"><a href="#3-4聚合根" class="headerlink" title="3.4聚合根"></a>3.4聚合根</h4><p>   首先它作为实体本身，拥有实体的属性和业务行为，实现自身的业务逻辑。其次它作为聚合的管理者，在聚合内部负责协调实体和值对象按照固定的业务规则协同完成共同的业务逻辑。</p>
+<p>   以聚合根 ID 关联的方式接受外部任务和请求，在上下文内实现聚合之间的业务协同。也就是说，聚合之间通过聚合根 ID 关联引用，如果需要访问其它聚合的实体，就要先访问聚合根，再导航到聚合内部实体，外部对象不能直接访问聚合内实体。</p>
+<h4 id="3-5领域服务"><a href="#3-5领域服务" class="headerlink" title="3.5领域服务"></a>3.5领域服务</h4><p>   一些重要的领域行为或操作，可以归类为领域服务。<br>   它既不是实体，也不是值对象的范畴。</p>
+<h4 id="3-6领域事件"><a href="#3-6领域事件" class="headerlink" title="3.6领域事件"></a>3.6领域事件</h4><p>   领域事件可以是业务流程的一个步骤。<br>   一个完整的领域事件 = 事件发布 + 事件存储 + 事件分发 + 事件处理。</p>
+<p>   事件发布：构建一个事件，需要唯一标识，然后发布；<br>   事件存储：发布事件前需要存储，因为接收后的事件也会存储，可用于重试或对账等；就是每次执行一次具体的操作时，把行为记录下来，执行持久化。<br>   事件分发：服务内的应用服务或者领域服务直接发布给订阅者，服务外需要借助消息中间件，比如Kafka，RabbitMQ等，支持同步或者异步。<br>   事件处理：先将事件存储，然后再处理。</p>
+<p>   实际开发中事件存储和事件处理不是必须的</p>
+<h4 id="3-7工厂模式"><a href="#3-7工厂模式" class="headerlink" title="3.7工厂模式"></a>3.7工厂模式</h4><p>   在创建对象时，有些聚合需要实体或值对象较多，或者关系比较复杂，为了确保聚合内所有对象都能同时被创建，同时避免在聚合根中加入与其本身领域无关的内容，一般会将这些内容交给Factory处理。</p>
+<p>   Factory的主要作用：封装聚合内复杂对象的创建过程，完成聚合根、实体、值对象的创建。</p>
+<h4 id="3-8仓储模式"><a href="#3-8仓储模式" class="headerlink" title="3.8仓储模式"></a>3.8仓储模式</h4><p>   为了避免基础层数据处理逻辑渗透到领域层的业务代码中，导致领域层和基础层形成紧密耦合关系，引入Repository层。</p>
+<p>   Repository分为Interface和Implement，领域层依赖Repository接口。</p>
+<h3 id="四、DDD分层架构"><a href="#四、DDD分层架构" class="headerlink" title="四、DDD分层架构"></a>四、DDD分层架构</h3><p>   DDD 的分层架构在不断发展。最早是传统的四层架构；再后来领域层和应用层之间增加了上下文环境（Context）层，五层架构（DCI）就此形成了。<br><img src="/image/DDD4%E5%B1%82.png" alt="效果图预览"><br>    DDD分层架构中的要素其实和三层架构类似，只是在DDD分层架构中，这些要素被重新归类，重新划分了层，确定了层与层之间的交互规则和职责边界。<br><img src="/image/DDD%E5%AF%B9%E5%BA%94%E5%85%B3%E7%B3%BB.png" alt="效果图预览"> </p>
+<p>   用户接口层<br>      用户接口层是前端应用和微服务之间服务访问和数据交换的桥梁。它处理前端发送的 Restful 请求和解析用户输入的配置文件等，将数据传递给应用层。或获取应用服务的数据后，进行数据组装，向前端提供数据服务。主要服务形态是 Facade 服务。</p>
+<pre><code>  Facade 服务分为接口和实现两个部分。完成服务定向，DO 与 DTO 数据的转换和组装，实现前端与应用层数据的转换和交换。
+     一般包括用户接口、Web 服务、rpc请求，mq消息等外部输入均被视为外部输入的请求。对外暴露API，具体形式不限于RPC、Rest API、消息等。
+     一般都很薄，提供必要的参数校验和异常捕获流程。
+     一般会提供VO或者DTO到Entity或者ValueObject的转换，用于前后端调用的适配，当然dto可以直接使用command和query，视情况而定。
+  用户接口层很重要，在于前后端调用的适配。若你的微服务要面向很多应用或渠道提供服务，而每个渠道的入参出参都不一样，你不太可能开发出太多应用服务，这样Facade接口就起很好的作用了，包括DO和DTO对象的组装和转换等。</code></pre><p>   应用层<br>      应用层是很薄的一层，理论上不应该有业务规则或逻辑，主要面向用例和流程相关的操作。但应用层又位于领域层之上，因为领域层包含多个聚合，所以它可以协调多个聚合的服务和领域对象完成服务编排和组合，协作完成业务操作。除了同步方法调用外，还可以发布或者订阅领域事件，权限校验、事务控制，一个事务对应一个聚合根。</p>
+<pre><code>  应用层负责不同聚合之间的服务和数据协调，负责微服务之间的事件发布和订阅。
+
+  通过应用服务对外暴露微服务的内部功能，这样就可以隐藏领域层核心业务逻辑的复杂性以及内部实现机制。
+
+  应用层的主要服务形态有：应用服务、事件发布和订阅服务。应用服务内用于组合和编排的服务，主要来源于领域服务，也可以是外部微服务的应用服务。</code></pre><p>   领域层<br>      领域层包含聚合根、实体、值对象、领域服务等领域模型中的领域对象。</p>
+<pre><code>  特别解释一下其中几个领域对象的关系，以便你在设计领域层的时候能更加清楚。
+
+  首先，领域模型的业务逻辑主要是由实体和领域服务来实现的，其中实体会采用充血模型来实现所有与之相关的业务功能。
+
+  其次，实体和领域对象在实现业务逻辑上不是同级的，当领域中的某些功能，单一实体（或者值对象）不能实现时，领域服务就会出马，它可以组合聚合内的多个实体（或者值对象），实现复杂的业务逻辑。
+
+  领域层主要的服务形态有实体方法和领域服务。实体采用充血模型，在实体类内部实现实体相关的所有业务逻辑，实现的形式是实体类中的方法。实体是微服务的原子业务逻辑单元。在设计时我们主要考虑实体自身的属性和业务行为，实现领域模型的核心基础能力。不必过多考虑外部操作和业务流程，这样才能保证领域模型的稳定性。
+
+  DDD 提倡富领域模型，尽量将业务逻辑归属到实体对象上，实在无法归属的部分则设计成领域服务。
+
+  领域服务会对多个实体或实体方法进行组装和编排，实现跨多个实体的复杂核心业务逻辑。对于严格分层架构，如果单个实体的方法需要对应用层暴露，则需要通过领域服务封装后才能暴露给应用服务。</code></pre><p>   基础层<br>      基础层也叫基础设施层，基础层是贯穿所有层的，它的作用就是为其它各层提供通用的技术和基础服务，包括第三方工具、驱动、消息中间件、网关、文件、缓存以及数据库等，比较常见的功能还是提供数据库持久化。</p>
+<pre><code>  基础层的服务形态主要是仓储服务。仓储服务包括接口和实现两部分。仓储接口服务供应用层或者领域层服务调用，仓储实现服务，完成领域对象的持久化或数据初始化。
+
+  DDD分层架构的数据库等基础资源访问，采用了仓储（Repository）设计模式，通过依赖到置实现各层对基础资源的解耦。
+
+  仓储又分为两部分：仓储接口和仓储实现。
+
+     仓储接口放在领域层中，仓储实现放在基础层。原来三层架构通用的第三方工具包、驱动、Common、Utility、Config等通用的公共的资源类统一放到了基础层。
+
+     在传统架构设计中，由于上层应用对数据库的强耦合，很多公司在架构演进中最担忧的可能就是换数据库了，因为一旦更换数据库，就可能需要重写大部分的代码，这对应用来说是致命的。那采用依赖倒置的设计以后应用层就可以通过解耦来保持独立的核心业务。</code></pre><p>   防腐层:<br>      解决方案就是在两个系统之间加入一个中间层，隔离第三方系统的依赖，对第三方系统进行通讯转换和语义隔离，这个中间层，叫它防腐层。<br><img src="/image/DDD%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8.jpg" alt="效果图预览"> </p>
+<h3 id="五、领域事件驱动"><a href="#五、领域事件驱动" class="headerlink" title="五、领域事件驱动"></a>五、领域事件驱动</h3><p>   领域事件驱动包括微服务内和微服务之间的事件。微服务内通过事件总线（EventBus）完成聚合之间的异步处理。微服务之间通过消息中间件完成。异步化的领域事件驱动机制是一种间接的服务访问方式。当应用服务业务逻辑处理完成后，如果发生领域事件，可调用事件发布服务，完成事件发布。当接收到订阅的主题数据时，事件订阅服务会调用事件处理领域服务，完成进一步的业务操作。</p>
+<h3 id="六、服务依赖"><a href="#六、服务依赖" class="headerlink" title="六、服务依赖"></a>六、服务依赖</h3><p>   DDD 分层架构有一个重要的原则：每层只能与位于其下方的层发生耦合。<br>   在严格分层架构中，领域服务只能被应用服务调用，而应用服务只能被用户接口层调用，服务是逐层对外封装或组合的，依赖关系清晰。</p>
+<h3 id="七、服务封装"><a href="#七、服务封装" class="headerlink" title="七、服务封装"></a>七、服务封装</h3><p>   在严格分层架构模式下，不允许服务的跨层调用，每个服务只能调用它的下一层服务。服务从下到上依次为：实体方法、领域服务、应用服务和接口服务。如果需要实现服务的跨层调用，建议采用服务逐层封装的方式。</p>
+<h3 id="八、实体方法的封装"><a href="#八、实体方法的封装" class="headerlink" title="八、实体方法的封装"></a>八、实体方法的封装</h3><pre><code>  实体方法是最底层的原子业务逻辑。如果单一实体的方法需要被跨层调用，你可以将它封装成领域服务，这样封装的领域服务就可以被应用服务调用和编排了。如果它还需要被用户接口层调用，你还需要将这个领域服务封装成应用服务。经过逐层服务封装，实体方法就可以暴露给上面不同的层，实现跨层调用。
+
+  封装时服务前面的名字可以保持一致，可以用 DomainService 或 *AppService 后缀来区分领域服务或应用服务。</code></pre><h3 id="九、领域服务的组合和封装"><a href="#九、领域服务的组合和封装" class="headerlink" title="九、领域服务的组合和封装"></a>九、领域服务的组合和封装</h3><p>   领域服务会对多个实体和实体方法进行组合和编排，供应用服务调用。如果它需要暴露给用户接口层，领域服务就需要封装成应用服务。</p>
+<h3 id="十、应用服务的组合和编排"><a href="#十、应用服务的组合和编排" class="headerlink" title="十、应用服务的组合和编排"></a>十、应用服务的组合和编排</h3><p>   应用服务会对多个领域服务进行组合和编排，暴露给用户接口层，供前端应用调用。</p>
+<p>   在应用服务组合和编排时，需要关注一个现象：多个应用服务可能会对多个同样的领域服务重复进行同样业务逻辑的组合和编排。当出现这种情况时，你就需要分析是不是领域服务可以整合了。你可以将这几个不断重复组合的领域服务，合并到一个领域服务中实现。这样既省去了应用服务的反复编排，也实现了服务的演进。这样领域模型将会越来越精炼，更能适应业务的要求。</p>
+<pre><code>应用服务类放在应用层 Service 目录结构下。领域事件的发布和订阅类放在应用层 Eve</code></pre><h3 id="十一、DDD建模步骤"><a href="#十一、DDD建模步骤" class="headerlink" title="十一、DDD建模步骤"></a>十一、DDD建模步骤</h3><p>   设计领域模型的一般步骤如下：<br>      根据需求划分出初步的领域和限界上下文，以及上下文之间的关系。<br>      进一步分析每个上下文内部，识别出哪些是实体，哪些是值对象。<br>      对实体、值对象进行关联和聚合，划分出聚合的范畴和聚合根。<br>      为聚合根设计仓储，并思考实体或值对象的创建方式。<br>      在工程中实践领域模型，并在实践中检验模型的合理性，倒推模型中不足的地方并重构。</p>
+<h3 id="十二、DDD代码模型"><a href="#十二、DDD代码模型" class="headerlink" title="十二、DDD代码模型"></a>十二、DDD代码模型</h3><p>   微服务—级目录是按照DDD分层架构的分层职责来定义的。在代码模型里分别为用户接口层、应用层、领域层和基础层，分别建立了interfaces、application、domain 和 infrastructure 四个—级代码目录。</p>
+<p>   Interfaces（用户接口层）∶它主要存放用户接口层与前端交互、展现数据相关的代码。前端应用通过这一层的接口，向应用服务获取展现所需的数据。这一层主要用来处理用户发送的Restful请求，解析用户输入的配置文件，并将数据传递给Application层。数据的组装、数据传输格式以及Facade接口等代码都会放在这一层目录里。<br>   Application（应用层）︰它主要存放应用层服务组合和编排相关的代码。应用服务向下基于微服务内的领域服务或外部微服务的应用服务完成服务的编排和组合，向上为用户接口层提供各种应用数据展现支持服务。应用服务和事件等代码会放在这一层目录里。<br>   Domain（领域层）︰它主要存放领域层核心业务逻辑相关的代码。领域层可以包含多个聚合代码包，它们共同实现领域模型的核心业务逻辑。聚合以及聚合内的实体、方法、领域服务和事件等代码会放在这一层目录里。<br>   Infrastructure（基础层）∶它主要存放基础资源服务相关的代码，为其它各层提供的通用技术能力、三方软件包、数据库服务、配置和基础资源服务的代码都会放在这一层目录里。</p>
+<h4 id="12-1用户接口层"><a href="#12-1用户接口层" class="headerlink" title="12.1用户接口层"></a>12.1用户接口层</h4><p>   Interfaces 的代码目录结构有：assembler、dto 和 facade 三类。<br>      Assembler：实现 DTO 与领域对象之间的相互转换和数据交换。一般来说 Assembler 与DTO 总是一同出现。<br>      DTO：它是数据传输的载体，内部不存在任何业务逻辑，我们可以通过 DTO 把内部的领域对象与外界隔离。<br>      Facade：提供较粗粒度的调用接口，将用户请求委派给一个或多个应用服务进行处理。</p>
+<h4 id="12-2应用层"><a href="#12-2应用层" class="headerlink" title="12.2应用层"></a>12.2应用层</h4><p>   Application 的代码目录结构有：event 和 service。</p>
+<pre><code>  Event（事件）：这层目录主要存放事件相关的代码。它包括两个子目录：publish 和subscribe。前者主要存放事件发布相关代码，后者主要存放事件订阅相关代码（事件处理相关的核心业务逻辑在领域层实现）。
+  Service（应用服务）：这层的服务是应用服务。应用服务会对多个领域服务或外部应用服务进行封装、编排和组合，对外提供粗粒度的服务。应用服务主要实现服务组合和编排，是一段独立的业务逻辑。你可以将所有应用服务放在一个应用服务类里，也可以把一个应用服务设计为一个应用服务类，以防应用服务类代码量过大。</code></pre><h4 id="12-3领域层"><a href="#12-3领域层" class="headerlink" title="12.3领域层"></a>12.3领域层</h4><p>   Domain 是由一个或多个聚合包构成，共同实现领域模型的核心业务逻辑。聚合内的代码模型是标准和统一的，包括：entity、event、repository 和 service 四个子目录。</p>
+<pre><code>  Aggregate（聚合）：它是聚合软件包的根目录，可以根据实际项目的聚合名称命名，比如权限聚合。在聚合内定义聚合根、实体和值对象以及领域服务之间的关系和边界。聚合内实现高内聚的业务逻辑，它的代码可以独立拆分为微服务。以聚合为单位的代码放在一个包里的主要目的是为了业务内聚，而更大的目的是为了以后微服务之间聚合的重组。聚合之间清晰的代码边界，可以让你轻松地实现以聚合为单位的微服务重组，在微服务架构演进中有着很重要的作用。
+  Entity（实体）：它存放聚合根、实体、值对象以及工厂模式（Factory）相关代码。实体类采用充血模型，同一实体相关的业务逻辑都在实体类代码中实现。跨实体的业务逻辑代码在领域服务中实现。
+  Event（事件）：它存放事件实体以及与事件活动相关的业务逻辑代码。
+  Service（领域服务）：它存放领域服务代码。一个领域服务是多个实体组合出来的一段业务逻辑。你可以将聚合内所有领域服务都放在一个领域服务类中，你也可以把每一个领域服务设计为一个类。如果领域服务内的业务逻辑相对复杂，我建议你将一个领域服务设计为一个领域服务类，避免由于所有领域服务代码都放在一个领域服务类中，而出现代码臃肿的问题。领域服务封装多个实体或方法后向上层提供应用服务调用。
+  Repository（仓储）：它存放所在聚合的查询或持久化领域对象的代码，通常包括仓储接口和仓储实现方法。为了方便聚合的拆分和组合，我们设定了一个原则：一个聚合对应一个仓储。</code></pre><h4 id="12-4基础层"><a href="#12-4基础层" class="headerlink" title="12.4基础层"></a>12.4基础层</h4><p>   Infrastructure 的代码目录结构有：config 和 util 两个子目录。<br>      Config：主要存放配置相关代码。<br>      Util：主要存放平台、开发框架、消息、数据库、缓存、文件、总线、网关、第三方类库、通用算法等基础代码，你可以为不同的资源类别建立不同的子目录。</p>
+<h3 id="十三、目录结构"><a href="#十三、目录结构" class="headerlink" title="十三、目录结构"></a>十三、目录结构</h3><pre><code>  │
+  │    ├─interface   用户接口层 
+  │    │    └─controller    控制器，对外提供（Restful）接口
+  │    │    └─facade        外观模式，对外提供本地接口和dubbo接口
+  │    │    └─mq            mq消息，消费者消费外部mq消息
+  │    │ 
+  │    ├─application 应用层
+  │    │    ├─assembler     装配器
+  │    │    ├─dto           数据传输对象，xxxCommand/xxxQuery/xxxVo     
+  │    │    │    ├─command  接受增删改的参数
+  │    │    │    ├─query    接受查询的参数
+  │    │    │    ├─vo       返回给前端的vo对象
+  │    │    ├─service       应用服务，负责领域的组合、编排、转发、转换和传递
+  │    │    ├─repository    查询数据的仓库接口
+  │    │    ├─listener      事件监听定义
+  │    │ 
+  │    ├─domain      领域层
+  │    │    ├─entity        领域实体
+  │    │    ├─valueobject   领域值对象
+  │    │    ├─service       领域服务
+  │    │    ├─repository    仓库接口，增删改的接口
+  │    │    ├─acl           防腐层接口
+  │    │    ├─event         领域事件
+  │    │ 
+  │    ├─infrastructure  基础设施层
+  │    │    ├─converter     实体转换器
+  │    │    ├─repository    仓库
+  │    │    │    ├─impl     仓库实现
+  │    │    │    ├─mapper   mybatis mapper接口
+  │    │    │    ├─po       数据库orm数据对象 
+  │    │    ├─ack           实体转换器
+  │    │    ├─mq            mq消息
+  │    │    ├─cache         缓存
+  │    │    ├─util          工具类
+  │    │    
+  │    </code></pre><h3 id="十四、对象转化"><a href="#十四、对象转化" class="headerlink" title="十四、对象转化"></a>十四、对象转化</h3><pre><code>  基础层
+     基础层的主要对象是 PO 对象。我们需要先建立 DO 和 PO 的映射关系。当 DO 数据需要持久化时，仓储服务会将 DO 转换为 PO 对象，完成数据库持久化操作。当 DO 数据需要初始化时，仓储服务从数据库获取数据形成 PO 对象，并将 PO 转换为 DO，完成数据初始化。大多数情况下 PO 和 DO 是一一对应的。但也有 DO 和 PO 多对多的情况，在 DO 和 PO数据转换时，需要进行数据重组
+
+  领域层
+     领域层的主要对象是 DO 对象。DO 是实体和值对象的数据和业务行为载体，承载着基础的核心业务逻辑。通过 DO 和 PO 转换，我们可以完成数据持久化和初始化。
+
+  应用层
+     应用层的主要对象是 DO 对象。如果需要调用其它微服务的应用服务，DO 会转换为DTO，完成跨微服务的数据组装和传输。用户接口层先完成 DTO 到 DO 的转换，然后应用服务接收 DO 进行业务处理。如果 DTO 与 DO 是一对多的关系，这时就需要进行 DO数据重组。
+
+  用户接口层
+     用户接口层会完成 DO 和 DTO 的互转，完成微服务与前端应用数据交互及转换。Facade服务会对多个 DO 对象进行组装，转换为 DTO 对象，向前端应用完成数据转换和传输。
+
+  前端应用
+     前端应用主要是 VO 对象。展现层使用 VO 进行界面展示，通过用户接口层与应用层采用DTO 对象进行数据交互。</code></pre>
+            </div>
+            <hr/>
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/">
+                                    <span class="chip bg-color">DDD领域驱动设计</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/07/20/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="DDD领域驱动设计实现">
+                        
+                        <span class="card-title">DDD领域驱动设计实现</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+领域驱动设计（Domain-driven Design，DDD）是一种软件设计方法，该方法的核心思想是将业务领域作为设计和开发的中心，强调对业务领域的深入理解、业务语言的建模以及领域对象的设计和实现。翻译成大白话就是：是一种解决复杂软件的
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-07-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/" class="post-category">
+                                    DDD领域驱动设计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/">
+                        <span class="chip bg-color">DDD领域驱动设计</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/06/18/Arthas/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Arthas">
+                        
+                        <span class="card-title">Arthas</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+远程Debug操作步骤想要远程Debug需要确认本地与环境中的代码保持一致
+接下来是远程debug的步骤，首先修改启动脚本，找到后台启动的shell命令，
+在命令java后插入命令：
+-Xdebug -Xrunjdwp:transport
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Arthas/" class="post-category">
+                                    Arthas
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Arthas/">
+                        <span class="chip bg-color">Arthas</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">年份</span>
+            <a href="https://github.com/18772847471/18772847471.github.io" target="_blank">boyup</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">111k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/18772847471" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1104583639@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1104583639" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1104583639" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="/medias/reward/weixin.jpg" class="tooltipped" target="_blank" data-tooltip="加我微信" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: ""
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

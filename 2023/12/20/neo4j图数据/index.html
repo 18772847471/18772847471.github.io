@@ -1,0 +1,1258 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="neo4j图数据, Hexo">
+    <meta name="description" content=" Neo4j - Things，not string历史悠久且长期处于图数据库领域的主力地位，其功能强大，性能也不错，单节点的服务器可承载上亿级的节点和关系。社区版最多支持 320 亿个节点、320 亿个关系和 640亿个属性。优点：Neo">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>neo4j图数据 | Hexo</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Hexo</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Hexo</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/18772847471" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/18772847471" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        neo4j图数据
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                                <span class="chip bg-color">图数据库</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                图数据库
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-12-20
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.1k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        14 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="Neo4j-Things，not-string"><a href="#Neo4j-Things，not-string" class="headerlink" title=" Neo4j - Things，not string"></a> Neo4j - Things，not string</h2><p>历史悠久且长期处于图数据库领域的主力地位，其功能强大，性能也不错，单节点的服务器可承载上亿级的节点和关系。社区版最多支持 320 亿个节点、320 亿个关系和 640亿个属性。<br>优点：Neo4j有自己的后端存储，不必如同JanusGraph等一样还要依赖另外的数据库存储。 Neo4j在每个节点中存储了每个边的指针，因而遍历时效率相当高。<br>缺点：企业版付费。开源的社区版本只支持单机，不支持分布式。社区版只能部署成单实例，企业版可以部署成高可用集群，从而可以解决高并发量的问题；社区版不能做集群，单个实例故障时影响系统正常运行。社区版只支持冷备份，即需要停止服务后才能进行备份。</p>
+<h3 id="一、-三要素"><a href="#一、-三要素" class="headerlink" title="一、 三要素"></a>一、 三要素</h3><pre><code>在知识图谱中，通过三元组 &lt;实体 × 关系 × 属性&gt; 集合的形式来描述事物之间的关系：
+实体：又叫作本体，指客观存在并可相互区别的事物，可以是具体的人、事、物，也可以是抽象的概念或联系，实体是知识图谱中最基本的元素
+关系：在知识图谱中，边表示知识图谱中的关系，用来表示不同实体间的某种联系
+属性：知识图谱中的实体和关系都可以有各自的属性</code></pre><h3 id="二、-Neo4j安装"><a href="#二、-Neo4j安装" class="headerlink" title="二、 Neo4j安装"></a>二、 Neo4j安装</h3><pre><code>底层依赖于关键的图数据库，在这里我们选择 Neo4j，它是一款高性能的 nosql 图形数据库，能够将结构化的数据存储在图而不是表中。
+下载地址：https://Neo4j.com/download/other-releases/
+需要注意的是，Neo4j 4.x 以上的版本都需要依赖 jdk11 环境，所以如果运行环境是 jdk8 的话，只能下载 3.x 版本就行，下载解压完成后，在bin目录下通过命令启动</code></pre><h4 id="2-1-Neo4j环境Linux下搭建"><a href="#2-1-Neo4j环境Linux下搭建" class="headerlink" title="2.1 Neo4j环境Linux下搭建"></a>2.1 Neo4j环境Linux下搭建</h4><pre><code>(1).切换到Linux下 到安装目录neo4j 上传安装包 或者 下载安装包
+使用 ftp 工具上传neo4j-community-3.5.17.tar 到 liunx 下
+或者 wget https://neo4j.com/artifact.php?name=neo4j-community-3.5.17-unix.tar.gz
+(2). 解压
+tar -xvf neo4j-community-3.5.17.tar
+(3). 修改配置文件 neo4j.conf
+vi conf/neo4j.conf
+主要是修改 允许远程访问的地址 把对应的注释打开即可
+dbms.connectors.default_listen_address=0.0.0.0
+(4).开放对应的访问端口 默认要开放7474 和 7687或者直接关闭防火墙（生产环境上不会直接关防火墙）
+firewall-cmd --zone=public --add-port=7474/tcp --permanent
+firewall-cmd --zone=public --add-port=7687/tcp --permanent
+systemctl reload firewalld
+(5).启动（安装jdk8及以上否则启动报错）
+./bin/neo4j start
+(6).使用浏览器 访问服务器上的 neo4j
+http://XXXX:7474 用户名 密码
+默认的账号是 neo4j 密码 neo4j 这里第一次登录的话会要求修改密码</code></pre><h4 id="2-2-Neo4j-CQL"><a href="#2-2-Neo4j-CQL" class="headerlink" title="2.2 Neo4j CQL"></a>2.2 Neo4j CQL</h4><pre><code>CQL代表Cypher查询语言。 像关系型数据库具有查询语言SQL，Neo4j使用CQL作为查询语言。
+Neo4j CQL：它是Neo4j图形数据库的查询语言。它是一种声明性模式匹配语言。它遵循SQL语法。它的语法是非常简单且人性化、可读的格式。</code></pre><h5 id="2-2-1-CREATE"><a href="#2-2-1-CREATE" class="headerlink" title="2.2.1 CREATE"></a>2.2.1 CREATE</h5><pre><code>CREATE (
+&lt;node-name&gt;:&lt;label-name&gt;
+[{
+&lt;property1-name&gt;:&lt;property1-Value&gt;
+........
+&lt;propertyn-name&gt;:&lt;propertyn-Value&gt;
+}]
+)
+
+例如：
+CREATE (person:Person {cid:1,name:&quot;范闲&quot;,age:24,gender:0,character:&quot;A&quot;,money:1000});
+CREATE (person:Person {cid:2,name:&quot;林婉儿&quot;,age:20,gender:1,character:&quot;B&quot;,money:800});
+CREATE (person:Person {cid:3,name:&quot;庆帝&quot;,age:49,gender:0,character:&quot;A&quot;,money:8900});</code></pre><h5 id="2-2-2-MATCH-RETURN"><a href="#2-2-2-MATCH-RETURN" class="headerlink" title="2.2.2 MATCH RETURN"></a>2.2.2 MATCH RETURN</h5><pre><code>MATCH
+(
+&lt;node-name&gt;:&lt;label-name&gt;
+)
+RETURN
+&lt;node-name&gt;.&lt;property1-name&gt;,
+...
+&lt;node-name&gt;.&lt;propertyn-name&gt;
+
+
+例如：
+MATCH(person:Person) return person;
+MATCH(person:Person) return person.name,person.age;</code></pre><h5 id="2-2-3-关系创建"><a href="#2-2-3-关系创建" class="headerlink" title="2.2.3 关系创建"></a>2.2.3 关系创建</h5><h6 id="2-2-3-1使用现有节点创建没有属性的关系"><a href="#2-2-3-1使用现有节点创建没有属性的关系" class="headerlink" title="2.2.3.1使用现有节点创建没有属性的关系"></a>2.2.3.1使用现有节点创建没有属性的关系</h6><pre><code>MATCH (&lt;node1-name&gt;:&lt;node1-label-name&gt;),(&lt;node2-name&gt;:&lt;node2-label-name&gt;)
+CREATE
+(&lt;node1-name&gt;)-[&lt;relationship-name&gt;:&lt;relationship-label-name&gt;]-&gt;(&lt;node2-
+name&gt;)
+RETURN 相应的内容
+
+
+创建关系
+match(person:Person {name:&quot;范闲&quot;}) ,(person2:Person {name:&quot;林婉儿&quot;})
+create(person)-[r:Couple]-&gt;(person2);
+查询关系
+match p = (person:Person {name:&quot;范闲&quot;})-[r:Couple]-&gt;(person2:Person) return p
+match (p1:Person {name:&quot;范闲&quot;})-[r:Couple]-(p2:Person) return p1,p2
+match (p1:Person {name:&quot;范闲&quot;})-[r:Couple]-(p2:Person) return r</code></pre><h6 id="2-2-3-2使用现有节点创建有属性的关系"><a href="#2-2-3-2使用现有节点创建有属性的关系" class="headerlink" title="2.2.3.2使用现有节点创建有属性的关系"></a>2.2.3.2使用现有节点创建有属性的关系</h6><pre><code>MATCH (&lt;node1-label-name&gt;:&lt;node1-name&gt;),(&lt;node2-label-name&gt;:&lt;node2-name&gt;)
+CREATE
+(&lt;node1-label-name&gt;)-[&lt;relationship-label-name&gt;:&lt;relationship-name&gt;
+{&lt;define-properties-list&gt;}]-&gt;(&lt;node2-label-name&gt;)
+RETURN &lt;relationship-label-name&gt;
+其中&lt;define-properties-list&gt; 是分配给新创建关系的属性（名称 - 值对）的列表。
+{
+&lt;property1-name&gt;:&lt;property1-value&gt;,
+&lt;property2-name&gt;:&lt;property2-value&gt;,
+...
+&lt;propertyn-name&gt;:&lt;propertyn-value&gt;
+}</code></pre><h6 id="2-2-3-3使用新节点创建没有属性的关系"><a href="#2-2-3-3使用新节点创建没有属性的关系" class="headerlink" title="2.2.3.3使用新节点创建没有属性的关系"></a>2.2.3.3使用新节点创建没有属性的关系</h6><pre><code>CREATE
+(&lt;node1-label-name&gt;:&lt;node1-name&gt;)
+-[&lt;relationship-label-name&gt;:&lt;relationship-name&gt;]-&gt;
+(&lt;node1-label-name&gt;:&lt;node1-name&gt;)
+create(person1:Person {cid:4,name:&quot;长公主&quot;,age:49,gender:1,character:&quot;A&quot;,money:5000})
+-[r:Friend]-&gt;
+(person2:Person {cid:7,name:&quot;九品射手燕小乙&quot;,age:48,gender:0,character:&quot;B&quot;,money:1000});</code></pre><h6 id="2-2-3-4使用新节点创建没有属性的关系"><a href="#2-2-3-4使用新节点创建没有属性的关系" class="headerlink" title="2.2.3.4使用新节点创建没有属性的关系"></a>2.2.3.4使用新节点创建没有属性的关系</h6><pre><code>CREATE
+(&lt;node1-label-name&gt;:&lt;node1-name&gt;{&lt;define-properties-list&gt;})
+-[&lt;relationship-label-name&gt;:&lt;relationship-name&gt;{&lt;define-properties-list&gt;}]
+-&gt;(&lt;node1-label-name&gt;:&lt;node1-name&gt;{&lt;define-properties-list&gt;});
+create (person1:Person {cid:9,name:&quot;靖王子&quot;,age:23,gender:0,character:&quot;A&quot;,money:3000})
+-[r:Friend {date:&quot;11-02-2000&quot;}]-&gt;
+(person2:Person {cid:8,name:&quot;二皇子&quot;,age:24,gender:0,character:&quot;B&quot;,money:6000});
+关系和节点的属性可以使用的类型</code></pre><h5 id="2-2-4-WHERE-子句"><a href="#2-2-4-WHERE-子句" class="headerlink" title="2.2.4 WHERE 子句"></a>2.2.4 WHERE 子句</h5><pre><code>简单的WHERE子句
+WHERE &lt;condition&gt;
+复杂的WHERE子句
+WHERE &lt;condition&gt; &lt;boolean-operator&gt; &lt;condition&gt;</code></pre><h5 id="2-2-5DELETE-子句-和-REMOVE子句"><a href="#2-2-5DELETE-子句-和-REMOVE子句" class="headerlink" title="2.2.5DELETE 子句 和 REMOVE子句"></a>2.2.5DELETE 子句 和 REMOVE子句</h5><pre><code>DELETE 子句: 删除节点。删除节点及相关节点和关系。
+REMOVE子句: 删除节点或关系的标签,删除节点或关系的属性。
+match p = (:Person {name:&quot;林婉儿&quot;})-[r:Couple]-(:Person) delete r;
+MATCH (person:Person {name:&quot;小美女&quot;})
+REMOVE person.cid;
+REMOVE子句主要用于删除节点或关系的属性，这点跟DELETE有些差别。
+DELETE是删除节点或关系，但不删除属性。
+DELETE和REMOVE命令之间的主要区别 -
+DELETE操作用于删除节点和关联关系。
+REMOVE操作用于删除标签和属性。
+REMOVE命令用于
+    删除节点或关系的标签
+    删除节点或关系的属性
+CQL DELETE和REMOVE命令之间的相似性 -
+这两个命令不应单独使用。
+两个命令都应该与MATCH命令一起使用。</code></pre><h5 id="2-2-6-SET子句"><a href="#2-2-6-SET子句" class="headerlink" title="2.2.6 SET子句"></a>2.2.6 SET子句</h5><pre><code>向现有节点或关系添加新属性，更新属性值 .
+MATCH (person:Person {cid:1})
+SET person.money = 3456,person.age=25</code></pre><h5 id="2-2-7-ORDER-BY-子句"><a href="#2-2-7-ORDER-BY-子句" class="headerlink" title="2.2.7 ORDER BY 子句"></a>2.2.7 ORDER BY 子句</h5><pre><code>“ORDER BY”子句，对MATCH查询返回的结果进行排序。
+我们可以按升序或降序对行进行排序。
+默认情况下，它按升序对行进行排序。 如果我们要按降序对它们进行排序，我们需要使用DESC子句。
+MATCH (person:Person) RETURN person.name,person.money ORDER BY person.money DESC;</code></pre><h5 id="2-2-8-SKIP-和-LIMIT"><a href="#2-2-8-SKIP-和-LIMIT" class="headerlink" title="2.2.8 SKIP 和 LIMIT"></a>2.2.8 SKIP 和 LIMIT</h5><pre><code>Neo4j CQL已提供“SKIP”子句来过滤或限制查询返回的行数。 它修整了CQL查询结果集顶部的结果。
+Neo4j CQL已提供“LIMIT”子句来过滤或限制查询返回的行数。 它修剪CQL查询结果集底部的结果。
+MATCH (person:Person)
+RETURN ID(person),person.name,person.money
+ORDER BY person.money DESC skip 4 limit 2</code></pre><h5 id="2-2-9-DISTINCT-排重"><a href="#2-2-9-DISTINCT-排重" class="headerlink" title="2.2.9 DISTINCT 排重"></a>2.2.9 DISTINCT 排重</h5><pre><code>这个函数的用法就像SQL中的distinct关键字，返回的是所有不同值。
+MATCH (p:Person) RETURN Distinct(p.cid);</code></pre><h5 id="2-2-10-操作符"><a href="#2-2-10-操作符" class="headerlink" title="2.2.10 操作符"></a>2.2.10 操作符</h5><pre><code>操作符是对Cypher查询进行算术运算，逻辑运算等。</code></pre><h6 id="2-2-10-1-通用操作符"><a href="#2-2-10-1-通用操作符" class="headerlink" title="2.2.10.1 通用操作符"></a>2.2.10.1 通用操作符</h6><pre><code> distinct 用于移除重复值， n.property 用于访问属性，[]是变量的列表
+
+ CREATE (a:Person { name: &#39;Anne&#39;, eyeColor: &#39;blue&#39; }),(b:Person { name: &#39;Bill&#39;, eyeColor: &#39;brown&#39; }),(c:Person { name: &#39;Carol&#39;, eyeColor: &#39;blue&#39; })
+WITH [a, b, c] AS ps
+UNWIND ps AS p
+RETURN DISTINCT p.eyeColor</code></pre><h6 id="2-2-10-2-数学操作符"><a href="#2-2-10-2-数学操作符" class="headerlink" title="2.2.10.2 数学操作符"></a>2.2.10.2 数学操作符</h6><pre><code>加减乘除：+,-,*,/
+取模：%
+取幂：^</code></pre><h6 id="2-2-10-3-比较运算符"><a href="#2-2-10-3-比较运算符" class="headerlink" title="2.2.10.3 比较运算符"></a>2.2.10.3 比较运算符</h6><pre><code>等于：=
+不等于：&lt;&gt;
+小于、大于、小于等于、大于等于：&lt;、&gt;、&lt;=、&gt;=
+IS NULL和 IS NOT NULL</code></pre><h6 id="2-2-10-4-逻辑运算符"><a href="#2-2-10-4-逻辑运算符" class="headerlink" title="2.2.10.4 逻辑运算符"></a>2.2.10.4 逻辑运算符</h6><pre><code>与（AND）,或（OR）,异或（XOR）,非（NOT）
+WITH [2, 4, 7, 9, 12] AS numberlist
+UNWIND numberlist AS number
+WITH number
+WHERE number = 4 OR (number &gt; 6 AND number &lt; 10)
+RETURN number</code></pre><h6 id="2-2-10-5-字符串"><a href="#2-2-10-5-字符串" class="headerlink" title="2.2.10.5 字符串"></a>2.2.10.5 字符串</h6><pre><code>字符串拼接：+
+匹配正则：=~
+
+WITH [&#39;mouse&#39;, &#39;chair&#39;, &#39;door&#39;, &#39;house&#39;] AS wordlist
+UNWIND wordlist AS word
+WITH word
+WHERE word =~ &#39;.*ous.*&#39;
+RETURN word
+
+对于字符串，使用 STARTS WITH、ENDS WITH和CONTAINS 过滤字符串：
+
+WITH [&#39;John&#39;, &#39;Mark&#39;, &#39;Jonathan&#39;, &#39;Bill&#39;] AS somenames
+UNWIND somenames AS names
+WITH names AS candidate
+WHERE candidate STARTS WITH &#39;Jo&#39;
+RETURN candidate</code></pre><h6 id="2-2-10-6-列表操作"><a href="#2-2-10-6-列表操作" class="headerlink" title="2.2.10.6 列表操作"></a>2.2.10.6 列表操作</h6><pre><code>+，列表追加
+IN：检查成员
+[]：索引，特殊地，[start .. end]，从start开始，递增1，但是不包括end
+
+RETURN [1,2,3,4,5]+[6,7] AS myList
+
+WITH [2, 3, 4, 5] AS numberlist
+UNWIND numberlist AS number
+WITH number
+WHERE number IN [2, 3, 8]
+RETURN number
+
+WITH [&#39;Anne&#39;, &#39;John&#39;, &#39;Bill&#39;, &#39;Diane&#39;, &#39;Eve&#39;] AS names
+RETURN names[1..3] AS result</code></pre><h6 id="2-2-10-7-访问属性"><a href="#2-2-10-7-访问属性" class="headerlink" title="2.2.10.7 访问属性"></a>2.2.10.7 访问属性</h6><pre><code>使用 . 号访问属性
+MATCH (n) WHERE 21 &lt; n.age AND n.age &lt;= 30 RETURN n</code></pre><h3 id="三、-Springboot整合-Neo4j"><a href="#三、-Springboot整合-Neo4j" class="headerlink" title="三、 Springboot整合 Neo4j"></a>三、 Springboot整合 Neo4j</h3><h4 id="3-1-引入依赖"><a href="#3-1-引入依赖" class="headerlink" title="3.1 引入依赖"></a>3.1 引入依赖</h4><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-data-neo4j&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre><h4 id="3-2-增加配置"><a href="#3-2-增加配置" class="headerlink" title="3.2 增加配置"></a>3.2 增加配置</h4><pre><code>spring:
+    data:
+        neo4j:
+            uri: bolt://XX:7687
+            username: 用户民
+            password: 密码</code></pre><h4 id="3-3-核心代码"><a href="#3-3-核心代码" class="headerlink" title="3.3 核心代码"></a>3.3 核心代码</h4><h4 id="3-3-1设置节点"><a href="#3-3-1设置节点" class="headerlink" title="3.3.1设置节点"></a>3.3.1设置节点</h4><pre><code>@Data
+@Node(&quot;Organization&quot;)
+public class Organization {
+    @Id
+    @GeneratedValue
+    private Long id;
+    @Property(name = &quot;orgName&quot;)
+    private String orgName;
+    @Relationship(type = &quot;父&quot;, direction = Relationship.Direction.OUTGOING)
+    private Organization parentOrganization;
+}</code></pre><h4 id="3-3-2-设置Repository"><a href="#3-3-2-设置Repository" class="headerlink" title="3.3.2 设置Repository"></a>3.3.2 设置Repository</h4><pre><code>@EnableNeo4jRepositories
+public interface OrganizationRepository extends Neo4jRepository&lt;Organization,Long&gt; {
+}</code></pre><h4 id="3-3-3设置事务"><a href="#3-3-3设置事务" class="headerlink" title="3.3.3设置事务"></a>3.3.3设置事务</h4><pre><code>@Configuration
+@EnableNeo4jRepositories(basePackages = &quot;com.cloud.cmp.neo4j.mapper&quot;)
+@EnableTransactionManagement
+public class Neo4jConfig {
+}</code></pre><h3 id="四、数据同步"><a href="#四、数据同步" class="headerlink" title="四、数据同步"></a>四、数据同步</h3><h4 id="4-1Apoc安装"><a href="#4-1Apoc安装" class="headerlink" title="4.1Apoc安装"></a>4.1Apoc安装</h4><pre><code>APOC 是 neo4j 自带一款强大的功能组件。它引入了用户自定义过程和函数概念，某些Cypher本身不能轻易实现的自定义功能可以由 APOC 完成。它是用Java实现的，Apoc 库由许多(大约450个)过程和函数组成，用于在数据集成、图形算法或数据转换等领域帮助完成许多不同的任务。
+APOC依赖于Neo4j的内部api，在Neo4j时，需要使用匹配的APOC版本，确保Neo4j和APOC之间的前两个版本号匹配。</code></pre><h5 id="4-1-1下载APOC"><a href="#4-1-1下载APOC" class="headerlink" title="4.1.1下载APOC"></a>4.1.1下载APOC</h5><pre><code>在Neo4j的APOC手册中有APOC的下载地址，通过链接下载指定的APOC版本，本次选用apoc-3.5.0.11-all.jar。</code></pre><h5 id="4-1-2安装APOC"><a href="#4-1-2安装APOC" class="headerlink" title="4.1.2安装APOC"></a>4.1.2安装APOC</h5><pre><code>下载APOC的jar文件后，将jar文件复制到Neo4j的plugins目录下。</code></pre><h5 id="4-1-3修改配置文件"><a href="#4-1-3修改配置文件" class="headerlink" title="4.1.3修改配置文件"></a>4.1.3修改配置文件</h5><pre><code>在neo4j.conf 配置文件中添加：
+dbms.security.procedures.unrestricted=apoc.*</code></pre><h5 id="4-1-4重启Neo4j服务"><a href="#4-1-4重启Neo4j服务" class="headerlink" title="4.1.4重启Neo4j服务"></a>4.1.4重启Neo4j服务</h5><pre><code>Kill -9 25961 
+./neo4j start</code></pre><h5 id="4-1-5在可视化界面运行"><a href="#4-1-5在可视化界面运行" class="headerlink" title="4.1.5在可视化界面运行"></a>4.1.5在可视化界面运行</h5><pre><code>return apoc.version(); 出现对应的版本号，证明安装成功。</code></pre><h4 id="4-2常用函数"><a href="#4-2常用函数" class="headerlink" title="4.2常用函数"></a>4.2常用函数</h4><h5 id="4-2-1-UPPER-函数"><a href="#4-2-1-UPPER-函数" class="headerlink" title="4.2.1 UPPER 函数"></a>4.2.1 UPPER 函数</h5><pre><code>UPPER 用于将所有字母更改为大写字母。
+Match (n:Person) return UPPER (n.name);</code></pre><h5 id="4-2-2-LOWER函数"><a href="#4-2-2-LOWER函数" class="headerlink" title="4.2.2 LOWER函数"></a>4.2.2 LOWER函数</h5><pre><code>LOWER 用于将所有字母改为小写字母。
+Match (n:Person) return LOWER(n.name);</code></pre><h5 id="4-2-3-SUBSTRING3函数"><a href="#4-2-3-SUBSTRING3函数" class="headerlink" title="4.2.3 SUBSTRING3函数"></a>4.2.3 SUBSTRING3函数</h5><pre><code>SUBSTRING 用于获取给定String的子字符串。
+Match (n:Person) return SUBSTRING(n.id,2,0),n.id;</code></pre><h5 id="4-2-4-REPLACE-函数"><a href="#4-2-4-REPLACE-函数" class="headerlink" title="4.2.4 REPLACE 函数"></a>4.2.4 REPLACE 函数</h5><pre><code>REPLAC 用于替换一个字符串的子字符串。</code></pre><h5 id="4-2-5-聚合函数"><a href="#4-2-5-聚合函数" class="headerlink" title="4.2.5 聚合函数"></a>4.2.5 聚合函数</h5><pre><code>COUNT —— 它返回由MATCH命令返回的行数。
+MAX —— 它从MATCH命令返回的一组行返回最大值。
+MIN —— 它返回由MATCH命令返回的一组行的最小值。
+SUM —— 它返回由MATCH命令返回的所有行的求和值。
+AVG —— 它返回由MATCH命令返回的所有行的平均值。</code></pre><h4 id="4-3-Neo4j-驱动程序"><a href="#4-3-Neo4j-驱动程序" class="headerlink" title="4.3 Neo4j 驱动程序"></a>4.3 Neo4j 驱动程序</h4><h5 id="4-3-1-引入pom文件"><a href="#4-3-1-引入pom文件" class="headerlink" title="4.3.1 引入pom文件"></a>4.3.1 引入pom文件</h5><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.neo4j.driver&lt;/groupId&gt;
+    &lt;artifactId&gt;neo4j-java-driver&lt;/artifactId&gt;
+    &lt;version&gt;1.5.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre><h5 id="4-3-2-创建驱动程序的数据库对象"><a href="#4-3-2-创建驱动程序的数据库对象" class="headerlink" title="4.3.2 创建驱动程序的数据库对象"></a>4.3.2 创建驱动程序的数据库对象</h5><pre><code>1) 向数据库对象请求一个新的驱动程序。
+2) 向驱动程序对象请求一个新会。；
+3) 请求会话对象创建事务。
+4) 使用事务对象运行语句，它返回一个表示结果的对象。
+5) 处理结果。
+6) 关闭会话。  </code></pre>
+            </div>
+            <hr/>
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                                    <span class="chip bg-color">图数据库</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/12/25/canal/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="canal">
+                        
+                        <span class="card-title">canal</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                             canal，译意为水道/管道/沟渠，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费canal的工作原理canal 模拟 MySQL slave 的交互协议，伪装自己为 MySQL slave ，向 MySQL ma
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/canal/" class="post-category">
+                                    canal
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/canal/">
+                        <span class="chip bg-color">canal</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/07/20/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="DDD领域驱动设计实现">
+                        
+                        <span class="card-title">DDD领域驱动设计实现</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+领域驱动设计（Domain-driven Design，DDD）是一种软件设计方法，该方法的核心思想是将业务领域作为设计和开发的中心，强调对业务领域的深入理解、业务语言的建模以及领域对象的设计和实现。翻译成大白话就是：是一种解决复杂软件的
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/" class="post-category">
+                                    DDD领域驱动设计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/">
+                        <span class="chip bg-color">DDD领域驱动设计</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">年份</span>
+            <a href="https://github.com/18772847471/18772847471.github.io" target="_blank">boyup</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">111k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/18772847471" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1104583639@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1104583639" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1104583639" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="/medias/reward/weixin.jpg" class="tooltipped" target="_blank" data-tooltip="加我微信" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: ""
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
